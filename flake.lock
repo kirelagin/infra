@@ -1,0 +1,66 @@
+{
+  "nodes": {
+    "dns": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1597004712,
+        "narHash": "sha256-96Ah8/qD0Z/TDUaXJ4mV0JPbdDZTdkujC7Ydm1VmXDY=",
+        "owner": "kirelagin",
+        "repo": "nix-dns",
+        "rev": "b74d9292a5d9f953a018d4800893978e6ba586a3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kirelagin",
+        "ref": "flake",
+        "repo": "nix-dns",
+        "type": "github"
+      }
+    },
+    "mailserver": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1595884314,
+        "narHash": "sha256-HUdMaznWkwUDcrYyAFMaNkJo4R/qLvyCn0S8bEfcOvk=",
+        "owner": "simple-nixos-mailserver",
+        "repo": "nixos-mailserver",
+        "rev": "4008d0cb53b9abd00d2dc568814566227ddd3825",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "simple-nixos-mailserver",
+        "repo": "nixos-mailserver",
+        "type": "gitlab"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1596965487,
+        "narHash": "sha256-E9vKDDfJP1AO9WYuwkPRomLlCPilngVpJ42oXEjb/B4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e9bd19d4d352f45e871cfc3e91f854cb76ff48e1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-20.03",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "dns": "dns",
+        "mailserver": "mailserver",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
