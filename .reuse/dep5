@@ -1,0 +1,5 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+
+Files: .git-crypt/keys/* credentials/*
+Copyright: 2020 Kirill Elagin <https://kir.elagin.me/>
+License: LicenseRef-Proprietary

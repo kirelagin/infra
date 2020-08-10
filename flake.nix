@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020 Kirill Elagin <https://kir.elagin.me/>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.03";
