@@ -70,6 +70,7 @@ inputs:
     nix.extraOptions = ''
       experimental-features = ca-references flakes nix-command
     '';
+    nix.registry.nixpkgs.flake = inputs.nixpkgs;
 
     # Use zsh
     programs.zsh.enable = true;
