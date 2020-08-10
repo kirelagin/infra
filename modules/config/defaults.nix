@@ -80,8 +80,5 @@ inputs:
     environment.systemPackages = [ pkgs.neovim ];
     environment.variables.EDITOR = "nvim";
     environment.shellAliases.e = "$EDITOR";
-
-    # Fixup nix-daemon for flakes
-    systemd.services.nix-daemon.path = [ pkgs.git ];
   };
 }
