@@ -68,7 +68,7 @@ inputs:
     # Enable flakes
     nix.package = pkgs.nixFlakes;
     nix.extraOptions = ''
-      experimental-features = nix-command flakes
+      experimental-features = ca-references flakes nix-command
     '';
 
     # Use zsh
