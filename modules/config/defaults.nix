@@ -76,8 +76,15 @@ inputs:
     programs.zsh.enable = true;
     users.defaultUserShell = pkgs.zsh;
 
+    # Useful system packages
+    environment.systemPackages = with pkgs; [
+      dnsutils
+      file
+      htop
+      neovim
+    ];
+
     # Use neovim
-    environment.systemPackages = [ pkgs.neovim ];
     environment.variables.EDITOR = "nvim";
     environment.shellAliases.e = "$EDITOR";
   };
