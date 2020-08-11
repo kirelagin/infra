@@ -2,19 +2,15 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 
-inputs:
-{ lib, pkgs, ... }:
+{ lib, pkgs, flakes, ... }:
 
 {
   config = {
-    # Pass top-level flakes to all modules
-    _module.args = { flakes = inputs; };
-
     # The NixOS release to be compatible with for stateful data such as databases.
     system.stateVersion = "18.03";
 
     # Let 'nixos-version --json' know about the Git revision of this flake.
-    system.configurationRevision = lib.mkIf (inputs.self ? rev) inputs.self.rev;
+    system.configurationRevision = lib.mkIf (flakes.self ? rev) flakes.self.rev;
 
     time.timeZone = "UTC";
 
@@ -70,7 +66,7 @@ inputs:
     nix.extraOptions = ''
       experimental-features = ca-references flakes nix-command
     '';
-    nix.registry.nixpkgs.flake = inputs.nixpkgs;
+    nix.registry.nixpkgs.flake = flakes.nixpkgs;
 
     # Use zsh
     programs.zsh.enable = true;

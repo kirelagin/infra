@@ -20,6 +20,7 @@
     nixosConfigurations = {
       bruna = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+	specialArgs = { flakes = inputs; };
         modules =
           [ ({ pkgs, ... }: {
               boot.initrd.availableKernelModules =
@@ -91,7 +92,7 @@
 
       config = {
         boot-loader = import ./modules/config/grub.nix;
-        defaults = import ./modules/config/defaults.nix inputs;
+        defaults = import ./modules/config/defaults.nix;
       };
     };
 
