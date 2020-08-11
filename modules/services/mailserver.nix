@@ -5,11 +5,12 @@
 { config, flakes, ... }:
 
 {
-  config = {
 
-    imports = [
-      flakes.mailserver
-    ];
+  imports = [
+    (import flakes.mailserver)
+  ];
+
+  config = {
 
     mailserver = {
       enable = true;

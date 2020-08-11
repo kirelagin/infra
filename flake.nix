@@ -60,6 +60,7 @@
               };
             })
           ] ++ (with self.nixosModules.services; [
+            mail
             nginx
             nsd
           ]) ++ (with self.nixosModules.apps; [
@@ -77,7 +78,7 @@
 
     nixosModules = {
       services = {
-        mailserver = import ./modules/services/mailserver.nix;
+        mail = import ./modules/services/mailserver.nix;
         nginx = import ./modules/services/nginx.nix;
         nsd = import ./modules/services/nsd.nix;
       };
