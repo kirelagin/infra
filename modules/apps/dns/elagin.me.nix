@@ -9,7 +9,7 @@ let
     SOA = {
       nameServer = "ns1";
       adminEmail = "kirelagin@gmail.com";
-      serial = 2019031301;
+      serial = 2020083103;
     };
 
     NS = [
@@ -26,6 +26,8 @@ let
     CAA = letsEncrypt "kir@elagin.me";
 
     MX = [ (mx.mx 10 "bruna.kir.elagin.me.") ];
+
+    DMARC = [ (dmarc.postmarkapp "mailto:re+ifjzjmjecfw@dmarc.postmarkapp.com") ];
 
     TXT = [
       (spf.strict ["mx"])
