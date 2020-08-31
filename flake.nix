@@ -6,7 +6,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.03";
     dns = {
-      url = "github:kirelagin/nix-dns/flake";
+      url = "github:kirelagin/nix-dns";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mailserver = {
