@@ -9,7 +9,7 @@ let
     SOA = {
       nameServer = "ns1";
       adminEmail = "kirelagin@gmail.com";
-      serial = 2020083103;
+      serial = 2020091400;
     };
 
     NS = [
@@ -27,6 +27,11 @@ let
 
     MX = [ (mx.mx 10 "bruna.kir.elagin.me.") ];
 
+    DKIM = [
+      { selector = "mail";
+        p = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDCiYuCjO2Hrdk5wf9j3LJ1i06ZpoTwRyWDS4ml2Xz+SmQ+h7/eurm4poxZqE2th5nb9P62fUbZV7eYGJev23y8cDABAqrEnZStmE2YWqxP6NN3AInBiMkvhAt41eM3/FJsuycnFILl8UYb6/9WYLB2EaGBabodlTOy6x9wDC19wwIDAQAB";
+      }
+    ];
     DMARC = [ (dmarc.postmarkapp "mailto:re+ifjzjmjecfw@dmarc.postmarkapp.com") ];
 
     TXT = [
