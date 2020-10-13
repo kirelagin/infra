@@ -4,7 +4,7 @@
 
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.03";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.09";
     dns = {
       url = "github:kirelagin/nix-dns";
       inputs.nixpkgs.follows = "nixpkgs";
