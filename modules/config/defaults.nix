@@ -7,12 +7,12 @@
 {
   config = {
     # The NixOS release to be compatible with for stateful data such as databases.
-    system.stateVersion = "18.03";
+    system.stateVersion = lib.mkDefault "18.03";
 
     # Let 'nixos-version --json' know about the Git revision of this flake.
     system.configurationRevision = lib.mkIf (flakes.self ? rev) flakes.self.rev;
 
-    time.timeZone = "UTC";
+    time.timeZone = lib.mkDefault "UTC";
 
     # Set logfile size limit
     services.journald.extraConfig = "SystemMaxUse=300M";
@@ -26,6 +26,9 @@
       '';
     };
 
+    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
+    networking.useDHCP = false;
+
     # Disable search domain list
     networking.search = [ "." ];
 
@@ -34,6 +37,9 @@
       "1.1.1.1"
       "1.0.0.1"
     ];
+
+    i18n.defaultLocale = "en_US.UTF-8";
+    console.keyMap = "us";
 
     # Configure ssh
     services.openssh = {

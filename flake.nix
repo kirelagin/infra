@@ -74,6 +74,17 @@
             defaults
           ]);
       };
+
+      kirXps = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { flakes = inputs; };
+        modules =
+          [ (import ./hosts/kirXps.nix)
+          ] ++ (with self.nixosModules.config; [
+            defaults
+            laptop
+          ]);
+      };
     };
 
     nixosModules = {
@@ -94,6 +105,7 @@
       config = {
         boot-loader = import ./modules/config/grub.nix;
         defaults = import ./modules/config/defaults.nix;
+        laptop = import ./modules/config/laptop.nix;
       };
     };
 
