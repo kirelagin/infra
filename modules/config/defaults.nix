@@ -6,9 +6,6 @@
 
 {
   config = {
-    # The NixOS release to be compatible with for stateful data such as databases.
-    system.stateVersion = lib.mkDefault "18.03";
-
     # Let 'nixos-version --json' know about the Git revision of this flake.
     system.configurationRevision = lib.mkIf (flakes.self ? rev) flakes.self.rev;
 
