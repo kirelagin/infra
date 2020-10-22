@@ -53,11 +53,28 @@
         "type": "github"
       }
     },
+    "prompt_kir": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1546639159,
+        "narHash": "sha256-nbgVB8EQn5w5V0fxWuDk8aLvJFiV4FHc/D4hGzcbOh4=",
+        "owner": "kirelagin",
+        "repo": "prompt_kir",
+        "rev": "2f7ccd551366088e9eb6c4ac8880b83c0d27dd92",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kirelagin",
+        "repo": "prompt_kir",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "dns": "dns",
         "mailserver": "mailserver",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "prompt_kir": "prompt_kir"
       }
     }
   },

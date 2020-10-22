@@ -13,9 +13,13 @@
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-20.09";
       flake = false;
     };
+    prompt_kir = {
+      url = "github:kirelagin/prompt_kir";
+      flake = false;
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, dns, mailserver }: {
+  outputs = inputs@{ self, nixpkgs, dns, mailserver, prompt_kir }: {
 
     nixosConfigurations = {
       bruna = nixpkgs.lib.nixosSystem {
