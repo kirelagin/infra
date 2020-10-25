@@ -9,6 +9,8 @@
     # Let 'nixos-version --json' know about the Git revision of this flake.
     system.configurationRevision = lib.mkIf (flakes.self ? rev) flakes.self.rev;
 
+    boot.tmpOnTmpfs = true;
+
     time.timeZone = lib.mkDefault "UTC";
 
     # Set logfile size limit
