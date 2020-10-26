@@ -34,6 +34,9 @@ in {
           { allowedIPs = [ "172.16.200.5"  "2605:6400:30:fa9e:ff05::0/80" ];  # lglinskih-osx
             publicKey = "VQXQAnqIOXCY1swtGTsOet08ojEEqRUO0vxC4hANFC4=";
           }
+          { allowedIPs = [ "172.16.200.6"  "2605:6400:30:fa9e:ff06::0/80" ];  # boston
+            publicKey = "k2mdVx/rodCcwEJx267zRkU+IiUwXfi6J7GYA38AOk0=";
+          }
           { allowedIPs = [ "172.16.200.10" "2605:6400:30:fa9e:ff0a::0/80" ];  # dacha
             publicKey = "y3oLdyOzcGXTgG1p/aAnhLFxHNu4vkgLslE5KPmipRQ=";
           }
