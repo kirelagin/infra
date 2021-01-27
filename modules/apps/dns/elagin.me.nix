@@ -51,6 +51,7 @@ let
 
         TXT = [
           # Verifications
+          "google-site-verification=1sIBb7cmbbKl4hG_P_ZoXas1fwD1nQ2TtVy4kW-SKW4"
           "yandex-verification: 5092e0d91e8d4817"
           "keybase-site-verification=Jtjfnsjk7P1RZV7n68cdbGjcqh2hrwUuSTovvF4axO0"
         ];
