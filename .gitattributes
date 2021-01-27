@@ -2,4 +2,4 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 
-#credentials/** filter=git-crypt diff=git-crypt
+credentials/** filter=git-crypt diff=git-crypt
