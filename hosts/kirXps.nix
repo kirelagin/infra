@@ -81,4 +81,22 @@
     "serokell-1:aIojg2Vxgv7MkzPJoftOO/I8HKX622sT+c0fjnZBLj0="
     "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
   ];
+
+
+  virtualisation.docker.enable = true;
+
+  networking.nat = {
+    enable = true;
+    internalInterfaces = ["ve-+"];
+  };
+  networking.firewall = {
+    extraCommands = ''
+      ip46tables -A FORWARD -i 've-+' -j ACCEPT
+      ip46tables -A FORWARD -o 've-+' -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+    '';
+    extraStopCommands = ''
+      ip46tables -D FORWARD -o 've-+' -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT || true
+      ip46tables -D FORWARD -i 've-+' -j ACCEPT || true
+    '';
+  };
 }

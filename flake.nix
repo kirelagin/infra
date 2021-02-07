@@ -52,6 +52,17 @@
             laptop
           ]);
       };
+
+      infosec = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { flakes = inputs; };
+        modules = [{
+          boot.isContainer = true;
+        }] ++ (with self.nixosModules.config; [
+          defaults
+          infosec
+        ]);
+      };
     };
 
     nixosModules = {
@@ -71,6 +82,7 @@
 
       config = {
         defaults = import ./modules/config/defaults.nix;
+        infosec = import ./modules/config/infosec.nix;
         laptop = import ./modules/config/laptop.nix;
       };
     };
