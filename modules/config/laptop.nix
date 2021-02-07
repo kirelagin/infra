@@ -35,8 +35,6 @@
     services.xserver.desktopManager.pantheon.enable = true;
     services.xserver.displayManager.lightdm.enable = true;
     services.xserver.displayManager.lightdm.greeters.pantheon.enable = true;
-    # TODO: https://github.com/NixOS/nixpkgs/issues/100119
-    users.users.lightdm.shell = pkgs.bash;
 
     services.thermald.enable = true;
     services.tlp.enable = true;
