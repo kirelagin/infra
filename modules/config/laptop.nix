@@ -27,8 +27,8 @@
     users.users.kirelagin.extraGroups = [ "networkmanager" ];
 
     services.xserver.enable = true;
-    services.xserver.layout = "us";
-    # services.xserver.xkbOptions = "eurosign:e";
+    services.xserver.layout = "us,ru";
+    services.xserver.xkbOptions = "grp:win_space_toggle,misc:typo,lv3:ralt_switch";
 
     services.xserver.libinput.enable = true;
 

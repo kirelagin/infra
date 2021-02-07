@@ -59,4 +59,26 @@
   time.timeZone = "America/New_York";
 
   system.stateVersion = "20.09";
+
+  # Remap left Win and Alt
+  boot.initrd.preLVMCommands = ''
+    setkeycodes 38 125
+    setkeycodes db 56
+  '';
+
+
+  services.xserver.displayManager.sessionCommands = ''
+    export $(/run/current-system/systemd/bin/systemctl --user show-environment | grep -v ' ' | grep -v 'XDG_\(DATA\|CONFIG\)_DIRS' | grep -v 'PATH=')
+    export "$(/run/current-system/systemd/bin/systemctl --user show-environment | grep '^PATH='):$PATH"
+  '';
+
+  nix.binaryCaches = [
+    "s3://serokell-private-cache?endpoint=s3.eu-central-1.wasabisys.com"
+    "https://hydra.iohk.io"
+  ];
+
+  nix.binaryCachePublicKeys = [
+    "serokell-1:aIojg2Vxgv7MkzPJoftOO/I8HKX622sT+c0fjnZBLj0="
+    "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+  ];
 }
