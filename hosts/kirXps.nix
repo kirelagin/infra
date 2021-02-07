@@ -53,18 +53,18 @@
 
   hardware.video.hidpi.enable = true;
 
+  # Remap left Win and Alt
+  boot.initrd.preLVMCommands = ''
+    setkeycodes 38 125
+    setkeycodes db 56
+  '';
+
   networking.hostName = "kirXps";
 
   # TODO: should be set automatically
   time.timeZone = "America/New_York";
 
   system.stateVersion = "20.09";
-
-  # Remap left Win and Alt
-  boot.initrd.preLVMCommands = ''
-    setkeycodes 38 125
-    setkeycodes db 56
-  '';
 
 
   services.xserver.displayManager.sessionCommands = ''
