@@ -49,5 +49,9 @@
       enableSSHSupport = true;
       enableExtraSocket = true;
     };
+
+    environment.systemPackages = with pkgs; [
+      wireguard-tools
+    ];
   };
 }
