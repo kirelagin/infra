@@ -49,6 +49,9 @@ in {
           { allowedIPs = [ "172.16.200.13" "2605:6400:30:fa9e:ff0d::0/80" ];  # kirOne7t
             publicKey = "HRZEyv2L24UPRefRF1bJ/sFRD+ZLO5xb6y96Z7UnCF0=";
           }
+          { allowedIPs = [ "172.16.200.14" "2605:6400:30:fa9e:ff0e::0/80" ];  # kirXps
+            publicKey = "XjR9nzUDhU1v+JsWxdjtcJV0FP/RpPmpXHBY7Nbn8Bs=";
+          }
         ];
         postSetup = [
           helpers
