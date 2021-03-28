@@ -53,5 +53,23 @@
     environment.systemPackages = with pkgs; [
       wireguard-tools
     ];
+
+
+    # Allow containers to access the internet through NAT.
+    networking.nat = {
+      enable = true;
+      internalInterfaces = ["ve-+"];
+    };
+    networking.firewall = {
+      extraCommands = ''
+        ip46tables -A FORWARD -i 've-+' -j ACCEPT
+        ip46tables -A FORWARD -o 've-+' -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+      '';
+      extraStopCommands = ''
+        ip46tables -D FORWARD -o 've-+' -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT || true
+        ip46tables -D FORWARD -i 've-+' -j ACCEPT || true
+      '';
+    };
+
   };
 }

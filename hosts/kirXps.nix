@@ -61,6 +61,8 @@
 
   networking.hostName = "kirXps";
 
+#  virtualisation.docker.enable = true;
+
   # TODO: should be set automatically
   time.timeZone = "America/New_York";
 
@@ -81,4 +83,5 @@
     "serokell-1:aIojg2Vxgv7MkzPJoftOO/I8HKX622sT+c0fjnZBLj0="
     "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
   ];
+
 }
