@@ -9,7 +9,7 @@ let
     SOA = {
       nameServer = "ns1";
       adminEmail = "kirelagin@gmail.com";
-      serial = 2021012700;
+      serial = 2021040300;
     };
 
     NS = [
@@ -55,6 +55,8 @@ let
           "yandex-verification: 5092e0d91e8d4817"
           "keybase-site-verification=Jtjfnsjk7P1RZV7n68cdbGjcqh2hrwUuSTovvF4axO0"
         ];
+
+        MX = [ (mx.mx 10 "bruna.kir.elagin.me.") ];
 
         subdomains = {
           www.CNAME = [ "kir.elagin.me." ];

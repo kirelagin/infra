@@ -15,12 +15,12 @@
     mailserver = {
       enable = true;
       fqdn = "${config.networking.hostName}.${config.networking.domain}";
-      domains = [ "elagin.me" ];
+      domains = [ "elagin.me" "kir.elagin.me" ];
 
       loginAccounts = {
         "kir@elagin.me" = {
           hashedPassword = import ../../credentials/mailserver.nix;
-          aliases = [ "kirill@elagin.me" ];
+          aliases = [ "kirill@elagin.me" "📧@kir.elagin.me" ];
         };
       };
       extraVirtualAliases = {
