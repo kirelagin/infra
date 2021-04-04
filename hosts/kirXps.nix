@@ -61,6 +61,10 @@
 
   networking.hostName = "kirXps";
 
+  services.tlp.settings = {
+    CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_performance";  # DE laggy otherwise
+  };
+
 #  virtualisation.docker.enable = true;
 
   # TODO: should be set automatically
