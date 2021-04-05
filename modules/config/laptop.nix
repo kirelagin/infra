@@ -7,6 +7,7 @@
 {
   config = {
     powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+    services.throttled.extraConfig = import ./conf/throttled.nix;  # Not enabled by default
 
     services.fwupd.enable = true;
 

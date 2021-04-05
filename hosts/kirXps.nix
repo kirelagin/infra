@@ -65,6 +65,8 @@
     CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_performance";  # DE laggy otherwise
   };
 
+  services.throttled.enable = true;
+
 #  virtualisation.docker.enable = true;
 
   # TODO: should be set automatically
