@@ -8,6 +8,8 @@
   config = {
     powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 
+    services.fwupd.enable = true;
+
     services.avahi = {
       enable = true;
       ipv6 = true;
