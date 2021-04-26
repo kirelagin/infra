@@ -67,6 +67,12 @@
 
   services.throttled.enable = true;
 
+  security.tpm2 = {
+    enable = true;
+    abrmd.enable = true;
+    pkcs11.enable = true;
+  };
+
 #  virtualisation.docker.enable = true;
 
   # TODO: should be set automatically
