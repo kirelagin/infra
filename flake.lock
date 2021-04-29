@@ -2,21 +2,57 @@
   "nodes": {
     "dns": {
       "inputs": {
+        "flake-utils": "flake-utils",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1606918933,
-        "narHash": "sha256-nkayeLpTvkj1IbwwUKZtz8Nxqxyl7UOuyDvSx5Y0WVY=",
+        "lastModified": 1617971069,
+        "narHash": "sha256-Lg9X/O5e2qnLBjkGRVKMiOGssxZrsIgm9a26LJ1Ib38=",
         "owner": "kirelagin",
         "repo": "nix-dns",
-        "rev": "985797066ffaf8fb05693169c7c2c3222c704365",
+        "rev": "c27914e527b79912ddc86a0f0f1ae5bd6a325519",
         "type": "github"
       },
       "original": {
         "owner": "kirelagin",
         "repo": "nix-dns",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1614513358,
+        "narHash": "sha256-LakhOx3S1dRjnh0b5Dg3mbZyH0ToC9I8Y2wKSkBaTzU=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5466c5bbece17adaab2d82fae80b46e807611bf3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1619654218,
+        "narHash": "sha256-Ppc7R8mDPNRvAXwzPxQlF0p9S2f+Q8ZteQRovD1YywQ=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "137a584e22e13a8d0d82102dedaca17f36110a94",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
         "type": "github"
       }
     },
@@ -39,16 +75,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1616863217,
-        "narHash": "sha256-UI1iem5xpxePEmd3vtOeDZik3aBH1xGLkO1Tn694Fvw=",
-        "owner": "NixOS",
+        "lastModified": 1619655106,
+        "narHash": "sha256-zdDchdB3sSmoPJ5l/xmO3nmuaKw1xc5AK/GkNAa1+4E=",
+        "owner": "kirelagin",
         "repo": "nixpkgs",
-        "rev": "dc2870a606a7a5a6aeb387ddab78e02cbe41924b",
+        "rev": "f38e0c6ca3207358286c34ba7498c891092a5d30",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixos-20.09",
+        "owner": "kirelagin",
+        "ref": "local",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -72,6 +108,7 @@
     "root": {
       "inputs": {
         "dns": "dns",
+        "home-manager": "home-manager",
         "mailserver": "mailserver",
         "nixpkgs": "nixpkgs",
         "prompt_kir": "prompt_kir"
