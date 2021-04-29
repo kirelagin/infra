@@ -36,6 +36,26 @@
         "type": "github"
       }
     },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1628287034,
+        "narHash": "sha256-pWMEpQQcKxBy0OKskFLXJHEyGYJIiMu/BUQjCWxGF38=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "b0d769691cc379c9ab91d3acec5d14e75c02c02b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "mailserver": {
       "flake": false,
       "locked": {
@@ -88,6 +108,7 @@
     "root": {
       "inputs": {
         "dns": "dns",
+        "home-manager": "home-manager",
         "mailserver": "mailserver",
         "nixpkgs": "nixpkgs",
         "prompt_kir": "prompt_kir"

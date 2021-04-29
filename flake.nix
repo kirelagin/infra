@@ -17,9 +17,13 @@
       url = "github:kirelagin/prompt_kir";
       flake = false;
     };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, dns, mailserver, prompt_kir }: {
+  outputs = inputs@{ self, nixpkgs, dns, mailserver, prompt_kir, home-manager }: {
 
     nixosConfigurations = {
       bruna = nixpkgs.lib.nixosSystem {

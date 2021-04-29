@@ -2,9 +2,11 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 
-{ pkgs, lib, ... }:
+{ pkgs, lib, flakes, ... }:
 
 {
+  imports = [ ./home-manager.nix ];
+
   config = {
     powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
     services.throttled.extraConfig = import ./conf/throttled.nix;  # Not enabled by default
