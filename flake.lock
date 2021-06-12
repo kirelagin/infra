@@ -2,53 +2,69 @@
   "nodes": {
     "dns": {
       "inputs": {
+        "flake-utils": "flake-utils",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1606918933,
-        "narHash": "sha256-nkayeLpTvkj1IbwwUKZtz8Nxqxyl7UOuyDvSx5Y0WVY=",
+        "lastModified": 1617971069,
+        "narHash": "sha256-Lg9X/O5e2qnLBjkGRVKMiOGssxZrsIgm9a26LJ1Ib38=",
         "owner": "kirelagin",
         "repo": "nix-dns",
-        "rev": "985797066ffaf8fb05693169c7c2c3222c704365",
+        "rev": "c27914e527b79912ddc86a0f0f1ae5bd6a325519",
         "type": "github"
       },
       "original": {
         "owner": "kirelagin",
         "repo": "nix-dns",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1614513358,
+        "narHash": "sha256-LakhOx3S1dRjnh0b5Dg3mbZyH0ToC9I8Y2wKSkBaTzU=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5466c5bbece17adaab2d82fae80b46e807611bf3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
         "type": "github"
       }
     },
     "mailserver": {
       "flake": false,
       "locked": {
-        "lastModified": 1606677096,
-        "narHash": "sha256-PpTp7EdzvU7Hooqgg31wSABa4JHhBJQk//Wx8np/W28=",
+        "lastModified": 1622967674,
+        "narHash": "sha256-8RLe6Rqy2rKR/PGDMg/EVsWihsO+DQe/RYmlXdRZkLs=",
         "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
-        "rev": "fb1cc04c0a517d4200237b02c3472bcaf9104afb",
+        "rev": "5675b122a947b40e551438df6a623efad19fd2e7",
         "type": "gitlab"
       },
       "original": {
         "owner": "simple-nixos-mailserver",
-        "ref": "nixos-20.09",
+        "ref": "nixos-21.05",
         "repo": "nixos-mailserver",
         "type": "gitlab"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1616863217,
-        "narHash": "sha256-UI1iem5xpxePEmd3vtOeDZik3aBH1xGLkO1Tn694Fvw=",
+        "lastModified": 1623309731,
+        "narHash": "sha256-UZVcWcMEuWr6QmoFNryxUwjnokXXREJO7CSRe8ob6E4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "dc2870a606a7a5a6aeb387ddab78e02cbe41924b",
+        "rev": "cedcf2565c6b982d703d67455199b09a3d905d86",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-20.09",
+        "ref": "nixos-21.05",
         "repo": "nixpkgs",
         "type": "github"
       }

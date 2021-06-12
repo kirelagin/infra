@@ -4,13 +4,13 @@
 
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.09";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.05";
     dns = {
       url = "github:kirelagin/nix-dns";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-20.09";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-21.05";
       flake = false;
     };
     prompt_kir = {
