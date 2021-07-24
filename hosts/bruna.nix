@@ -39,6 +39,8 @@
     };
   };
 
+  networking.firewall.allowedTCPPorts = [ 11234 ];  # for testing
+
   nix.maxJobs = 1;
 
   system.stateVersion = "18.03";
