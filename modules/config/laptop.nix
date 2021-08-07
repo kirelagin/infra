@@ -49,11 +49,6 @@
     };
 
     services.pcscd.enable = true;
-    programs.gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-      enableExtraSocket = true;
-    };
 
     environment.systemPackages = with pkgs; [
       wireguard-tools
