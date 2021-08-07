@@ -20,7 +20,7 @@
     };
 
     extraConfig = {
-      help.autocorrect = true;
+      help.autoCorrect = 1;
       color.ui = "auto";
       core.pager = "less -+F -X";
 
