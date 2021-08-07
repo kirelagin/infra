@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 {
   imports = [
@@ -6,6 +6,7 @@
     (import ./gdb.nix)
     (import ./gnupg.nix)
     (import ./git.nix)
+    (import ./homebrew.nix)
     (import ./lldb.nix)
     (import ./mail.nix)
     (import ./sagemath.nix)
