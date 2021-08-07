@@ -11,6 +11,7 @@
     (import ./lldb.nix)
     (import ./mail.nix)
     (import ./sagemath.nix)
+    (import ./tmux.nix)
   ];
 
   config = {
