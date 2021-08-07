@@ -23,7 +23,6 @@
       radare2
       samba
       sqlite
-      steghide
       wine
       wireshark
       #yara
