@@ -12,5 +12,8 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     users.kirelagin = import ../../home-manager;
+    sharedModules = [
+      (import ../../home-manager/_modules/sagemath.nix)
+    ];
   };
 }
