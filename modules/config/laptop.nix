@@ -51,6 +51,7 @@
     services.pcscd.enable = true;
 
     environment.systemPackages = with pkgs; [
+      iw
       wireguard-tools
     ];
 
