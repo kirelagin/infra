@@ -9,7 +9,7 @@ let
     SOA = {
       nameServer = "ns1";
       adminEmail = "kirelagin@gmail.com";
-      serial = 2021040300;
+      serial = 2021092400;
     };
 
     NS = [
