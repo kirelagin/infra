@@ -40,6 +40,7 @@
     services.xserver.desktopManager.pantheon.enable = true;
     services.xserver.displayManager.lightdm.enable = true;
     services.xserver.displayManager.lightdm.greeters.pantheon.enable = true;
+    programs.pantheon-tweaks.enable = true;
 
     services.thermald.enable = true;
     services.tlp.enable = true;
