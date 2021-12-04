@@ -75,8 +75,8 @@
 
 #  virtualisation.docker.enable = true;
 
-  # TODO: should be set automatically
-  time.timeZone = "America/New_York";
+  # Set timezone automatically (timedatectl or based on location).
+  time.timeZone = null;
 
   system.stateVersion = "20.09";
 
