@@ -5,6 +5,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
+    nixpkgs-u.url = "github:NixOS/nixpkgs/nixos-unstable";
     dns = {
       url = "github:kirelagin/nix-dns";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,7 +24,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, dns, mailserver, prompt_kir, home-manager }: {
+  outputs = inputs@{ self, nixpkgs, nixpkgs-u, dns, mailserver, prompt_kir, home-manager }: {
 
     nixosConfigurations = {
       bruna = nixpkgs.lib.nixosSystem {
@@ -46,7 +47,7 @@
           ]);
       };
 
-      kirXps = nixpkgs.lib.nixosSystem {
+      kirXps = nixpkgs-u.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { flakes = inputs; };
         modules =
