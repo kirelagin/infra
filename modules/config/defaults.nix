@@ -70,7 +70,7 @@
     nix.package = pkgs.nixFlakes;
     nix.extraOptions = ''
       allow-import-from-derivation = true
-      experimental-features = ca-references flakes nix-command
+      experimental-features = flakes nix-command
     '';
     nix.registry.nixpkgs.flake = flakes.nixpkgs;
 
