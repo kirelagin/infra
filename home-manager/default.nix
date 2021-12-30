@@ -2,16 +2,19 @@
 
 {
   imports = [
-    (import ./ghc.nix)
-    (import ./gdb.nix)
-    (import ./gnupg.nix)
-    (import ./git.nix)
-    (import ./homebrew.nix)
-    (import ./idea.nix)
-    (import ./lldb.nix)
-    (import ./mail.nix)
-    (import ./sagemath.nix)
-    (import ./tmux.nix)
+    ./ghc.nix
+    ./gdb.nix
+    ./gnupg.nix
+    ./git.nix
+    ./git-annex.nix
+    ./homebrew.nix
+    ./idea.nix
+    ./lldb.nix
+    ./mail.nix
+    ./sagemath.nix
+    ./taskwarrior.nix
+    ./tmux.nix
+    ./tools.nix
   ];
 
   config = {

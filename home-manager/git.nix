@@ -59,4 +59,8 @@
       "/.tmp"
     ];
   };
+
+  home.packages = with pkgs; [
+    gitAndTools.git-crypt
+  ];
 }
