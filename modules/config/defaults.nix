@@ -69,6 +69,7 @@
     # Enable flakes
     nix.package = pkgs.nixFlakes;
     nix.extraOptions = ''
+      allow-import-from-derivation = true
       experimental-features = ca-references flakes nix-command
     '';
     nix.registry.nixpkgs.flake = flakes.nixpkgs;
