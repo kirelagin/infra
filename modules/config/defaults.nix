@@ -85,6 +85,7 @@
       file
       htop
       neovim
+      nftables
     ];
 
     # Use neovim
