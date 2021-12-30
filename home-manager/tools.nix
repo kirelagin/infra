@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   programs = {
@@ -24,25 +24,24 @@
 
   home.packages = with pkgs; [
                     androidenv.androidPkgs_9_0.platform-tools
-    haskellPackages.cabal-install
                     ctags
                     dnsutils
                     fswatch
-    haskellPackages.ghcid
                     gopass
-    haskellPackages.hasktags
-    haskellPackages.hlint
                     ncdu
                     nix-diff
     haskellPackages.pandoc
-                   (python3.withPackages (pp: with pp; [ pynvim six ]))
+                    python3
                     rclone
                     reuse
                     ripgrep
-    haskellPackages.stack
-    haskellPackages.stylish-haskell
-                    tdesktop  # Telegram
                     tldr
                     unzip
+  ] ++ lib.optionals pkgs.stdenv.isDarwin [
+    gnugrep
   ];
+
+  home.shellAliases = {
+    eofchomp = "${lib.getBin pkgs.perl}/bin/perl -pi -e 'chomp if eof'";
+  };
 }

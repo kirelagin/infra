@@ -78,6 +78,7 @@
     programs.zsh.enable = true;
     users.defaultUserShell = pkgs.zsh;
     programs.zsh.promptInit = "source ${flakes.prompt_kir}/prompt_kir.zsh";
+    environment.pathsToLink = [ "/share/zsh" ];
 
     # Useful system packages
     environment.systemPackages = with pkgs; [

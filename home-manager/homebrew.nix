@@ -8,7 +8,7 @@ in {
     enable = lib.mkEnableOption "homebrew" // { default = pkgs.stdenv.isDarwin; };
   };
 
-  config = lib.mkIf (cfg.enable) {
+  config = lib.mkIf cfg.enable {
     home.sessionVariables.HOMEBREW_NO_AUTO_UPDATE = 1;
   };
 }

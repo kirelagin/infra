@@ -55,6 +55,9 @@
       iotop
       iw
       wireguard-tools
+    ] ++ lib.optionals pkgs.stdenv.isLinux [
+      powertop
+      psmisc  # pskill and co
     ];
 
 
