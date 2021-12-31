@@ -1,6 +1,6 @@
 {
   programs.texlive = {
     enable = true;
-    extraPackages = tpkgs: tpkgs.scheme-basic;
+    extraPackages = tp: { inherit (tp) scheme-basic; };
   };
 }

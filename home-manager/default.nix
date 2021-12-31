@@ -15,6 +15,7 @@
     ./sagemath.nix
     ./shell.nix
     ./taskwarrior.nix
+    ./tex.nix
     ./tmux.nix
     ./tools.nix
 
