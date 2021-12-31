@@ -25,7 +25,7 @@ in {
     ];
 
     home.shellAliases = {
-      open = "${lib.getBin pkgs.xdg-utils}/xdg-open";
+      open = "${lib.getBin pkgs.xdg-utils}/bin/xdg-open";
     } // lib.optionalAttrs cfg.xorg {
       pbcopy  = "${lib.getBin pkgs.xclip}/bin/xclip -selection clipboard -i";
       pbpaste = "${lib.getBin pkgs.xclip}/bin/xclip -selection clipboard -o";
