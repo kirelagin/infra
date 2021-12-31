@@ -2,9 +2,16 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 
-{ lib, pkgs, flakes, ... }:
+{ config, flakes, lib, pkgs, ... }:
 
 {
+  options = {
+    flakes.nixpkgs = lib.mkOption {
+      description = "The flake to use as nixpkgs";
+      default = flakes.nixpkgs;
+    };
+  };
+
   config = {
     # Let 'nixos-version --json' know about the Git revision of this flake.
     system.configurationRevision = lib.mkIf (flakes.self ? rev) flakes.self.rev;
@@ -72,7 +79,7 @@
       allow-import-from-derivation = true
       experimental-features = flakes nix-command
     '';
-    nix.registry.nixpkgs.flake = flakes.nixpkgs;
+    nix.registry.nixpkgs.flake = config.flakes.nixpkgs;
 
     # Use zsh
     programs.zsh.enable = true;

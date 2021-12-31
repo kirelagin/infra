@@ -52,6 +52,7 @@
         specialArgs = { flakes = inputs; };
         modules =
           [ (import ./hosts/kirXps.nix)
+            { flakes.nixpkgs = nixpkgs-u; }
           ] ++ (with self.nixosModules.config; [
             defaults
             laptop
