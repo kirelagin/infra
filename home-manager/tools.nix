@@ -39,6 +39,9 @@
                     unzip
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     gnugrep
+  ] ++ lib.optionals pkgs.stdenv.isLinux [
+    (import ./tools/envof.nix lib pkgs)
+    (import ./tools/whicher.nix lib pkgs)
   ];
 
   home.shellAliases = {
