@@ -6,8 +6,11 @@
       collection-latexrecommended
       collection-xetex
 
+      blindtext
       catchfile
       datetime2
+      enumitem
+      multirow
       tracklang
     ;};
   };

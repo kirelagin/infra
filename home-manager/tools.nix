@@ -30,7 +30,6 @@
                     gopass
                     ncdu
                     nix-diff
-    haskellPackages.pandoc
                     python3
                     rclone
                     reuse

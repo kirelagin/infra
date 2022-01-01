@@ -1,0 +1,141 @@
+\documentclass[%
+  $if(draft)$draft,$endif$%
+  english,%
+  paper=a4,%
+  BCOR=10mm,%
+  DIV=11,%
+  parskip=half,%
+  headsepline=true,%
+  headings=big%
+]{scrartcl}
+
+\usepackage{microtype}
+
+\usepackage{babel}
+\frenchspacing
+\usepackage{datetime2}
+
+\usepackage[no-math]{fontspec}
+
+
+\usepackage{scrlayer-scrpage}
+\setkomafont{pageheadfoot}{\normalfont\normalcolor}
+$if(author)$\ihead{$author$}$endif$
+$if(title)$\ohead{$title$}$endif$
+\cfoot{}
+\ofoot{\pagemark}
+
+
+\renewcommand*\sectionformat{}
+\renewcommand*\subsectionformat{}
+\renewcommand*\subsubsectionformat{}
+
+\addtokomafont{section}{\clearpage}
+
+
+\usepackage[hyphens]{url}
+
+\usepackage[unicode=true]{hyperref}
+$if(colorlinks)$
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+$endif$
+\hypersetup{
+$if(title-meta)$
+            pdftitle={$title-meta$},
+$endif$
+$if(author-meta)$
+            pdfauthor={$author-meta$},
+$endif$
+$if(keywords)$
+            pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},
+$endif$
+$if(colorlinks)$
+            colorlinks=true,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$Maroon$endif$,
+            citecolor=$if(citecolor)$$citecolor$$else$Blue$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$Blue$endif$,
+$else$
+            pdfborder={0 0 0},
+$endif$
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+
+$if(links-as-notes)$
+% Make links footnotes instead of hotlinks:
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+$else$
+\let\orighref\href
+\renewcommand{\href}[2]{\orighref{#1}{#2\textsuperscript{→}}}
+$endif$
+
+%%%
+
+% pandoc stuff
+\newcommand{\tightlist}{}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+\usepackage{longtable,booktabs,array}
+\usepackage{multirow}
+
+% pandoc bibliography
+$if(natbib)$
+\usepackage[$natbiboptions$]{natbib}
+\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
+$endif$
+$if(biblatex)$
+\usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+$endif$
+$if(csl-refs)$
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{cslreferences}%
+  {\KOMAoptions{parskip=half-}}%
+  {\KOMAoptions{parskip}}%
+$endif$
+
+%%%
+
+\usepackage{ifxetex,ifluatex}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{mathspec}
+\usepackage{xfrac}  % \sfrac
+\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+$for(operators)$\let\$operators$\relax\DeclareMathOperator{\$operators$}{$operators$}$endfor$
+
+\usepackage{enumitem}
+% No whitespace around lists and items. Align the marker left.
+\setlist[itemize]{nolistsep, noitemsep, left=0pt, labelsep=0.4em}
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+%%%
+
+$if(title)$
+\title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
+$endif$
+$if(subtitle)$
+\providecommand{\subtitle}[1]{}
+\subtitle{$subtitle$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+$if(date)$
+\date{$date$}
+$endif$
+
+\begin{document}
+
+$body$
+
+\end{document}

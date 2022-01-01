@@ -13,6 +13,7 @@
     useUserPackages = true;
     users.kirelagin = import ../../home-manager;
     sharedModules = [
+      (import ../../home-manager/_modules/pandoc.nix)
       (import ../../home-manager/_modules/sagemath.nix)
       ({ config, ... }: {
         systemd.user.sessionVariables = config.home.sessionVariables;

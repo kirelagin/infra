@@ -12,6 +12,7 @@
     ./lldb.nix
     ./mail.nix
     ./nvim.nix
+    ./pandoc.nix
     ./sagemath.nix
     ./shell.nix
     ./taskwarrior.nix
