@@ -6,6 +6,7 @@
       collection-latexrecommended
       collection-xetex
 
+      aligned-overset
       blindtext
       catchfile
       datetime2

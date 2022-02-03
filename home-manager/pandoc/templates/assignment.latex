@@ -109,6 +109,7 @@ $endif$
 \usepackage{xfrac}  % \sfrac
 \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 $for(operators)$\let\$operators$\relax\DeclareMathOperator{\$operators$}{$operators$}$endfor$
+\usepackage{aligned-overset}
 
 \usepackage{enumitem}
 % No whitespace around lists and items. Align the marker left.
