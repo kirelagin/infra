@@ -53,6 +53,13 @@
 
   hardware.video.hidpi.enable = true;
 
+  # Grayscale anti-aliasing
+  fonts.fontconfig.antialias = true;
+  fonts.fontconfig.subpixel = {
+    rgba = "none";
+    lcdfilter = "none";
+  };
+
   # Remap left Win and Alt
   boot.initrd.preLVMCommands = ''
     setkeycodes 38 125
