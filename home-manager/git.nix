@@ -57,6 +57,9 @@
       "result"
       "result-*"
       "/.tmp"
+
+      "__pycache__/"
+      ".ipynb_checkpoints/"
     ];
   };
 
