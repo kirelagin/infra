@@ -12,7 +12,9 @@
       datetime2
       enumitem
       multirow
+      spreadtab
       tracklang
+      xstring
     ;};
   };
 }
