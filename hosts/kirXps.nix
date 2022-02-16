@@ -80,6 +80,11 @@
     pkcs11.enable = true;
   };
 
+  # Gala (from Pantheon) spams logs. Dirty fix: at least do not write this bs to disk.
+  services.journald.extraConfig = ''
+    Storage=volatile
+  '';
+
 #  virtualisation.docker.enable = true;
 
   # Set timezone automatically (timedatectl or based on location).
