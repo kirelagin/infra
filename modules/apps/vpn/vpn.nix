@@ -52,6 +52,9 @@ in {
           { allowedIPs = [ "172.16.200.14" "2605:6400:30:fa9e:ff0e::0/80" ];  # kirXps
             publicKey = "XjR9nzUDhU1v+JsWxdjtcJV0FP/RpPmpXHBY7Nbn8Bs=";
           }
+          { allowedIPs = [ "172.16.200.15" "2605:6400:30:fa9e:ff0f::0/80" ];  # mom-phone
+            publicKey = "QquoLvO0mfuxUEVNM1CnZA9b/zbfYUeCahgXrO4ifWk=";
+          }
         ];
         postSetup = [
           helpers
