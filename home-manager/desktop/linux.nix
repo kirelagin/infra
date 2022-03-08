@@ -19,7 +19,6 @@ in {
       inkscape
       pavucontrol
       quassel
-      gitAndTools.qgit
       tdesktop  # Telegram
       vlc
     ];
