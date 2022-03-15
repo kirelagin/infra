@@ -108,4 +108,7 @@
     "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
   ];
 
+  services.printing.enable = true;
+  services.printing.drivers = with pkgs; [ hplip gutenprint ];
+
 }
