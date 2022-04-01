@@ -2,25 +2,34 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 
-{ config, flakes, ... }:
+{ config, flakes, lib, ... }:
 
 let
+  nokey = addr: addr + " NOKEY";
+
+  trifle = {
+    xfr = "195.24.128.164";
+    notify = "195.24.156.218";
+  };
+  afraid = {
+    xfr = "69.65.50.192";
+    notify = "69.65.50.223";
+  };
+  onecom = "46.30.211.18";
+
   elagin-me-zone = with flakes.dns.lib.combinators; {
     SOA = {
       nameServer = "ns1";
       adminEmail = "kirelagin@gmail.com";
-      serial = 2021092400;
+      serial = 2022040100;
     };
 
     NS = [
       "ns1.elagin.me."
       "ns2.afraid.org."
       "ns2.trifle.net."
-      "ns1.gratisdns.dk."
-      "ns2.gratisdns.dk."
-      #"ns3.gratisdns.dk."
-      "ns4.gratisdns.dk."
-      "ns5.gratisdns.dk."
+      "ns01.one.com."
+      "ns02.one.com."
     ];
 
     CAA = letsEncrypt "kir@elagin.me";
@@ -113,22 +122,15 @@ in {
     ];
 
     services.nsd.zones =
-      let
-        trifle = "195.24.128.164 NOKEY";
-        trifle-notify = "195.24.156.218 NOKEY";
-        afraid = "69.65.50.192 NOKEY";
-        afraid-notify = "69.65.50.223 NOKEY";
-        gratisdns = "91.221.196.0/28 NOKEY";
-        gratisdns-notify = "91.221.196.11 NOKEY";
-      in {
+      {
         "elagin.me" = {
-          provideXFR = [ trifle afraid gratisdns ];
-          notify = [ trifle-notify afraid-notify gratisdns-notify ];
+          provideXFR = map nokey (lib.flatten [ trifle.xfr afraid.xfr onecom ]);
+          notify = map nokey (lib.flatten [ trifle.notify afraid.notify onecom ]);
           data = flakes.dns.lib.toString "elagin.me" elagin-me-zone;
         };
         "kirelag.in" = {
-          provideXFR = [ trifle afraid ];
-          notify = [ trifle-notify afraid-notify ];
+          provideXFR = map nokey (lib.flatten [ trifle.xfr afraid.xfr ]);
+          notify = map nokey (lib.flatten [ trifle.notify afraid.notify ]);
           data = flakes.dns.lib.toString "kirelag.in" kirelag-in-zone;
         };
       };
