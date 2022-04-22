@@ -19,7 +19,7 @@
 
       loginAccounts = {
         "kir@elagin.me" = {
-          hashedPassword = import ../../credentials/mailserver.nix;
+          hashedPasswordFile = config.secrets.secrets.mailserver.path;
           aliases = [ "kirill@elagin.me" "📧@kir.elagin.me" ];
         };
       };
@@ -36,6 +36,10 @@
       enableImapSsl = true;
 
       localDnsResolver = false;
+    };
+
+    secrets.secrets.mailserver = {
+      owner = "dovecot2:dovecot2";
     };
 
   };
