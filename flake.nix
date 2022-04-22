@@ -90,6 +90,7 @@
         defaults = import ./modules/config/defaults.nix;
         infosec = import ./modules/config/infosec.nix;
         laptop = import ./modules/config/laptop.nix;
+        secrets = import ./modules/config/secrets.nix;
       };
     };
 
