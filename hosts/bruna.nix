@@ -10,10 +10,16 @@
   boot.initrd.availableKernelModules =
     [ "ata_piix" "uhci_hcd" "virtio_pci" "sr_mod" "virtio_blk" ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/fe761ffe-ed1d-46c0-b7fc-7c75e004880b";
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/fe761ffe-ed1d-46c0-b7fc-7c75e004880b";
       fsType = "ext4";
     };
+    "/mnt" = {
+      device = "/dev/disk/by-uuid/581d2578-7695-4569-92b7-8557d7606417";
+      fsType = "btrfs";
+    };
+  };
 
   swapDevices = [
     { device = "/dev/disk/by-uuid/cb76b10f-d2eb-402c-aa11-d35f2edacfee"; }
