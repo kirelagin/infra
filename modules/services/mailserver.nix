@@ -42,5 +42,7 @@
       owner = "dovecot2:dovecot2";
     };
 
+    backups.paths = [ config.mailserver.mailDirectory ];
+
   };
 }
