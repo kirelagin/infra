@@ -33,6 +33,7 @@
         modules =
           [ (import ./hosts/bruna.nix)
           ] ++ (with self.nixosModules.services; [
+            backups
             mail
             nginx
             nsd
@@ -42,6 +43,7 @@
             dns-kirelagin-me
             vpn
             legacy-tunnel
+            storage
           ]) ++ (with self.nixosModules.config; [
             defaults
           ]);
@@ -73,6 +75,7 @@
 
     nixosModules = {
       services = {
+        backups = import ./modules/services/backups.nix;
         mail = import ./modules/services/mailserver.nix;
         nginx = import ./modules/services/nginx.nix;
         nsd = import ./modules/services/nsd.nix;
@@ -83,6 +86,7 @@
         legacy-tunnel = import ./modules/apps/vpn/legacy-tunnel.nix;
         nginx-static = import ./modules/apps/web/static.nix;
         nginx-stub = import ./modules/apps/web/stub.nix;
+        storage = import ./modules/apps/storage.nix;
         vpn = import ./modules/apps/vpn/vpn.nix;
       };
 
