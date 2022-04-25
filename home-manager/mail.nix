@@ -8,7 +8,7 @@
       address = "kir@elagin.me";
       userName = address;
       realName = "Kirill Elagin";
-      passwordCommand = "${pkgs.pass}/bin/pass show email/kir@elagin.me | head -n1";
+      passwordCommand = "${pkgs.libsecret}/bin/secret-tool lookup xdg:schema org.gnome.Geary login kir@elagin.me";
       primary = true;
 
       imap.host = "bruna.kir.elagin.me";
