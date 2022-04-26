@@ -55,6 +55,16 @@
     postExec = toString (pkgs.writeShellScript "tag-mail" ''
       ${pkgs.notmuch}/bin/notmuch new
       ${pkgs.afew}/bin/afew --tag --all
+
+      ${pkgs.notmuch}/bin/notmuch tag +inbox -- tag:new AND NOT tag:spam
+      new=$(${pkgs.notmuch}/bin/notmuch count tag:new AND tag:inbox)
+      if [ $new -gt 0 ]; then
+        email="email"
+        [ $new -gt 1 ] && email="emails"
+        ${pkgs.libnotify}/bin/notify-send -c 'email.arrived' -a Email "$new new $email"
+      fi
+
+      ${pkgs.notmuch}/bin/notmuch tag -new -- tag:new
       ${pkgs.afew}/bin/afew --move --all
     '');
   };
@@ -94,7 +104,7 @@
       tags = -new;-inbox
       message = Archiving emails from the Archive directory
 
-      [InboxFilter]
+      #[InboxFilter]
 
       [MailMover]
       rename = True
