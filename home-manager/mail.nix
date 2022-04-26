@@ -116,5 +116,10 @@
     bindings = import ./alot/bindings.nix;
     hooks = builtins.readFile ./alot/hooks.py;
   };
+
+  home.file.".mailcap".text = ''
+    text/html; ${pkgs.elinks}/bin/elinks -dump -default-mime-type text/html '%s'; copiousoutput
+    #text/html; ${pkgs.w3m}/bin/w3m -dump -o document_charset=%{charset} '%s'; nametemplate=%s.html; copiousoutput
+  '';
 }
 
