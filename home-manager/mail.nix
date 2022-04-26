@@ -38,10 +38,10 @@
   # imapnotify -starts-> mbsync.service
   # mbsync.service -runs-> afew --move
   #           then syncs
-  #           then -runs-> notmuch new
-  # notmuch new -runs-> afew --tag && afew --move
+  #           then -runs-> notmuch new && afew --tag && afew --move
   #
   # NOTE: simply running `mbsync` only syncs and does not call anything!
+  # NOTE: simply running `notmuch new` does not run afew!
   #
   # mbsync.service is also started by a timer, just in case
   #
@@ -52,7 +52,11 @@
     enable = true;
     frequency = "*:0/10";  # every 10 minutes
     preExec = "${pkgs.afew}/bin/afew --move --all";
-    postExec = "${pkgs.notmuch}/bin/notmuch new";
+    postExec = toString (pkgs.writeShellScript "tag-mail" ''
+      ${pkgs.notmuch}/bin/notmuch new
+      ${pkgs.afew}/bin/afew --tag --all
+      ${pkgs.afew}/bin/afew --move --all
+    '');
   };
 
   programs.mbsync = {
@@ -66,7 +70,6 @@
     enable = true;
     new.tags = [ "new" ];
     new.ignore = [ "/.*[.](json|lock|bak)$/" ];
-    hooks.postNew = "afew --tag --all && afew --move --all";
   };
   programs.afew = {
     enable = true;
