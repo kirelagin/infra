@@ -55,6 +55,9 @@ in {
           { allowedIPs = [ "172.16.200.15" "2605:6400:30:fa9e:ff0f::0/80" ];  # mom-phone
             publicKey = "QquoLvO0mfuxUEVNM1CnZA9b/zbfYUeCahgXrO4ifWk=";
           }
+          { allowedIPs = [ "172.16.200.16" "2605:6400:30:fa9e:ff10::0/80" ];  # nyc
+            publicKey = "WF17ozwFNz0WKOufvw94FIUxYHI69jTlG63LF95r7hg=";
+          }
         ];
         postSetup = [
           helpers
