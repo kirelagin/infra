@@ -59,6 +59,7 @@
       psmisc  # pskill and co
     ];
 
+    programs.adb.enable = true;
 
     # Allow containers to access the internet through NAT.
     networking.nat = {
