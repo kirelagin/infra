@@ -43,7 +43,6 @@
     programs.pantheon-tweaks.enable = true;
 
     services.thermald.enable = true;
-    services.tlp.enable = true;
     services.fstrim.enable = true;
     boot.kernel.sysctl = {
       "vm.swappiness" = 1;
