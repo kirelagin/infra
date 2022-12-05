@@ -13,7 +13,7 @@ in {
     home.packages = with pkgs; [
       chromium
       (firefox.override { extraNativeMessagingHosts = [ passff-host ]; })
-      gnome3.dconf-editor
+      gnome.dconf-editor
       gimp
       gnvim
       inkscape

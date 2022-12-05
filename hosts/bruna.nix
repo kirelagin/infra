@@ -47,7 +47,7 @@
 
   networking.firewall.allowedTCPPorts = [ 11234 ];  # for testing
 
-  nix.maxJobs = 1;
+  nix.settings.max-jobs = 1;
 
   system.stateVersion = "18.03";
 }

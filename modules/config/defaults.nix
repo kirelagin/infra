@@ -53,7 +53,7 @@
     services.openssh = {
       enable = true;
       passwordAuthentication = false;
-      challengeResponseAuthentication = false;
+      kbdInteractiveAuthentication = false;
       permitRootLogin = "no";
     };
 
@@ -73,11 +73,9 @@
 
     security.acme = {
       acceptTerms = true;
-      email = "kirelagin@gmail.com";
+      defaults.email = "kirelagin@gmail.com";
     };
 
-    # Enable flakes
-    nix.package = pkgs.nixFlakes;
     nix.extraOptions = ''
       allow-import-from-derivation = true
       experimental-features = flakes nix-command
