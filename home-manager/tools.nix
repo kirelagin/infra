@@ -30,10 +30,13 @@
                     gopass
                     ncdu
                     nix-diff
+                    nmap
                     python3
+                    radare2
                     rclone
                     reuse
                     ripgrep
+                    rmapi
                     tldr
                     unzip
   ] ++ lib.optionals pkgs.stdenv.isDarwin [

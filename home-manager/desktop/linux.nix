@@ -17,6 +17,7 @@ in {
       gimp
       gnvim
       inkscape
+      libreoffice
       pavucontrol
       quassel
       tdesktop  # Telegram
