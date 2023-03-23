@@ -13,6 +13,12 @@
 
     services.fwupd.enable = true;
 
+    services.logind = {
+      lidSwitch = "suspend";
+      lidSwitchDocked = "suspend";
+      lidSwitchExternalPower = "suspend";
+    };
+
     services.avahi = {
       enable = true;
       ipv6 = true;

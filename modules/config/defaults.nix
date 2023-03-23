@@ -92,6 +92,7 @@
     environment.systemPackages = with pkgs; [
       dnsutils
       file
+      gitAndTools.gitMinimal
       htop
       neovim
       nftables

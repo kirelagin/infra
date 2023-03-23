@@ -58,6 +58,9 @@ in {
           { allowedIPs = [ "172.16.200.16" "2605:6400:30:fa9e:ff10::0/80" ];  # nyc
             publicKey = "WF17ozwFNz0WKOufvw94FIUxYHI69jTlG63LF95r7hg=";
           }
+          { allowedIPs = [ "172.16.200.17" "2605:6400:30:fa9e:ff11::0/80" ];  # mikrotik
+            publicKey = "h7hdYortM+u4GhqP6Ro31q5DJSKpVIjxlTx6plj0EQs=";
+          }
         ];
         postSetup = [
           helpers
