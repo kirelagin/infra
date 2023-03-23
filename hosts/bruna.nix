@@ -18,6 +18,7 @@
     "/mnt" = {
       device = "/dev/disk/by-uuid/581d2578-7695-4569-92b7-8557d7606417";
       fsType = "btrfs";
+      options = [ "nofail" ];
     };
   };
 
