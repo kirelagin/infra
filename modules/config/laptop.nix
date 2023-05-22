@@ -57,6 +57,7 @@
     services.pcscd.enable = true;
 
     environment.systemPackages = with pkgs; [
+      gptfdisk
       iotop
       iw
       wireguard-tools
