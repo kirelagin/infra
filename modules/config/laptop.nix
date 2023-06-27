@@ -10,6 +10,15 @@
   config = {
     powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
     services.throttled.extraConfig = import ./conf/throttled.nix;  # Not enabled by default
+    services.thermald.enable = true;
+    boot.extraModprobeConfig = ''
+      options snd_hda_intel power_save=1
+      options iwlwifi power_save=Y
+    '';
+    services.power-profiles-daemon.enable = lib.mkForce false;
+    services.tlp = {
+      enable = true;
+    };
 
     services.fwupd.enable = true;
 
@@ -48,7 +57,6 @@
     services.xserver.displayManager.lightdm.greeters.pantheon.enable = true;
     programs.pantheon-tweaks.enable = true;
 
-    services.thermald.enable = true;
     services.fstrim.enable = true;
     boot.kernel.sysctl = {
       "vm.swappiness" = 1;
