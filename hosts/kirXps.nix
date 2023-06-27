@@ -11,6 +11,7 @@
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.kernelParams = [ "mem_sleep_default=deep" ];  # defaults to fake suspend??
 
   boot.initrd.luks.devices = {
     root = {
