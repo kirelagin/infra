@@ -71,7 +71,6 @@
       wireguard-tools
     ] ++ lib.optionals pkgs.stdenv.isLinux [
       powertop
-      psmisc  # pskill and co
     ];
 
     programs.adb.enable = true;

@@ -97,7 +97,9 @@
       gitAndTools.gitMinimal
       htop
       neovim
+    ] ++ lib.optionals pkgs.stdenv.isLinux [
       nftables
+      psmisc  # pskill and co
     ];
 
     # Use neovim
