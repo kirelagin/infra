@@ -52,8 +52,6 @@
     firmwareLinuxNonfree
   ];
 
-  hardware.video.hidpi.enable = true;
-
   # Grayscale anti-aliasing
   fonts.fontconfig.antialias = true;
   fonts.fontconfig.subpixel = {
