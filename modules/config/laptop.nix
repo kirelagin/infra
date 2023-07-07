@@ -44,7 +44,7 @@
     };
 
     networking.networkmanager.enable = true;
-    users.users.kirelagin.extraGroups = [ "networkmanager" ];
+    users.users.kirelagin.extraGroups = [ "dialout" "networkmanager" ];
 
     services.xserver.enable = true;
     services.xserver.layout = "us,ru";
