@@ -106,4 +106,28 @@
   services.printing.enable = true;
   services.printing.drivers = with pkgs; [ hplip gutenprint ];
 
+  programs.steam.enable = true;
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "steam"
+    "steamcmd"
+    "steam-original"
+    "steam-run"
+  ];
+  environment.systemPackages = with pkgs; [
+    steamcmd
+    steam-tui
+  ];
+
+  virtualisation.oci-containers.backend = "podman";
+
+  services.nginx = {
+    enable = true;
+    virtualHosts."home.local".default = true;
+  };
+  networking.firewall.allowedTCPPorts = [
+    80
+  ];
+
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
 }

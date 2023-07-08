@@ -35,7 +35,7 @@
     };
 
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-    networking.useDHCP = false;
+    #networking.useDHCP = false;
 
     # Disable search domain list
     networking.search = [ "." ];

@@ -4,14 +4,14 @@
 
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     nixpkgs-u.url = "github:NixOS/nixpkgs/nixos-unstable";
     dns = {
       url = "github:kirelagin/nix-dns";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-22.11";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-23.05";
       flake = false;
     };
     prompt_kir = {
@@ -55,7 +55,9 @@
         modules =
           [ (import ./hosts/kirXps.nix)
             { flakes.nixpkgs = nixpkgs-u; }
-          ] ++ (with self.nixosModules.config; [
+          ] ++ (with self.nixosModules.services; [
+            home-assistant
+          ]) ++ (with self.nixosModules.config; [
             defaults
             laptop
           ]);
@@ -71,11 +73,31 @@
           infosec
         ]);
       };
+
+      home-sdcard = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = { flakes = inputs; };
+        modules = [
+          ./hosts/home.nix
+          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image.nix"
+          {
+            #nixpkgs.config.allowUnsupportedSystem = true;
+            #nixpkgs.buildPlatform.system = "x86_64-linux";
+            #nixpkgs.hostPlatform.system = "aarch64-linux";
+          }
+        ] ++ (with self.nixosModules.services; [
+          home-assistant
+        ]) ++ (with self.nixosModules.config; [
+          defaults
+          home-device
+        ]);
+      };
     };
 
     nixosModules = {
       services = {
         backups = import ./modules/services/backups.nix;
+        home-assistant = import ./modules/services/home-assistant.nix;
         mail = import ./modules/services/mailserver.nix;
         nginx = import ./modules/services/nginx.nix;
         nsd = import ./modules/services/nsd.nix;
@@ -92,6 +114,7 @@
 
       config = {
         defaults = import ./modules/config/defaults.nix;
+        home-device = import ./modules/config/home-device.nix;
         infosec = import ./modules/config/infosec.nix;
         laptop = import ./modules/config/laptop.nix;
         secrets = import ./modules/config/secrets.nix;

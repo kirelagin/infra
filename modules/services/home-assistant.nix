@@ -1,0 +1,57 @@
+# SPDX-FileCopyrightText: 2023 Kirill Elagin <https://kir.elagin.me/>
+#
+# SPDX-License-Identifier: MPL-2.0
+
+{ config, ... }:
+
+let
+  zwave-dev = "/dev/serial/by-id/usb-Zooz_800_Z-Wave_stick_533D004242-if00";
+
+in
+
+{
+  config = {
+
+    virtualisation.oci-containers = {
+      containers = {
+        homeassistant = {
+          image = "ghcr.io/home-assistant/home-assistant:stable";
+          volumes = [ "home-assistant:/config" ];
+          extraOptions = [
+            "--network=host"
+            "--volume=/run/dbus:/run/dbus"  # bluetooth
+          ];
+          dependsOn = [ "zwave-js" ];
+        };
+
+        zwave-js = {
+          image = "zwavejs/zwave-js-ui:latest";
+          volumes = [ "zwave-js:/usr/src/app/store" ];
+          extraOptions = [
+            "--device=${zwave-dev}:/dev/zwave"
+          ];
+          ports = [
+            "3000:3000/tcp"
+            "8091:8091/tcp"
+          ];
+        };
+      };
+    };
+
+    services.nginx = {
+      recommendedProxySettings = true;
+      virtualHosts."home.local" = {
+        forceSSL = false;
+        enableACME = false;
+        extraConfig = ''
+          proxy_buffering off;
+        '';
+        locations."/" = {
+          proxyPass = "http://[::1]:8123";
+          proxyWebsockets = true;
+        };
+      };
+    };
+
+  };
+}

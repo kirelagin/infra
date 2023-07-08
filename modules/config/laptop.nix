@@ -5,7 +5,10 @@
 { pkgs, lib, flakes, ... }:
 
 {
-  imports = [ ./home-manager.nix ];
+  imports = [
+    ./home-device.nix
+    ./home-manager.nix
+  ];
 
   config = {
     powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
@@ -20,27 +23,10 @@
       enable = true;
     };
 
-    services.fwupd.enable = true;
-
     services.logind = {
       lidSwitch = "suspend";
       lidSwitchDocked = "suspend";
       lidSwitchExternalPower = "suspend";
-    };
-
-    services.avahi = {
-      enable = true;
-      ipv6 = true;
-      nssmdns = true;
-      publish = {
-        # wtf, realy??
-        enable = true;
-        userServices = true;
-        addresses = true;
-      };
-      extraServiceFiles = {
-        ssh = "${pkgs.avahi}/etc/avahi/services/ssh.service";
-      };
     };
 
     networking.networkmanager.enable = true;
