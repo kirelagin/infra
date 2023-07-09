@@ -80,12 +80,7 @@
     Storage=volatile
   '';
 
-#  virtualisation.docker.enable = true;
-
-  # Set timezone automatically (timedatectl or based on location).
-  time.timeZone = null;
-
-  system.stateVersion = "20.09";
+  system.stateVersion = "23.05";
 
 
   services.xserver.displayManager.sessionCommands = ''

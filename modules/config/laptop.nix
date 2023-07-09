@@ -46,6 +46,9 @@
     networking.networkmanager.enable = true;
     users.users.kirelagin.extraGroups = [ "dialout" "networkmanager" ];
 
+    time.timeZone = null;
+    services.automatic-timezoned = true;
+
     services.xserver.enable = true;
     services.xserver.layout = "us,ru";
     services.xserver.xkbOptions = "grp:win_space_toggle,misc:typo,lv3:ralt_switch";

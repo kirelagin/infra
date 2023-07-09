@@ -18,7 +18,7 @@
     # Let 'nixos-version --json' know about the Git revision of this flake.
     system.configurationRevision = lib.mkIf (flakes.self ? rev) flakes.self.rev;
 
-    boot.tmpOnTmpfs = true;
+    boot.tmp.useTmpfs = true;
 
     time.timeZone = lib.mkDefault "UTC";
 
@@ -34,8 +34,7 @@
       '';
     };
 
-    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-    networking.useDHCP = false;
+    networking.useDHCP = lib.mkDefault true;
 
     # Disable search domain list
     networking.search = [ "." ];
@@ -45,6 +44,8 @@
       "1.1.1.1"
       "1.0.0.1"
     ];
+
+    services.nscd.enableNsncd = true;  # kill nscd
 
     i18n.defaultLocale = "C.UTF-8";
     console.keyMap = "us";

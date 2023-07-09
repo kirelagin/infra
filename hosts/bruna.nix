@@ -1,10 +1,7 @@
 { pkgs, lib, ... }:
 
 {
-  boot.loader.grub = {
-    enable = true;
-    version = 2;
-  };
+  boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/vda";
 
   boot.initrd.availableKernelModules =
@@ -30,6 +27,8 @@
     hostName = "bruna";
     domain = "kir.elagin.me";
 
+    useDHCP = false;
+
     interfaces.ens3 = {
       ipv4.addresses = [
         { address = "104.244.79.71"; prefixLength = 24; }
@@ -50,5 +49,5 @@
 
   nix.settings.max-jobs = 1;
 
-  system.stateVersion = "18.03";
+  system.stateVersion = "23.05";
 }

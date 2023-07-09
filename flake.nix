@@ -4,14 +4,14 @@
 
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     nixpkgs-u.url = "github:NixOS/nixpkgs/nixos-unstable";
     dns = {
       url = "github:kirelagin/nix-dns";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-22.11";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-23.05";
       flake = false;
     };
     prompt_kir = {
@@ -49,12 +49,12 @@
           ]);
       };
 
-      kirXps = nixpkgs-u.lib.nixosSystem {
+      kirXps = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { flakes = inputs; };
         modules =
           [ (import ./hosts/kirXps.nix)
-            { flakes.nixpkgs = nixpkgs-u; }
+            { flakes.nixpkgs = nixpkgs; }
           ] ++ (with self.nixosModules.config; [
             defaults
             laptop

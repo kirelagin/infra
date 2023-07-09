@@ -30,12 +30,19 @@
 
       hierarchySeparator = "/";
 
-      certificateScheme = 3;
+      certificateScheme = "acme-nginx";
 
       enableImap = true;
       enableImapSsl = true;
 
       localDnsResolver = false;
+
+      dmarcReporting = {
+        enable = true;
+        domain = config.networking.domain;
+        organizationName = config.networking.domain;
+        fromName = "Mailserver DMARC report";
+      };
     };
 
     secrets.secrets.mailserver = {
