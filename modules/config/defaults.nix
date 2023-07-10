@@ -84,6 +84,7 @@
       experimental-features = flakes nix-command
     '';
     nix.registry.nixpkgs.flake = config.flakes.nixpkgs;
+    nix.settings.trusted-users = [ "kirelagin" ];
 
     # Use zsh
     programs.zsh.enable = true;
