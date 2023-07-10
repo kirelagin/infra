@@ -26,6 +26,15 @@
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-u, dns, mailserver, prompt_kir, home-manager }: {
 
+    packages = {
+      x86_64-linux = {
+        # This one is not really x86_64... it is a mix:
+        # the bootloader is cross-compiled from x86_64 to target,
+        # but the OS itself is built through qemu...
+        home-sdcard-img = self.nixosConfigurations.home.config.system.build.sdImage;
+      };
+    };
+
     nixosConfigurations = {
       bruna = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -71,11 +80,28 @@
           infosec
         ]);
       };
+
+      home = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = { flakes = inputs; };
+        modules = [
+          ./hosts/home.nix
+          {
+            #nixpkgs.config.allowUnsupportedSystem = true;
+          }
+        ] ++ (with self.nixosModules.services; [
+          home-assistant
+        ]) ++ (with self.nixosModules.config; [
+          defaults
+          home-device
+        ]);
+      };
     };
 
     nixosModules = {
       services = {
         backups = import ./modules/services/backups.nix;
+        home-assistant = import ./modules/services/home-assistant.nix;
         mail = import ./modules/services/mailserver.nix;
         nginx = import ./modules/services/nginx.nix;
         nsd = import ./modules/services/nsd.nix;
@@ -92,6 +118,7 @@
 
       config = {
         defaults = import ./modules/config/defaults.nix;
+        home-device = import ./modules/config/home-device.nix;
         infosec = import ./modules/config/infosec.nix;
         laptop = import ./modules/config/laptop.nix;
         secrets = import ./modules/config/secrets.nix;

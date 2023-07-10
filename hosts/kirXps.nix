@@ -101,4 +101,6 @@
   services.printing.enable = true;
   services.printing.drivers = with pkgs; [ hplip gutenprint ];
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
 }
