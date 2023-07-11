@@ -86,6 +86,8 @@
     nix.registry.nixpkgs.flake = config.flakes.nixpkgs;
     nix.settings.trusted-users = [ "kirelagin" ];
 
+    services.resolved.dnssec = lib.mkDefault "true";
+
     # Use zsh
     programs.zsh.enable = true;
     users.defaultUserShell = pkgs.zsh;
