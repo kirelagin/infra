@@ -69,6 +69,9 @@
 
     services.fstrim.enable = true;
 
+    powerManagement.cpuFreqGovernor = "ondemand";
+    services.dbus.implementation = "broker";
+
     services.nginx = {
       enable = true;
       virtualHosts."home.local".default = true;
