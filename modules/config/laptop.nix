@@ -40,6 +40,11 @@
     networking.networkmanager.enable = true;
     users.users.kirelagin.extraGroups = [ "dialout" "networkmanager" ];
 
+    security.pam.services = {
+      polkit-1.u2fAuth = true;
+      sudo.u2fAuth = true;
+    };
+
     services.resolved.enable = true;
     services.resolved.dnssec = "allow-downgrade";
 
