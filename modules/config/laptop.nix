@@ -32,6 +32,9 @@
     networking.networkmanager.enable = true;
     users.users.kirelagin.extraGroups = [ "dialout" "networkmanager" ];
 
+    services.resolved.enable = true;
+    services.resolved.dnssec = "allow-downgrade";
+
     time.timeZone = null;
     services.automatic-timezoned.enable = true;
 
