@@ -64,7 +64,9 @@
         modules =
           [ (import ./hosts/kirXps.nix)
             { flakes.nixpkgs = nixpkgs; }
-          ] ++ (with self.nixosModules.config; [
+          ] ++ (with self.nixosModules.services; [
+            steam
+          ]) ++ (with self.nixosModules.config; [
             defaults
             laptop
           ]);
@@ -105,6 +107,7 @@
         mail = import ./modules/services/mailserver.nix;
         nginx = import ./modules/services/nginx.nix;
         nsd = import ./modules/services/nsd.nix;
+        steam = import ./modules/services/steam.nix;
       };
 
       apps = {
