@@ -59,6 +59,11 @@
     lcdfilter = "none";
   };
 
+  #qt = {
+  #  enable = true;
+  #  style = lib.mkForce "adwaita-dark";
+  #};
+
   # Remap left Win and Alt
   boot.initrd.preLVMCommands = ''
     setkeycodes 38 125

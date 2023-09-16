@@ -19,8 +19,8 @@
       flake = false;
     };
     home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs-u";
     };
   };
 
@@ -58,12 +58,12 @@
           ]);
       };
 
-      kirXps = nixpkgs.lib.nixosSystem {
+      kirXps = nixpkgs-u.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { flakes = inputs; };
         modules =
           [ (import ./hosts/kirXps.nix)
-            { flakes.nixpkgs = nixpkgs; }
+            { flakes.nixpkgs = nixpkgs-u; }
           ] ++ (with self.nixosModules.services; [
             steam
           ]) ++ (with self.nixosModules.config; [
