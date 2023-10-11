@@ -18,18 +18,8 @@
       options snd_hda_intel power_save=1
       options iwlwifi power_save=Y
     '';
-    services.power-profiles-daemon.enable = lib.mkForce false;
-    services.tlp = {
-      enable = true;
-      settings = {
-        CPU_BOOST_ON_AC = lib.mkDefault 1;
-        CPU_BOOST_ON_BAT = lib.mkDefault 0;
-        CPU_MAX_PERF_ON_AC = lib.mkDefault 100;
-        CPU_MAX_PERF_ON_BAT = lib.mkDefault 60;
-        CPU_ENERGY_PERF_POLICY_ON_AC = lib.mkDefault "balance_performance";
-        CPU_ENERGY_PERF_POLICY_ON_BAT = lib.mkDefault "balance_power";
-      };
-    };
+    services.power-profiles-daemon.enable = lib.mkDefault true;
+    services.tlp.enable = lib.mkDefault false;
 
     services.logind = {
       lidSwitch = "suspend";
