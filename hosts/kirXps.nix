@@ -33,15 +33,15 @@
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/bdd86810-fc8a-4bf2-9300-8c3207a6f05c";
-      fsType = "ext4";
-      options = [ "noatime" "nodiratime" ];
+    { device = "/dev/disk/by-uuid/0dfc813e-43e8-475e-9dfd-e818ff0758fb";
+      fsType = "btrfs";
+      options = [ "noatime" "nodiratime" "subvol=home" "compress=zstd" ];
     };
 
-  fileSystems."/nix/store" =
-    { device = "/dev/disk/by-uuid/59f3b3e8-c529-4bd6-af28-d45c6d14f712";
-      fsType = "ext4";
-      options = [ "noatime" "nodiratime" ];
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/0dfc813e-43e8-475e-9dfd-e818ff0758fb";
+      fsType = "btrfs";
+      options = [ "noatime" "nodiratime" "subvol=nix" "compress=zstd" ];
     };
 
   swapDevices =
