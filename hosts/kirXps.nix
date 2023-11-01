@@ -7,6 +7,8 @@
   # Bleeding-edge
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.initrd.systemd.enable = true;
+
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
@@ -64,11 +66,24 @@
   #  style = lib.mkForce "adwaita-dark";
   #};
 
-  # Remap left Win and Alt
-  boot.initrd.preLVMCommands = ''
-    setkeycodes 38 125
-    setkeycodes db 56
-  '';
+  boot.initrd.systemd = {
+    storePaths = [ "${pkgs.kbd}/bin/setkeycodes" ];
+
+    services.remap-keys = {
+      description = "Remap left Win and Alt";
+      wantedBy = [ "initrd.target" ];
+
+      script = ''
+        ${pkgs.kbd}/bin/setkeycodes 38 125
+        ${pkgs.kbd}/bin/setkeycodes db 56
+      '';
+
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+    };
+  };
 
   networking.hostName = "kirXps";
 
