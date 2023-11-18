@@ -22,9 +22,14 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs-u";
     };
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.3.0";
+      inputs.nixpkgs.follows = "nixpkgs-u";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-u, dns, mailserver, prompt_kir, home-manager }: {
+  outputs = inputs@{ self, nixpkgs, nixpkgs-u, dns, mailserver, prompt_kir, home-manager, nixos-hardware, lanzaboote }: {
 
     packages = {
       x86_64-linux = {
@@ -69,6 +74,20 @@
           ]) ++ (with self.nixosModules.config; [
             defaults
             laptop
+          ]);
+      };
+
+      kirFw = nixpkgs-u.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { flakes = inputs; };
+        modules =
+          [ (import ./hosts/kirFw.nix)
+            { flakes.nixpkgs = nixpkgs-u; }
+          ] ++ (with self.nixosModules.services; [
+          ]) ++ (with self.nixosModules.config; [
+            defaults
+            laptop
+            secure-boot
           ]);
       };
 
@@ -125,6 +144,7 @@
         infosec = import ./modules/config/infosec.nix;
         laptop = import ./modules/config/laptop.nix;
         secrets = import ./modules/config/secrets.nix;
+        secure-boot = import ./modules/config/secure-boot.nix;
       };
     };
 

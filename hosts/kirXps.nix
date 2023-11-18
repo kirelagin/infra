@@ -1,13 +1,12 @@
+# SPDX-FileCopyrightText: 2020 Kirill Elagin <https://kir.elagin.me/>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 { pkgs, lib, ... }:
 
 {
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   # Bleeding-edge
   boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  boot.initrd.systemd.enable = true;
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
@@ -90,11 +89,7 @@
 
   services.throttled.enable = true;
 
-  security.tpm2 = {
-    enable = true;
-    abrmd.enable = true;
-    pkcs11.enable = true;
-  };
+  security.tpm2.enable = true;
 
   # Gala (from Pantheon) spams logs. Dirty fix: at least do not write this bs to disk.
   services.journald.extraConfig = ''

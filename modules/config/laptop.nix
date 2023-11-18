@@ -11,6 +11,13 @@
   ];
 
   config = {
+    boot.loader.systemd-boot.enable = lib.mkDefault true;
+    boot.loader.efi.canTouchEfiVariables = true;
+
+    boot.initrd.systemd.enable = true;
+
+    hardware.enableRedistributableFirmware = lib.mkDefault true;
+
     powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
     services.throttled.extraConfig = import ./conf/throttled.nix;  # Not enabled by default
     services.thermald.enable = true;
@@ -29,6 +36,11 @@
 
     networking.networkmanager.enable = true;
     users.users.kirelagin.extraGroups = [ "dialout" "networkmanager" ];
+
+    security.tpm2 = {
+      abrmd.enable = true;
+      pkcs11.enable = true;
+    };
 
     security.pam.services = {
       polkit-1.u2fAuth = true;
