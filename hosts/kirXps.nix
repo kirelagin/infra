@@ -18,6 +18,7 @@
   boot.initrd.luks.devices = {
     root = {
       device = "/dev/disk/by-uuid/bb50f319-8ac5-431a-aab7-c9a9f8dced77";
+      crypttabExtraOpts = [ "fido2-device=auto" ];
       preLVM = true;
       allowDiscards = true;
     };
