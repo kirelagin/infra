@@ -20,7 +20,7 @@
 
     boot.initrd.luks.devices."root" = {
       device = "/dev/disk/by-uuid/44a90e36-0327-4d09-b4b3-88fd9d258af9";
-      crypttabExtraOpts = [ "fido2-device=auto" ];
+      crypttabExtraOpts = [ "tpm2-device=auto" "fido2-device=auto" ];
       allowDiscards = true;
     };
 
