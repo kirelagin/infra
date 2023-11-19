@@ -78,6 +78,7 @@
       wireguard-tools
     ] ++ lib.optionals pkgs.stdenv.isLinux [
       powertop
+      tpm2-tools
     ];
 
     programs.adb.enable = true;
