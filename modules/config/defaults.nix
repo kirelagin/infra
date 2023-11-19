@@ -109,5 +109,8 @@
     # Use neovim
     environment.variables.EDITOR = "nvim";
     environment.shellAliases.e = "$EDITOR";
+
+    # Propagate SSH_ASKPASS to the session
+    environment.sessionVariables.SSH_ASKPASS = lib.optionalString config.programs.ssh.enableAskPassword config.programs.ssh.askPassword;
   };
 }
