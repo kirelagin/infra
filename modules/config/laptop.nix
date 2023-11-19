@@ -63,6 +63,7 @@
     services.xserver.displayManager.lightdm.enable = true;
     services.xserver.displayManager.lightdm.greeters.pantheon.enable = true;
     programs.pantheon-tweaks.enable = true;
+    programs.seahorse.enable = true;  # gnome keymanager for nice ssh-askpass
 
     services.fstrim.enable = true;
     boot.kernel.sysctl = {
