@@ -18,6 +18,8 @@
     boot.kernelModules = [ "kvm-amd" ];
     boot.extraModulePackages = [ ];
 
+    boot.kernelParams = [ "amdgpu.sg_display=0" ];
+
     boot.initrd.luks.devices."root" = {
       device = "/dev/disk/by-uuid/44a90e36-0327-4d09-b4b3-88fd9d258af9";
       crypttabExtraOpts = [ "tpm2-device=auto" "fido2-device=auto" ];
@@ -51,7 +53,7 @@
     swapDevices = [ ];
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-    hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    hardware.firmware = [ pkgs.linux-firmware ];  # amdgpu and mediatek
 
     security.tpm2.enable = true;
 
