@@ -22,6 +22,8 @@ in {
       quassel
       tdesktop  # Telegram
       vlc
+      wl-clipboard
+      xclip
     ];
 
     home.shellAliases = {
