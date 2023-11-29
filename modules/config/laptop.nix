@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 
-{ pkgs, lib, flakes, ... }:
+{ config, pkgs, lib, flakes, ... }:
 
 {
   imports = [
@@ -70,6 +70,8 @@
       "vm.swappiness" = 1;
     };
 
+    services.fwupd.enable = true;
+
     services.pcscd.enable = true;
 
     environment.systemPackages = with pkgs; [
@@ -80,6 +82,8 @@
     ] ++ lib.optionals pkgs.stdenv.isLinux [
       powertop
       tpm2-tools
+    ] ++ lib.optionals config.services.xserver.desktopManager.gnome.enable [
+      pkgs.gnome-firmware
     ];
 
     programs.adb.enable = true;
