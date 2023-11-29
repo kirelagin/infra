@@ -84,6 +84,7 @@
           [ (import ./hosts/kirFw.nix)
             { flakes.nixpkgs = nixpkgs-u; }
           ] ++ (with self.nixosModules.services; [
+            steam
           ]) ++ (with self.nixosModules.config; [
             defaults
             laptop
