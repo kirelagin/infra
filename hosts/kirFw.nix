@@ -16,9 +16,17 @@
     boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
     boot.initrd.kernelModules = [ ];
     boot.kernelModules = [ "kvm-amd" ];
-    boot.extraModulePackages = [ ];
+    boot.extraModulePackages = [ (pkgs.linuxPackages_latest.callPackage ../pkgs/framework-laptop-kmod { }) ];
 
-    boot.kernelParams = [ "amdgpu.sg_display=0" ];
+    boot.kernelParams = [
+      "amdgpu.sg_display=0"
+      "rtc_cmos.use_acpi_alarm=1"
+      "pm_debug_messages" "amd_pmc.dyndbg"  # FIXME
+    ];
+
+    boot.kernelPatches = [
+      { name = "fw-amd-ec"; patch = ../patches/kernel/fw-amd-ec.patch; }
+    ];
 
     boot.initrd.luks.devices."root" = {
       device = "/dev/disk/by-uuid/44a90e36-0327-4d09-b4b3-88fd9d258af9";
@@ -54,6 +62,8 @@
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
     hardware.firmware = [ pkgs.linux-firmware ];  # amdgpu and mediatek
+
+    hardware.framework.amd-7040.preventWakeOnAC = true;
 
     security.tpm2.enable = true;
 
