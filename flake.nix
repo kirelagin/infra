@@ -27,9 +27,14 @@
       url = "github:nix-community/lanzaboote/v0.3.0";
       inputs.nixpkgs.follows = "nixpkgs-u";
     };
+
+    power-profiles-daemon = {  # XXX: Framework AMD fixees
+      url = "gitlab:upower/power-profiles-daemon?host=gitlab.freedesktop.org";
+      flake = false;
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-u, dns, mailserver, prompt_kir, home-manager, nixos-hardware, lanzaboote }: {
+  outputs = inputs@{ self, nixpkgs, nixpkgs-u, ... }: {
 
     packages = {
       x86_64-linux = {

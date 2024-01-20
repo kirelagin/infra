@@ -65,6 +65,12 @@
 
     hardware.framework.amd-7040.preventWakeOnAC = true;
 
+    # XXX: use HEAD for Mario's fixes
+    services.power-profiles-daemon.package = pkgs.power-profiles-daemon.overrideAttrs {
+      src = flakes.power-profiles-daemon;
+      version = flakes.power-profiles-daemon.lastModifiedDate;
+    };
+
     security.tpm2.enable = true;
 
     networking.hostName = "kirFw";
