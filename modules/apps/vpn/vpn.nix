@@ -61,6 +61,9 @@ in {
           { allowedIPs = [ "172.16.200.17" "2605:6400:30:fa9e:ff11::0/80" ];  # mikrotik
             publicKey = "h7hdYortM+u4GhqP6Ro31q5DJSKpVIjxlTx6plj0EQs=";
           }
+          { allowedIPs = [ "172.16.200.18" "2605:6400:30:fa9e:ff12::0/80" ];  # kirFw
+            publicKey = "/yPBj/756X/StzURUCIkDaYwoLy1QmdUCSpStgqRRiw=";
+          }
         ];
         postSetup = [
           helpers
