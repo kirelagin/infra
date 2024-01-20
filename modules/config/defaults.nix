@@ -40,7 +40,7 @@
     networking.search = [ "." ];
 
     # Use CloudFlare DNS
-    networking.nameservers = [
+    networking.nameservers = lib.mkDefault [
       "1.1.1.1"
       "1.0.0.1"
     ];

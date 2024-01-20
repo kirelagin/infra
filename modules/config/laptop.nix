@@ -35,6 +35,7 @@
     };
 
     networking.networkmanager.enable = true;
+    networking.nameservers = [];  # do not use harcoded dns
     users.users.kirelagin.extraGroups = [ "dialout" "networkmanager" ];
 
     security.tpm2 = {
