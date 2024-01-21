@@ -62,7 +62,8 @@
 
     services.xserver.desktopManager.gnome.enable = true;
     services.xserver.displayManager.gdm.enable = true;
-    programs.seahorse.enable = true;  # gnome keymanager for nice ssh-askpass
+    programs.ssh.enableAskPassword = true;
+    programs.ssh.askPassword = "${pkgs.callPackage ../../pkgs/ssh-askpass-gnome4 {}}/bin/gnome-ssh-askpass4";
 
     services.fstrim.enable = true;
     boot.kernel.sysctl = {

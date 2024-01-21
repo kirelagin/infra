@@ -110,7 +110,8 @@
     environment.variables.EDITOR = "nvim";
     environment.shellAliases.e = "$EDITOR";
 
-    # Propagate SSH_ASKPASS to the session
+    # Propagate SSH_ASKPASS to the session and force its use even if $DISPLAY is not set
     environment.sessionVariables.SSH_ASKPASS = lib.optionalString config.programs.ssh.enableAskPassword config.programs.ssh.askPassword;
+    environment.sessionVariables.SSH_ASKPASS_REQUIRE = lib.optionalString config.programs.ssh.enableAskPassword "force";
   };
 }
