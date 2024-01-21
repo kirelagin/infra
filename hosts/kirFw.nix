@@ -77,6 +77,23 @@
       version = flakes.power-profiles-daemon.lastModifiedDate;
     };
 
+    # XXX: amdgpu firmware fixup
+    nixpkgs.overlays = [
+      (final: prev: {
+        linux-firmware = let
+          vcn_bin = final.fetchurl {
+            url = "https://gitlab.freedesktop.org/mesa/mesa/uploads/f51d221a24d4ac354e2d1d901613b594/vcn_4_0_2.bin";
+            hash = "sha256-6I849LwnGg6YviNy+IYT751WMHavW2bK0MbuqE3V5GU=";
+          };
+        in prev.linux-firmware.overrideAttrs (old: {
+          outputHash = null;
+          postInstall = (old.postInstall or "") + ''
+            cp "${vcn_bin}" "$out"/lib/firmware/amdgpu/vcn_4_0_2.bin
+          '';
+        });
+      })
+    ];
+
     security.tpm2.enable = true;
 
     networking.hostName = "kirFw";
