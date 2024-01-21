@@ -28,6 +28,12 @@
       { name = "fw-amd-ec"; patch = ../patches/kernel/fw-amd-ec.patch; }
     ];
 
+    services.udev.extraRules = ''
+      # Allow wheel to set the battery charge capacity
+      SUBSYSTEM=="power_supply", RUN+="${pkgs.coreutils}/bin/chgrp -f wheel /sys%p/charge_control_end_threshold"
+      SUBSYSTEM=="power_supply", RUN+="${pkgs.coreutils}/bin/chmod -f  0660 /sys%p/charge_control_end_threshold"
+    '';
+
     boot.initrd.luks.devices."root" = {
       device = "/dev/disk/by-uuid/44a90e36-0327-4d09-b4b3-88fd9d258af9";
       crypttabExtraOpts = [ "tpm2-device=auto" "fido2-device=auto" ];

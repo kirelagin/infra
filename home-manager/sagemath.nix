@@ -2,7 +2,7 @@
 
 {
   programs.sagemath = {
-    enable = true;
+    enable = false;
     initScript = ''
       %colors linux
     '';

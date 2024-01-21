@@ -60,10 +60,8 @@
 
     services.xserver.libinput.enable = true;
 
-    services.xserver.desktopManager.pantheon.enable = true;
-    services.xserver.displayManager.lightdm.enable = true;
-    services.xserver.displayManager.lightdm.greeters.pantheon.enable = true;
-    programs.pantheon-tweaks.enable = true;
+    services.xserver.desktopManager.gnome.enable = true;
+    services.xserver.displayManager.gdm.enable = true;
     programs.seahorse.enable = true;  # gnome keymanager for nice ssh-askpass
 
     services.fstrim.enable = true;
