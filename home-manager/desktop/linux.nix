@@ -32,5 +32,26 @@ in {
       pbcopy  = "${lib.getBin pkgs.xclip}/bin/xclip -selection clipboard -i";
       pbpaste = "${lib.getBin pkgs.xclip}/bin/xclip -selection clipboard -o";
     };
+
+    dconf.settings = {
+      "org/gnome/desktop/input-sources" = {
+        xkb-options = [
+          "misc:typo" "lv3:ralt_switch"  # typo layout
+          "altwin:swap_alt_win"  # swap alt and win
+        ];
+      };
+
+      "org/gnome/desktop/wm/preferences" = {
+        button-layout = "close,minimize:appmeny";
+
+        audible-bell = false;
+        visual-bell = true;
+        visual-bell-type = "frame-flash";  # flash window
+      };
+
+      "org/gnome/settings-daemon/plugins/power" = {
+        idle-brightness = 100;  # disable screen dimming hack
+      };
+    };
   };
 }
