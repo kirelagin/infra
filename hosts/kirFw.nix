@@ -26,6 +26,7 @@
 
     boot.kernelPatches = [
       { name = "fw-amd-ec"; patch = ../patches/kernel/fw-amd-ec.patch; }
+      { name = "amdgpu-drm-buddy-alloc_range"; patch = ../patches/kernel/amdgpu-drm-buddy-alloc_range.patch; }
     ];
 
     services.udev.extraRules = ''
