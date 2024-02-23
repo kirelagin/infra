@@ -21,7 +21,7 @@ let
     SOA = {
       nameServer = "ns1";
       adminEmail = "kirelagin@gmail.com";
-      serial = 2023022200;
+      serial = 2023022201;
     };
 
     NS = [
@@ -48,6 +48,7 @@ let
     ] ++ [
       # Verifications
       "google-site-verification=7eSteX9R6IiaSz32CvanrfKPetdlL-QfBHAgInmDMXU"
+      "google-site-verification=mMKdzA0obsuEQKadoH4361PHWnW1esoQZ657TiQtPGI"
       "firebase=kir-elagin-me"
       "globalsign-domain-verification=ItLiGzsKrucx89txkuBZAYFi67bYGGtlzVBzuQYgkh"
     ];
