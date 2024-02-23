@@ -8,7 +8,7 @@ let
   nokey = addr: addr + " NOKEY";
 
   trifle = {
-    xfr = "195.24.128.164";
+    xfr = "195.24.156.218";
     notify = "195.24.156.218";
   };
   afraid = {
