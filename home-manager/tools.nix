@@ -28,6 +28,7 @@
                     dnsutils
                     fswatch
                     gopass
+                    mypy
                     ncdu
                     nix-diff
                     nmap
@@ -39,6 +40,7 @@
                     rmapi
                     tldr
                     unzip
+                    yubikey-manager
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     gnugrep
   ] ++ lib.optionals pkgs.stdenv.isLinux [
