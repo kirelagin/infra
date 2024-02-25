@@ -65,7 +65,16 @@
         options = [ "subvol=@nix" "compress=zstd" "noatime" ];
       };
 
-    swapDevices = [ ];
+    fileSystems."/run/swap" =
+      { device = "/dev/disk/by-uuid/6b25f0fe-70c3-4c41-9398-41182be07f80";
+        fsType = "btrfs";
+        options = [ "subvol=@swap" "noatime" "nofail" ];
+      };
+
+    swapDevices = [
+      { device = "/run/swap/swapfile";
+      }
+    ];
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
     hardware.firmware = [ pkgs.linux-firmware ];  # amdgpu and mediatek
