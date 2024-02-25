@@ -103,7 +103,9 @@
       neovim
     ] ++ lib.optionals pkgs.stdenv.isLinux [
       nftables
+      pciutils
       psmisc  # pskill and co
+      usbutils
     ];
 
     # Use neovim
