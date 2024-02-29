@@ -105,16 +105,14 @@
     # XXX: amdgpu firmware fixup
     nixpkgs.overlays = [
       (final: prev: {
-        linux-firmware = let
-          vcn_bin = final.fetchurl {
-            url = "https://gitlab.freedesktop.org/mesa/mesa/uploads/f51d221a24d4ac354e2d1d901613b594/vcn_4_0_2.bin";
-            hash = "sha256-6I849LwnGg6YviNy+IYT751WMHavW2bK0MbuqE3V5GU=";
+        linux-firmware = prev.linux-firmware.overrideAttrs (old: {
+          src = prev.fetchFromGitLab {
+            owner = "kernel-firmware";
+            repo = "linux-firmware";
+            rev = "5cd471e3de782d1d5ae9e96909a08d264d866842";
+            sha256 = "sha256-VnOSnjDs4mnv8vJH6/WghabHt4Y3g+xk8A1BnmxGFTk=";
           };
-        in prev.linux-firmware.overrideAttrs (old: {
           outputHash = null;
-          postInstall = (old.postInstall or "") + ''
-            cp "${vcn_bin}" "$out"/lib/firmware/amdgpu/vcn_4_0_2.bin
-          '';
         });
       })
     ];
