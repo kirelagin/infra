@@ -29,7 +29,7 @@
     };
 
     power-profiles-daemon = {  # XXX: Framework AMD fixees
-      url = "gitlab:upower/power-profiles-daemon?host=gitlab.freedesktop.org";
+      url = "gitlab:upower/power-profiles-daemon/superm1/power-changes-amd-pstate?host=gitlab.freedesktop.org";
       flake = false;
     };
   };

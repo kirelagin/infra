@@ -82,10 +82,25 @@
     hardware.framework.amd-7040.preventWakeOnAC = true;
 
     # XXX: use HEAD for Mario's fixes
-    services.power-profiles-daemon.package = pkgs.power-profiles-daemon.overrideAttrs {
+    services.power-profiles-daemon.package = pkgs.power-profiles-daemon.overrideAttrs (old: {
       src = flakes.power-profiles-daemon;
       version = flakes.power-profiles-daemon.lastModifiedDate;
-    };
+
+      nativeBuildInputs = (lib.filter (d: !(lib.hasPrefix "python" d.name)) old.nativeBuildInputs) ++ [
+        (pkgs.python3.pythonOnBuildForHost.withPackages (ps: with ps; [
+          pygobject3
+          dbus-python
+          python-dbusmock
+          pylint
+          argparse-manpage
+          shtab
+        ]))
+        pkgs.cmake
+      ];
+      buildInputs = old.buildInputs ++ [
+        pkgs.bash-completion
+      ];
+    });
 
     # XXX: amdgpu firmware fixup
     nixpkgs.overlays = [

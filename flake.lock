@@ -278,16 +278,17 @@
       "flake": false,
       "locked": {
         "host": "gitlab.freedesktop.org",
-        "lastModified": 1705301399,
-        "narHash": "sha256-Kjljrf/xhwbLtNkKDQWKMVlflQDurk7727ZwgU2p/Vc=",
+        "lastModified": 1708824478,
+        "narHash": "sha256-+TAZNZOChG4FASdGpBL3mQsFZgUhLrmWFpbxHjTyWgE=",
         "owner": "upower",
         "repo": "power-profiles-daemon",
-        "rev": "53fb59a2b90f837375bec633ee59c00140f4d18d",
+        "rev": "f8bea7c205afc4b3101edc31b8e9b35780b0ceb6",
         "type": "gitlab"
       },
       "original": {
         "host": "gitlab.freedesktop.org",
         "owner": "upower",
+        "ref": "superm1/power-changes-amd-pstate",
         "repo": "power-profiles-daemon",
         "type": "gitlab"
       }
