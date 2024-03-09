@@ -64,6 +64,9 @@ in {
           { allowedIPs = [ "172.16.200.18" "2605:6400:30:fa9e:ff12::0/80" ];  # kirFw
             publicKey = "/yPBj/756X/StzURUCIkDaYwoLy1QmdUCSpStgqRRiw=";
           }
+          { allowedIPs = [ "172.16.200.19" "2605:6400:30:fa9e:ff13::0/80" ];  # Pixel 7
+            publicKey = "6AzoJa9Xa+BEIYB8EAJkLy6qMUckjiXNezLXEAXtyz0=";
+          }
         ];
         postSetup = [
           helpers
