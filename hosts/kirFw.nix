@@ -4,28 +4,41 @@
 
 { config, flakes, lib, pkgs, ... }:
 
-{
+let
+  linuxPackages = pkgs.linuxPackagesFor (pkgs.linux_testing.override {
+    argsOverride = rec {
+      src = pkgs.fetchzip {
+        url = "https://git.kernel.org/torvalds/t/linux-${version}.tar.gz";
+        hash = "sha256-wPsC8/cUscTbBrgxYu2Y2h0qdr8a0BbJqvl3avbTMWE=";
+      };
+      version = "6.8-rc7";
+      modDirVersion = lib.versions.pad 3 version;
+    };
+  });
+
+
+in {
   imports = [
     flakes.nixos-hardware.nixosModules.framework-13-7040-amd
   ];
 
   config = {
     # Bleeding-edge
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = linuxPackages;
 
     boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
     boot.initrd.kernelModules = [ ];
     boot.kernelModules = [ "kvm-amd" ];
-    boot.extraModulePackages = [ (pkgs.linuxPackages_latest.callPackage ../pkgs/framework-laptop-kmod { }) ];
+    boot.extraModulePackages = [ (linuxPackages.callPackage ../pkgs/framework-laptop-kmod { }) ];
 
     boot.kernelParams = [
       "amdgpu.sg_display=0"
-      "rtc_cmos.use_acpi_alarm=1"
-      "pm_debug_messages" "amd_pmc.dyndbg"  # FIXME
+      #"pm_debug_messages" "amd_pmc.dyndbg"  # FIXME
     ];
 
     boot.kernelPatches = [
       { name = "fw-amd-ec"; patch = ../patches/kernel/fw-amd-ec.patch; }
+    ] ++ lib.optionals (lib.versionOlder linuxPackages.kernel.version "6.7.8") [
       { name = "amdgpu-drm-buddy-alloc_range"; patch = ../patches/kernel/amdgpu-drm-buddy-alloc_range.patch; }
     ];
 
@@ -78,8 +91,6 @@
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
     hardware.firmware = [ pkgs.linux-firmware ];  # amdgpu and mediatek
-
-    hardware.framework.amd-7040.preventWakeOnAC = true;
 
     # XXX: use HEAD for Mario's fixes
     services.power-profiles-daemon.package = pkgs.power-profiles-daemon.overrideAttrs (old: {
