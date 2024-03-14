@@ -120,30 +120,6 @@ let
     };
   };
 
-  kirelag-in-zone = with flakes.dns.lib.combinators; {
-    SOA = {
-      nameServer = "ns1.elagin.me.";
-      adminEmail = "kirelagin@gmail.com";
-      serial = 2019041102;
-    };
-
-    NS = lib.flatten [
-      "ns1.elagin.me."
-      afraid.ns
-      trifle.ns
-    ];
-
-    TXT = [
-      "google-site-verification=g5HX9rRosUzT7Of3fM4bG1edzOwR4pGTG0tsKLSSP_8"
-    ];
-
-    CAA = letsEncrypt "kir@elagin.me";
-
-    subdomains = {
-      srk.CNAME = ["serokell.github.io."];
-    };
-  };
-
 in {
   config = {
     assertions = [
@@ -158,11 +134,6 @@ in {
           provideXFR = map nokey (lib.flatten [ trifle.xfr afraid.xfr onecom.xfr buddyns.ips ]);
           notify = map nokey (lib.flatten [ trifle.notify afraid.notify onecom.notify buddyns.notify ]);
           data = flakes.dns.lib.toString "elagin.me" elagin-me-zone;
-        };
-        "kirelag.in" = {
-          provideXFR = map nokey (lib.flatten [ trifle.xfr afraid.xfr ]);
-          notify = map nokey (lib.flatten [ trifle.notify afraid.notify ]);
-          data = flakes.dns.lib.toString "kirelag.in" kirelag-in-zone;
         };
       };
   };
