@@ -65,6 +65,8 @@ in {
 
     services.nginx = {
       virtualHosts."${config.networking.hostName}.${config.networking.domain}" = {
+        forceSSL = true;
+        enableACME = !config.boot.isContainer;
         locations = {
           "=/index.html".alias = "${stub}/stub.html";
           "/".index = "/index.html";
