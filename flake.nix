@@ -65,6 +65,7 @@
             storage
           ]) ++ (with self.nixosModules.config; [
             defaults
+            headless
           ]);
       };
 
@@ -146,6 +147,7 @@
 
       config = {
         defaults = import ./modules/config/defaults.nix;
+        headless = import ./modules/config/headless.nix;
         home-device = import ./modules/config/home-device.nix;
         infosec = import ./modules/config/infosec.nix;
         laptop = import ./modules/config/laptop.nix;
