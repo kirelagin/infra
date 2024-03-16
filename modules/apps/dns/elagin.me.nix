@@ -51,7 +51,7 @@ let
     SOA = {
       nameServer = "ns1";
       adminEmail = "kirelagin@gmail.com";
-      serial = 2024030200;
+      serial = 2024031601;
     };
 
     NS = lib.flatten [
@@ -111,9 +111,11 @@ let
           blog.CNAME = [ "ghc.google.com." ];
 
           bruna = host "104.244.79.71" "2605:6400:30:fa9e::ff90:4000";
+          blanka = host null "2a13:9f40:0:25:2aec:5ba6:84f1:aed9";
 
           s.subdomains = {
             vpn.CNAME = [ "bruna.kir.elagin.me." ];
+            mysticflow.CNAME = [ "blanka.kir.elagin.me." ];
           };
         };
       };
