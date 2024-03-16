@@ -30,7 +30,7 @@ let
             margin: 0;
           }
           body {
-            background-color: #904000;
+            background-color: ${config.colour.css};
             display: flex;
             justify-content: center;
             align-items: center;

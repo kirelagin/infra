@@ -5,7 +5,7 @@
 { config, flakes, lib, pkgs, ... }:
 
 {
-  imports = [ ./secrets.nix ];
+  imports = [ ./colour.nix ./secrets.nix ];
 
   options = {
     flakes.nixpkgs = lib.mkOption {

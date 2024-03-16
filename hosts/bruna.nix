@@ -23,6 +23,8 @@
     { device = "/dev/disk/by-uuid/cb76b10f-d2eb-402c-aa11-d35f2edacfee"; }
   ];
 
+  colour.css = "#904000";
+
   networking = {
     hostName = "bruna";
     domain = "kir.elagin.me";
