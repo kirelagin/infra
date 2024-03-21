@@ -26,6 +26,7 @@
       extraVirtualAliases = {
         "abuse@elagin.me" = "kir@elagin.me";
         "postmaster@elagin.me" = "kir@elagin.me";
+        "ruf@elagin.me" = "kir@elagin.me";
       };
 
       hierarchySeparator = "/";

@@ -51,7 +51,7 @@ let
     SOA = {
       nameServer = "ns1";
       adminEmail = "kirelagin@gmail.com";
-      serial = 2024031602;
+      serial = 2024032100;
     };
 
     NS = lib.flatten [
@@ -71,7 +71,7 @@ let
         p = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDCiYuCjO2Hrdk5wf9j3LJ1i06ZpoTwRyWDS4ml2Xz+SmQ+h7/eurm4poxZqE2th5nb9P62fUbZV7eYGJev23y8cDABAqrEnZStmE2YWqxP6NN3AInBiMkvhAt41eM3/FJsuycnFILl8UYb6/9WYLB2EaGBabodlTOy6x9wDC19wwIDAQAB";
       }
     ];
-    DMARC = [ (dmarc.postmarkapp "mailto:re+ifjzjmjecfw@dmarc.postmarkapp.com" // { p = "quarantine"; sp = "quarantine"; }) ];
+    DMARC = [ (dmarc.postmarkapp "mailto:re+ifjzjmjecfw@dmarc.postmarkapp.com" // { p = "quarantine"; sp = "quarantine"; ruf = ["mailto:ruf@elagin.me"]; }) ];
 
     TXT = [
       (spf.strict ["mx"])
