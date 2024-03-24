@@ -3,6 +3,7 @@ let
     blanka = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBNvtklymKYtjj8hFhTYp59odfbN0fhVh2mi/NbNBtkR" ];
     bruna = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILvC0F5+t3oO4Ewg2xZDAJ4mw05Dmnm4koaMlTQOpfhc" ];
     home = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN/HU6zwd740qIHBHLsnQXCy+nAftR/qpY14PhuXwAFT" ];
+    kirFw = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJDlQzaZ4LkkXy3fWc90VJDQwmSVWCOmZmAxPa3PRnu4" ];
     orkolora = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID3nyFzdEt8Jem3n83kf6q70OIEAAasAXJRC6U49GFvm" ];
   };
 
