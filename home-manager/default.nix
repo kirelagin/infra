@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./fonts.nix
     ./gdb.nix
     ./gnupg.nix
     ./git.nix
