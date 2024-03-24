@@ -17,6 +17,8 @@
     };
   };
 
+  services.qemuGuest.enable = true;
+
   colour.css = "#ffcc00";
 
   networking = {
