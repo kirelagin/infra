@@ -5,8 +5,8 @@
 { config, ... }:
 
 let
-  ha_version = "2024.1.5";
-  zwave-js-ui_version = "9.7.1";
+  ha_version = "2024.3.3";
+  zwave-js-ui_version = "9.9.1";
   zwave_dev = "/dev/serial/by-id/usb-Zooz_800_Z-Wave_stick_533D004242-if00";
 
 in

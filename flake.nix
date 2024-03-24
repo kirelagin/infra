@@ -141,6 +141,7 @@
           home-assistant
         ]) ++ (with self.nixosModules.config; [
           defaults
+          headless
           home-device
         ]);
       };
