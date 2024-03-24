@@ -53,6 +53,11 @@ in
       initialize = true;
 
       inherit (cfg) repository paths;
+      pruneOpts = [
+        "--keep-daily 7"
+        "--keep-weekly 4"
+        "--keep-monthly 12"
+      ];
     };
   };
 }
