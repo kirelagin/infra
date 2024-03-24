@@ -31,13 +31,13 @@ in
 
     credsSecretName = mkOption {
       type = types.str;
-      default = "backup-${config.networking.hostName}-creds";
+      default = "backups/${config.networking.hostName}/b2-creds";
       description = "Name of the secret with b2 credentials.";
     };
 
     encryptionSecretName = mkOption {
       type = types.str;
-      default = "backup-${config.networking.hostName}";
+      default = "backups/${config.networking.hostName}/password";
       description = "Name of the secret with the encryption key.";
     };
   };

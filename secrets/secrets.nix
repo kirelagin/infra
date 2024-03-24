@@ -16,8 +16,9 @@ in
 {
   "user.age".publicKeys = kirelagin ++ builtins.concatMap (xs: xs) (builtins.attrValues machines);
 
-  "backup-bruna.age".publicKeys = kirelagin ++ machines.bruna;
-  "backup-bruna-creds.age".publicKeys = kirelagin ++ machines.bruna;
+  "backups/bruna/password.age".publicKeys = kirelagin ++ machines.bruna;
+  "backups/bruna/b2-creds.age".publicKeys = kirelagin ++ machines.bruna;
+
   "mailserver.age".publicKeys = kirelagin ++ machines.bruna;
   "wireguard.age".publicKeys = kirelagin ++ machines.bruna;
 }
