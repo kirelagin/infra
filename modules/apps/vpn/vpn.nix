@@ -15,12 +15,13 @@ let
 
 in {
   config = {
+    secrets.secrets.wireguard = {};
     networking.wireguard.interfaces = {
       wg0 = {
         ips = [ "172.16.200.1/24" "2605:6400:30:fa9e:ff01::ff90:4000/72" ];
         listenPort = 16200;
         # TODO: This stores the secret key in the store :(
-        privateKey = import ../../../credentials/wireguard.nix;
+        privateKeyFile = config.secrets.secrets.wireguard.path;
         peers = [
           { allowedIPs = [ "172.16.200.2"  "2605:6400:30:fa9e:ff02::0/80" ];  # minano
             publicKey = "etxITkU1t8IZy/5nW/dcUTC+i2SPwIMf+ZFfGOm7J1I=";

@@ -10,7 +10,8 @@ let
   cfg = config.backups;
 
   secretConfig = {
-    owner = "${config.services.restic.backups.backup.user}:root";
+    owner = config.services.restic.backups.backup.user;
+    group = "root";
   };
 in
 

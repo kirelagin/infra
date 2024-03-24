@@ -23,6 +23,8 @@
   };
 
   home.packages = with pkgs; [
+                    age-plugin-yubikey
+                    agenix
                     androidenv.androidPkgs_9_0.platform-tools
                     ctags
                     dnsutils
@@ -34,6 +36,7 @@
                     nmap
                     python3
                     radare2
+                    rage
                     rclone
                     reuse
                     ripgrep

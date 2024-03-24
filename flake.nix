@@ -27,6 +27,11 @@
       url = "github:nix-community/lanzaboote/v0.3.0";
       inputs.nixpkgs.follows = "nixpkgs-u";
     };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.home-manager.follows = "home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     power-profiles-daemon = {  # XXX: Framework AMD fixees
       url = "gitlab:upower/power-profiles-daemon/superm1/power-changes-amd-pstate?host=gitlab.freedesktop.org";

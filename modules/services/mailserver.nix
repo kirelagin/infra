@@ -47,7 +47,8 @@
     };
 
     secrets.secrets.mailserver = {
-      owner = "dovecot2:dovecot2";
+      owner = "dovecot2";
+      group = "dovecot2";
     };
 
     backups.paths = [ config.mailserver.mailDirectory ];

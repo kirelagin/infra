@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 
-{ config, lib, ... }:
+{ config, flakes, lib, ... }:
 
 let
   inherit (lib) mkOption types;
@@ -13,15 +13,21 @@ let
     options = {
       path = mkOption {
         type = types.path;
-        default = "${cfg.location}/${name}";
+        default = config.age.secrets.${name}.path;
         readOnly = true;
         description = "Path to the file containing the secret value.";
       };
 
       owner = mkOption {
         type = types.str;
-        default = "root:root";
-        description = "Ensure the ownership of the file.";
+        default = "root";
+        description = "Ensure the owner of the file.";
+      };
+
+      group = mkOption {
+        type = types.str;
+        default = "root";
+        description = "Ensure the group of the file.";
       };
 
       permissions = mkOption {
@@ -38,46 +44,20 @@ let
       };
     };
   });
-
-  ensureSecret = _name: opts: ''
-    if [ ! -f  "${opts.path}" ]; then
-      echo >&2 'Secret file `${opts.path}` does not exist.'
-      missing_secrets=1
-    else
-      chown '${opts.owner}' '${opts.path}'
-      chmod '${opts.permissions}' '${opts.path}'
-    fi
-  '';
 in
 
 {
+  imports = [ flakes.agenix.nixosModules.default ];
+
   options.secrets = {
     secrets = mkOption {
       type = types.attrsOf secret;
       default = {};
       description = "Secrets that have to be present.";
     };
-
-    location = mkOption {
-      type = types.path;
-      default = "/var/lib/secrets";
-      description = "Directory where the secrets are stored.";
-    };
   };
 
   config = {
-    system.activationScripts = {
-      secrets = {
-        supportsDryActivation = true;
-        text = ''
-          missing_secrets=0
-          ${lib.concatStringsSep "\n" (lib.mapAttrsToList ensureSecret cfg.secrets)}
-          [ $missing_secrets -eq 0 ]  # assert
-        '';
-      };
-
-      # Activate users after secrets in case there are some user passwords
-      users.deps = [ "secrets" ];
-    };
+    age.secrets = lib.mapAttrs (n: v: { inherit (v) owner group; file = ../../secrets + "/${n}.age"; }) cfg.secrets;
   };
 }
