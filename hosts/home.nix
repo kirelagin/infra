@@ -5,10 +5,6 @@
 { config, pkgs, flakes, ... }:
 
 {
-  imports = [
-    "${flakes.nixpkgs}/nixos/modules/installer/sd-card/sd-image.nix"
-  ];
-
   config = {
 
     ##
@@ -20,41 +16,29 @@
     boot.consoleLogLevel = 7;
     boot.kernelParams = ["console=ttyS0,115200n8" "console=ttyAMA0,115200n8" "console=tty0"];
 
-    # Not sure if this firmware thing is even actally needed...
-    sdImage = {
-      populateFirmwareCommands = let
-        configTxt = pkgs.writeText "config.txt" ''
-          [all]
-          # Boot in 64-bit mode.
-          arm_64bit=1
-
-          # U-Boot needs this to work, regardless of whether UART is actually used or not.
-          # Look in arch/arm/mach-bcm283x/Kconfig in the U-Boot tree to see if this is still
-          # a requirement in the future.
-          enable_uart=1
-
-          # Prevent the firmware from smashing the framebuffer setup done by the mainline kernel
-          # when attempting to show low-voltage or overtemperature warnings.
-          avoid_warnings=1
-        '';
-        in ''
-          # Add the config
-          cp ${configTxt} firmware/config.txt
-        '';
-      populateRootCommands = ''
-        mkdir -p ./files/boot
-        ${config.boot.loader.generic-extlinux-compatible.populateCmd} -c ${config.system.build.toplevel} -d ./files/boot
-      '';
-
-      postBuildCommands =
-        let
-          buildPkgs = flakes.nixpkgs.legacyPackages.x86_64-linux;
-          uboot = buildPkgs.pkgsCross.aarch64-multiplatform.ubootLibreTechCC;
-        in ''
-          dd if="${uboot}/u-boot.gxl.sd.bin" of="$img" conv=fsync,notrunc bs=1 count=444
-          dd if="${uboot}/u-boot.gxl.sd.bin" of="$img" conv=fsync,notrunc bs=512 skip=1 seek=1
-        '';
+    fileSystems."/" = {
+      device = "/dev/disk/by-uuid/c8b0b7fd-23de-4769-9451-3e11ad50fe03";
+      fsType = "btrfs";
+      options = [ "subvol=@root" "compress=zstd" "noatime" ];
     };
+
+    # I don't know how to move the u-boot stuff to eMMC, so sdcard is still
+    # necesary for booting
+    fileSystems."/run/mount/sdcard" = {
+      device = "/dev/disk/by-label/NIXOS_SD";
+      fsType = "ext4";
+      options = [ "noatime" ];
+    };
+    systemd.tmpfiles.rules = [
+      "L /boot - - - - /run/mount/sdcard/boot"
+    ];
+
+    fileSystems."/mnt/data" = {
+      device = "/dev/disk/by-uuid/c8b0b7fd-23de-4769-9451-3e11ad50fe03";
+      fsType = "btrfs";
+      options = [ "subvol=@data" "compress=zstd" "noatime" ];
+    };
+
 
     ##
 
