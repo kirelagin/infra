@@ -7,12 +7,24 @@
 {
   config = {
 
-    ##
-    # Snatched this from `installer/sd-card` because otherwise it does a lot of useless stuff
+    boot.loader.grub.enable = true;
+    boot.loader.grub.efiSupport = true;
+    boot.loader.grub.efiInstallAsRemovable = true;
+    boot.loader.grub.devices = [ "nodev" ];
+    boot.loader.grub.timeoutStyle = "hidden";
 
-    boot.loader.grub.enable = false;
-    boot.loader.generic-extlinux-compatible.enable = true;
+    # It would be enough to copy just `amlogic/meson-gxl-s905x-libretech-cc.dtb`, but this way
+    # I don't have to think about it
+    boot.loader.grub.extraInstallCommands = ''
+      dtb_target="${config.boot.loader.efi.efiSysMountPoint}"/dtb
+      dtb_target_tmp="$dtb_target".tmp.''$''$
+      "${pkgs.coreutils}"/bin/rm -rf "$dtb_target_tmp"
+      "${pkgs.coreutils}"/bin/cp -aT "${config.hardware.deviceTree.kernelPackage}"/dtbs "$dtb_target_tmp"
+      "${pkgs.coreutils}"/bin/rm -rf "$dtb_target"
+      "${pkgs.coreutils}"/bin/mv "$dtb_target_tmp" "$dtb_target"
+    '';
 
+    boot.loader.timeout = 0;
     boot.consoleLogLevel = 7;
     boot.kernelParams = ["console=ttyS0,115200n8" "console=ttyAMA0,115200n8" "console=tty0"];
 
@@ -22,16 +34,11 @@
       options = [ "subvol=@root" "compress=zstd" "noatime" ];
     };
 
-    # I don't know how to move the u-boot stuff to eMMC, so sdcard is still
-    # necesary for booting
-    fileSystems."/run/mount/sdcard" = {
-      device = "/dev/disk/by-label/NIXOS_SD";
-      fsType = "ext4";
+    fileSystems."/boot" = {
+      device = "/dev/disk/by-uuid/C8A2-F164";
+      fsType = "vfat";
       options = [ "noatime" ];
     };
-    systemd.tmpfiles.rules = [
-      "L /boot - - - - /run/mount/sdcard/boot"
-    ];
 
     fileSystems."/mnt/data" = {
       device = "/dev/disk/by-uuid/c8b0b7fd-23de-4769-9451-3e11ad50fe03";
