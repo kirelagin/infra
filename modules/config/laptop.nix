@@ -8,7 +8,6 @@
   imports = [
     ./home-device.nix
     ./home-manager.nix
-    ./snapshots.nix
   ];
 
   config = {

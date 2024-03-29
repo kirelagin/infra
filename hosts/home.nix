@@ -40,6 +40,12 @@
       options = [ "noatime" ];
     };
 
+    fileSystems."/home" = {
+      device = "/dev/disk/by-uuid/c8b0b7fd-23de-4769-9451-3e11ad50fe03";
+      fsType = "btrfs";
+      options = [ "subvol=@home" "compress=zstd" "noatime" ];
+    };
+
     fileSystems."/mnt/data" = {
       device = "/dev/disk/by-uuid/c8b0b7fd-23de-4769-9451-3e11ad50fe03";
       fsType = "btrfs";
