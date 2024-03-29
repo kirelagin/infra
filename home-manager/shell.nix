@@ -75,6 +75,8 @@
     ls = "ls -v --color=auto";
   } // lib.optionalAttrs pkgs.stdenv.isDarwin {
     ls = "ls -G";
+  } // lib.optionalAttrs config.programs.zoxide.enable {
+    cd = "z";
   };
 
   programs.readline = {
@@ -91,5 +93,28 @@
       show-all-if-unmodified = true;
     };
   };
+
+
+  programs.nushell = {
+    enable = true;
+
+    shellAliases = {
+      e = "nvim";
+    };
+
+    extraConfig = ''
+      $env.config = {
+        show_banner: false
+        edit_mode: "vi"
+        shell_integration: true
+      }
+    '';
+  };
+
+  programs.carapace.enable = true;
+
+  programs.zoxide.enable = true;
+
+  #programs.starship.enable = true;
 
 }

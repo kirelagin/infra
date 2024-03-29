@@ -1,4 +1,4 @@
-{ config , ... }:
+{ config , pkgs, ... }:
 
 {
   programs.gpg = {
@@ -34,7 +34,7 @@
 
   services.gpg-agent = {
     enable = true;
-    pinentryFlavor = "gnome3";
+    pinentryPackage = pkgs.pinentry-gnome;
     enableSshSupport = true;
     enableExtraSocket = true;
   };
