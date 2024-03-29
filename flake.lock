@@ -244,11 +244,11 @@
     "mailserver": {
       "flake": false,
       "locked": {
-        "lastModified": 1703023684,
-        "narHash": "sha256-XQU4OaacV0F2tf9cNAvIMqlC0HBIrAtvb0MLjIHt+7M=",
+        "lastModified": 1706219574,
+        "narHash": "sha256-qO+8UErk+bXCq2ybHU4GzXG4Ejk4Tk0rnnTPNyypW4g=",
         "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
-        "rev": "4bfb8eb058f098302c97b909df2d019926e11220",
+        "rev": "e47f3719f1db3e0961a4358d4cb234a0acaa7baf",
         "type": "gitlab"
       },
       "original": {
