@@ -59,8 +59,10 @@
           ] ++ (with self.nixosModules.services; [
             backups
             mail
+            nextcloud
             nginx
             nsd
+            postgresql
           ]) ++ (with self.nixosModules.apps; [
             nginx-static
             nginx-stub
@@ -152,8 +154,10 @@
         backups = import ./modules/services/backups.nix;
         home-assistant = import ./modules/services/home-assistant.nix;
         mail = import ./modules/services/mailserver.nix;
+        nextcloud = import ./modules/services/nextcloud.nix;
         nginx = import ./modules/services/nginx.nix;
         nsd = import ./modules/services/nsd.nix;
+        postgresql = import ./modules/services/postgresql.nix;
         steam = import ./modules/services/steam.nix;
       };
 

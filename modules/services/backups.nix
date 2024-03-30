@@ -40,6 +40,18 @@ in
       default = "backups/${config.networking.hostName}/password";
       description = "Name of the secret with the encryption key.";
     };
+
+    commandsBefore = mkOption {
+      type = types.lines;
+      default = "";
+      description = "Commands to run before starting the backup";
+    };
+
+    commandsAfter = mkOption {
+      type = types.lines;
+      default = "";
+      description = "Commands to run after finishing the backup";
+    };
   };
 
   config = {
@@ -58,7 +70,11 @@ in
         "--keep-daily 7"
         "--keep-weekly 4"
         "--keep-monthly 12"
+        "--group-by tags"
       ];
+
+      backupPrepareCommand = cfg.commandsBefore;
+      backupCleanupCommand = cfg.commandsAfter;
     };
   };
 }

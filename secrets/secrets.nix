@@ -20,5 +20,6 @@ in
   "backups/bruna/b2-creds.age".publicKeys = kirelagin ++ machines.bruna;
 
   "mailserver.age".publicKeys = kirelagin ++ machines.bruna;
+  "nextcloud-admin.age".publicKeys = kirelagin ++ machines.bruna;
   "wireguard.age".publicKeys = kirelagin ++ machines.bruna;
 }
