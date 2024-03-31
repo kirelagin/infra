@@ -50,17 +50,17 @@
 
         # Enable HEIC previews
         enabledPreviewProviders = [
-          "OC\\Preview\\BMP"
-          "OC\\Preview\\GIF"
-          "OC\\Preview\\JPEG"
-          "OC\\Preview\\Krita"
+          # Text
           "OC\\Preview\\MarkDown"
-          "OC\\Preview\\MP3"
-          "OC\\Preview\\OpenDocument"
-          "OC\\Preview\\PNG"
           "OC\\Preview\\TXT"
-          "OC\\Preview\\XBitmap"
-          "OC\\Preview\\HEIC"
+          "OC\\Preview\\OpenDocument"
+
+          # Audio
+          "OC\\Preview\\MP3"
+
+          # Images
+          "OC\\Preview\\Krita"
+          "OC\\Preview\\Imaginary"
         ];
 
         # Fix paths used by apps
@@ -69,8 +69,13 @@
         "memories.exiftool" = "${lib.getExe pkgs.exiftool}";
         "memories.vod.ffmpeg" = "${lib.getExe pkgs.ffmpeg-headless}";
         "memories.vod.ffprobe" = "${pkgs.ffmpeg-headless}/bin/ffprobe";
+
+        "preview_imaginary_url" = "http://${config.services.imaginary.address}:${toString config.services.imaginary.port}";
       };
+      enableImagemagick = false;  # Use imaginary instead
     };
+    services.imaginary.enable = true;
+    services.imaginary.settings.return-size = true;  # had to set to true, the NixOS module is broken :/
 
     # HACK: for memories
     systemd.services.nextcloud-cron = {
