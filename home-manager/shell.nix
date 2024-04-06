@@ -108,6 +108,9 @@
         edit_mode: "vi"
         shell_integration: true
       }
+
+      const local_rc = ~/.config/nushell/local.nu
+      if ($local_rc | path exists) { source $local_rc }
     '';
   };
 
