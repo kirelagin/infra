@@ -52,6 +52,14 @@
       options = [ "subvol=@data" "compress=zstd" "noatime" ];
     };
 
+    systemd.tmpfiles.rules = [
+      "w /sys/class/leds/blue:status/trigger - - - - none"
+      "w /sys/class/leds/blue:status/brightness - - - - 0"
+
+      "w /sys/class/leds/green:disk-activity/trigger - - - - none"
+      "w /sys/class/leds/green:disk-activity/brightness - - - - 0"
+    ];
+
 
     ##
 
