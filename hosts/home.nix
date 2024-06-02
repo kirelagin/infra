@@ -71,6 +71,7 @@
 
     networking.useDHCP = true;
     networking.useNetworkd = true;
+    services.resolved.dnssec = "false";  # FIXME: why does it not work without??
 
     services.fstrim.enable = true;
 
