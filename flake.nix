@@ -70,6 +70,7 @@
             vpn
             legacy-tunnel
             storage
+            tesla-fleet
           ]) ++ (with self.nixosModules.config; [
             defaults
             headless
@@ -167,6 +168,7 @@
         nginx-static = import ./modules/apps/web/static.nix;
         nginx-stub = import ./modules/apps/web/stub.nix;
         storage = import ./modules/apps/storage.nix;
+        tesla-fleet = import ./modules/apps/tesla-fleet.nix;
         vpn = import ./modules/apps/vpn/vpn.nix;
       };
 
