@@ -17,7 +17,6 @@
       package = pkgs.nextcloud28;
       hostName = "cloud.s.kir.elagin.me";
       https = true;
-      config.overwriteProtocol = "https";
 
       home = "/mnt/data/nextcloud";
       config.adminpassFile = config.secrets.secrets.nextcloud-admin.path;
@@ -40,7 +39,9 @@
         ;
       };
 
-      extraOptions = {
+      settings = {
+        overwriteprotocol = "https";
+
         # Run heavy meaintenance jobs at this time (hour) in UTC.
         maintenance_window_start = 7;
 

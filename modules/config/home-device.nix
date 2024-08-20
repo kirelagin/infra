@@ -11,7 +11,8 @@
     services.avahi = {
       enable = true;
       ipv6 = true;
-      nssmdns = true;
+      nssmdns4 = true;
+      nssmdns6 = true;
       publish = {
         # wtf, realy??
         enable = true;
