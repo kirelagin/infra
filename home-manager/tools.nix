@@ -29,6 +29,7 @@
                     ctags
                     dnsutils
                     fswatch
+                    fzf
                     gopass
                     mypy
                     ncdu
