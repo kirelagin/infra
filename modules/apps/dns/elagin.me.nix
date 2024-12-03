@@ -51,7 +51,7 @@ let
     SOA = {
       nameServer = "ns1";
       adminEmail = "kirelagin@gmail.com";
-      serial = 2024120300;
+      serial = 2024120301;
     };
 
     NS = lib.flatten [
@@ -120,11 +120,10 @@ let
             vpn.CNAME = [ "bruna.kir.elagin.me." ];
             mysticflow.CNAME = [ "blanka.kir.elagin.me." ];
           };
+
+          _atproto.TXT = [ "did=did:plc:csdzev2ancxx2orclfy66xi2" ];  # Bluesky verification
         };
       };
-
-      # Federated services
-      _atproto.TXT = [ "did=did:plc:csdzev2ancxx2orclfy66xi2" ];
     };
   };
 
