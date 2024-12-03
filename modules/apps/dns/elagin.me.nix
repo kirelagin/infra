@@ -51,7 +51,7 @@ let
     SOA = {
       nameServer = "ns1";
       adminEmail = "kirelagin@gmail.com";
-      serial = 2024081900;
+      serial = 2024120300;
     };
 
     NS = lib.flatten [
@@ -122,6 +122,9 @@ let
           };
         };
       };
+
+      # Federated services
+      _atproto.TXT = [ "did=did:plc:csdzev2ancxx2orclfy66xi2" ];
     };
   };
 
