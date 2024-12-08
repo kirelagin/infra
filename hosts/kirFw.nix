@@ -5,16 +5,7 @@
 { config, flakes, lib, pkgs, ... }:
 
 let
-  linuxPackages = pkgs.linuxPackagesFor (pkgs.linux_testing.override {
-    argsOverride = rec {
-      src = pkgs.fetchzip {
-        url = "https://git.kernel.org/torvalds/t/linux-${version}.tar.gz";
-        hash = "sha256-wPsC8/cUscTbBrgxYu2Y2h0qdr8a0BbJqvl3avbTMWE=";
-      };
-      version = "6.8-rc7";
-      modDirVersion = lib.versions.pad 3 version;
-    };
-  });
+  linuxPackages = pkgs.linuxPackages_latest;
 
 
 in {
@@ -29,14 +20,13 @@ in {
     boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
     boot.initrd.kernelModules = [ ];
     boot.kernelModules = [ "kvm-amd" ];
-    boot.extraModulePackages = [ (linuxPackages.callPackage ../pkgs/framework-laptop-kmod { }) ];
+    boot.extraModulePackages = [ linuxPackages.framework-laptop-kmod ];
 
     boot.kernelParams = [
-      "amdgpu.sg_display=0"
-      #"pm_debug_messages" "amd_pmc.dyndbg"  # FIXME
+      #"pm_debug_messages" "amd_pmc.dyndbg"
     ];
 
-    boot.kernelPatches = [
+    boot.kernelPatches = lib.optionals (lib.versionOlder linuxPackages.kernel.version "6.10") [
       { name = "fw-amd-ec"; patch = ../patches/kernel/fw-amd-ec.patch; }
     ] ++ lib.optionals (lib.versionOlder linuxPackages.kernel.version "6.7.8") [
       { name = "amdgpu-drm-buddy-alloc_range"; patch = ../patches/kernel/amdgpu-drm-buddy-alloc_range.patch; }
@@ -91,42 +81,6 @@ in {
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
     hardware.firmware = [ pkgs.linux-firmware ];  # amdgpu and mediatek
-
-    # XXX: use HEAD for Mario's fixes
-    services.power-profiles-daemon.package = pkgs.power-profiles-daemon.overrideAttrs (old: {
-      src = flakes.power-profiles-daemon;
-      version = flakes.power-profiles-daemon.lastModifiedDate;
-
-      nativeBuildInputs = (lib.filter (d: !(lib.hasPrefix "python" d.name)) old.nativeBuildInputs) ++ [
-        (pkgs.python3.pythonOnBuildForHost.withPackages (ps: with ps; [
-          pygobject3
-          dbus-python
-          python-dbusmock
-          pylint
-          argparse-manpage
-          shtab
-        ]))
-        pkgs.cmake
-      ];
-      buildInputs = old.buildInputs ++ [
-        pkgs.bash-completion
-      ];
-    });
-
-    # XXX: amdgpu firmware fixup
-    nixpkgs.overlays = [
-      (final: prev: {
-        linux-firmware = prev.linux-firmware.overrideAttrs (old: {
-          src = prev.fetchFromGitLab {
-            owner = "kernel-firmware";
-            repo = "linux-firmware";
-            rev = "5cd471e3de782d1d5ae9e96909a08d264d866842";
-            sha256 = "sha256-VnOSnjDs4mnv8vJH6/WghabHt4Y3g+xk8A1BnmxGFTk=";
-          };
-          outputHash = null;
-        });
-      })
-    ];
 
     security.tpm2.enable = true;
 

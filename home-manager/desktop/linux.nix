@@ -12,8 +12,8 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       chromium
+      dconf-editor
       (firefox.override { nativeMessagingHosts = [ browserpass passff-host ]; })
-      gnome.dconf-editor
       gimp
       gnvim
       inkscape

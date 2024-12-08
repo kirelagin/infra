@@ -7,8 +7,8 @@
 
     enableCompletion = true;
 
-    enableAutosuggestions = true;
-    enableSyntaxHighlighting = false;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = false;
 
     history = {
       path = "${config.xdg.dataHome}/zsh/zsh_history";

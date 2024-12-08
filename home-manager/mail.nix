@@ -38,7 +38,7 @@
     enable = true;
   };
   programs.alot = {
-    enable = true;
+    #enable = true;
     settings = {
       initial_command = "search tag:inbox; sort oldest_first; # search tag:todo; sort oldest_first; buffer 0;";
       thread_focus_linewise = false;

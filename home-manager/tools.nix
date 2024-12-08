@@ -25,7 +25,7 @@
   home.packages = with pkgs; [
                     age-plugin-yubikey
                     agenix
-                    androidenv.androidPkgs_9_0.platform-tools
+                    androidenv.androidPkgs.platform-tools
                     ctags
                     dnsutils
                     fswatch

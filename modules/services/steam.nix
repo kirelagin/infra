@@ -7,6 +7,7 @@
     "steamcmd"
     "steam-original"
     "steam-run"
+    "steam-unwrapped"
   ];
   environment.systemPackages = with pkgs; [
     steamcmd
