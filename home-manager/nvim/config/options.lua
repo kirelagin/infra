@@ -37,7 +37,6 @@ vim.opt.conceallevel = 2 -- do not show concealed text unless it has a marker
 vim.optexrc = true -- execute ./.nvim.lua
 
 vim.opt.encoding = "utf-8"
-vim.opt.termencoding = "utf-8"
 
 vim.opt.scrolloff = 3
 vim.opt.sidescrolloff = 3

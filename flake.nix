@@ -19,23 +19,18 @@
       flake = false;
     };
     home-manager = {
-      url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs-u";
+      url = "github:nix-community/home-manager/release-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.3.0";
-      inputs.nixpkgs.follows = "nixpkgs-u";
+      url = "github:nix-community/lanzaboote/v0.4.1";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.home-manager.follows = "home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    power-profiles-daemon = {  # XXX: Framework AMD fixees
-      url = "gitlab:upower/power-profiles-daemon/superm1/power-changes-amd-pstate?host=gitlab.freedesktop.org";
-      flake = false;
     };
   };
 
@@ -106,12 +101,12 @@
           ]);
       };
 
-      kirFw = nixpkgs-u.lib.nixosSystem {
+      kirFw = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { flakes = inputs; };
         modules =
           [ (import ./hosts/kirFw.nix)
-            { flakes.nixpkgs = nixpkgs-u; }
+            { flakes.nixpkgs = nixpkgs; }
           ] ++ (with self.nixosModules.services; [
             steam
           ]) ++ (with self.nixosModules.config; [
