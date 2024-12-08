@@ -14,7 +14,7 @@
 
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud28;
+      package = pkgs.nextcloud30;
       hostName = "cloud.s.kir.elagin.me";
       https = true;
 
