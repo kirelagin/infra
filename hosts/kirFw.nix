@@ -44,6 +44,35 @@ in {
       allowDiscards = true;
     };
 
+    boot.initrd.systemd = {
+      storePaths = [ "${pkgs.fw-ectool}/bin/ectool" ];
+
+      services.remap-keys = {
+        description = "Swap left Win and Alt on the Framework keyboard";
+        wantedBy = [ "initrd.target" ];
+
+        #from typing import List, Tuple
+        #
+        #def ec_keymap(write: bool, items: List[Tuple[int, int, int]]):
+        #    print(','.join(
+        #      [ f'd{len(items):x},d{int(write):x}' ] +
+        #      ['b{:x},b{:x},w{:x}'.format(*item) for item in items]
+        #    ))
+        #
+        ## LAlt = (1, 3, 0x11)
+        ## LWin = (3, 1, 0xe01f)
+        #ec_keymap(True, [(1,3,0xe01f), (3,1,0x11)])
+        script = ''
+          "${pkgs.fw-ectool}"/bin/ectool raw 0x3E0C d2,d1,b1,b3,we01f,b3,b1,w11
+        '';
+
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+        };
+      };
+    };
+
     fileSystems."/" =
       { device = "/dev/disk/by-uuid/6b25f0fe-70c3-4c41-9398-41182be07f80";
         fsType = "btrfs";

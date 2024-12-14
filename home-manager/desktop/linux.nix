@@ -37,7 +37,6 @@ in {
       "org/gnome/desktop/input-sources" = {
         xkb-options = [
           "misc:typo" "lv3:ralt_switch"  # typo layout
-          "altwin:swap_alt_win"  # swap alt and win
         ];
       };
 
