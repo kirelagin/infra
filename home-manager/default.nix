@@ -3,6 +3,7 @@
 {
   imports = [
     ./fonts.nix
+    ./games.nix
     ./gdb.nix
     ./gnupg.nix
     ./git.nix

@@ -28,6 +28,7 @@
                     androidenv.androidPkgs.platform-tools
                     ctags
                     dnsutils
+                    fd
                     fswatch
                     fzf
                     gopass
@@ -35,7 +36,7 @@
                     ncdu
                     nix-diff
                     nmap
-                    python3
+                    (python3.withPackages (pp: [pp.requests]))
                     radare2
                     rage
                     rclone
