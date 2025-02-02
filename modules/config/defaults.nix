@@ -73,7 +73,7 @@
       extraGroups = [ "wheel" ];
       hashedPasswordFile = config.secrets.secrets.user.path;
       openssh.authorizedKeys.keys = [
-        "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAICuih0mWtPl+LXqjWazMWPZ8b38MZfpVifC7/1wTUNS3AAAABHNzaDo= kirelagin"
+        "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIEOFobzdBymcGU/MIxyaoFgM8VvywH9nri0UZy5pEHSKAAAABHNzaDo= kirelagin"
         "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCeIMHEm+lpvOzXZVF5kiXTnu05KWHsXf7IHEVFxuwaFuX7HJWdbkf5yvMQuEoNYIgiO8sEFQuhocTKYmspONBmpC8GZBRmAYo/FlrfHd0R8pB3xj88LY661/TqQleJYbOhQ9rgaOeZ2NGBtGQGF0oh9+ab5hTSdU/GE5PEUKhySXZzHIu72pGHe0E8QBnmU/pY9RqcZ8BjaSbmF/77GyizSumdXLSLjoi/mIGvJy9MPJEhB5C6AyZslAYQLj1UELOJ54g35OEhZVy183Ru0zRILP5Lxs+DqLsPItAC2S0GwpijMaz8FxQUqAKNmjVvYxuWrI3YReUlLnbZ5hNqrlbXplGDvG2tuOybPsvUu17UX6TOmPXGBIfo2WyUzSNgAXWQ+3smSV3CmeWgTz/ielFNnKqlnjjn51YMlrmGtyhxCZAY6a6v8Gj+ZxGpDXc+utk25iSq81yYUb/UCBTCNs0nM8m6VEcYPEiys0v0uSig3eQ1DS3H31zUDdgitCghvuZdIEkqWpBELFV1xa5VCR1Uo6I1vutWraws/tM+SkDLSs91iIragPvlIMoXfLtqnyHp/Prb4kughIoAL1d3jYtixmsDG8ye792z7LwlK0wkWbjsKD7snjmTSv4g6obzTIz/ZXKEDQ2szGJo7DHk+JCy4mTqqVkwBxBR87/glS1Yqw== disaster@kirelagin"
       ];
     };
