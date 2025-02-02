@@ -2,9 +2,21 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 
-{ config, ... }:
+{ config, pkgs, ... }:
 
 let
+  images = {
+    ha = {
+      imageName = "homeassistant/home-assistant";
+      imageDigest = "sha256:a8aab945aec2f43eb1b1fde4d19e25ef952fab9c10f49e40d3b3ce7d24cedc19";
+      sha256 = "0wk702asy4hxbwfspdb8njd445mhh06b0vx54qw935fxbs1blsdc";
+    };
+    zwave-js-ui = {
+      imageName = "zwavejs/zwave-js-ui";
+      imageDigest = "sha256:69966e5a4bf1a6c52cb8b1c15037471a47cd07ae4fcdf24bf807019bba9ce2ee";
+      sha256 = "0cp4kcnzlqa4zn0vk7dw4f2mwxvrqlbqkk8wfbc4l59686jyfw5p";
+    };
+  };
   ha_version = "2024.12.1";
   zwave-js-ui_version = "9.27.8";
   zwave_dev = "/dev/serial/by-id/usb-Zooz_800_Z-Wave_stick_533D004242-if00";
@@ -20,7 +32,8 @@ in
     virtualisation.oci-containers = {
       containers = {
         homeassistant = {
-          image = "ghcr.io/home-assistant/home-assistant:${ha_version}";
+          image = images.ha.imageName;
+          imageFile = pkgs.dockerTools.pullImage images.ha;
           volumes = [ "home-assistant:/config" ];
           extraOptions = [
             "--network=host"
@@ -31,7 +44,8 @@ in
         };
 
         zwave-js = {
-          image = "zwavejs/zwave-js-ui:${zwave-js-ui_version}";
+          image = images.zwave-js-ui.imageName;
+          imageFile = pkgs.dockerTools.pullImage images.zwave-js-ui;
           volumes = [ "zwave-js:/usr/src/app/store" ];
           extraOptions = [
             "--device=${zwave_dev}:/dev/zwave"
