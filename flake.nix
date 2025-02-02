@@ -11,7 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/master";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.11";
       flake = false;
     };
     prompt_kir = {
