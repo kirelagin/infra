@@ -115,6 +115,8 @@ in {
 
     networking.hostName = "kirFw";
 
+    environment.systemPackages = [ pkgs.fw-ectool ];
+
     system.stateVersion = "23.05";
   };
 }
