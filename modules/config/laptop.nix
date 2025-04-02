@@ -70,7 +70,10 @@
       "vm.swappiness" = 1;
     };
 
-    services.fwupd.enable = true;
+    services.fwupd = {
+      enable = true;
+      extraRemotes = [ "lvfs-testing" ];
+    };
 
     services.pcscd.enable = true;
 
