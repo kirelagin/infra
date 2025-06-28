@@ -30,6 +30,10 @@
       # can handle long filenames, uncomment this.
       no-mangle-dos-filenames = true;
     };
+
+    scdaemonSettings = {
+      disable-ccid = true;
+    };
   };
 
   services.gpg-agent = {
