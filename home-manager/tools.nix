@@ -46,6 +46,8 @@
                     tldr
                     unzip
                     yubikey-manager
+  ] ++ [
+    (import ./tools/yubi-oath-backup.nix lib pkgs)
   ] ++ lib.optionals pkgs.stdenv.isDarwin [
     gnugrep
   ] ++ lib.optionals pkgs.stdenv.isLinux [
