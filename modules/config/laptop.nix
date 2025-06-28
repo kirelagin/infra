@@ -140,5 +140,15 @@
         destination = "/etc/udev/rules.d/70-nuphy.rules";
       })
 
+      (pkgs.writeTextFile {
+        name = "serial-rules";
+        text = ''
+          # Silicon Labs CP210x UART Bridge
+          ACTION=="add", SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE="0660", TAG+="uaccess"
+        '';
+        destination = "/etc/udev/rules.d/70-serial.rules";
+      })
+    ];
+
   };
 }
