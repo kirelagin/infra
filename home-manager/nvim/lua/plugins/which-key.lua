@@ -9,20 +9,20 @@ return {
   opts = {
     defaults = {
       mode = { "n", "v" },
-      ["["] = "+prev",
-      ["]"] = "+next",
-      ["g"] = "+go",
-      ["<leader>b"] = "+buffers",
-      ["<leader>c"] = "+code",
-      ["<leader>f"] = "+files",
-      ["<leader>s"] = "+search",
-      ["<leader>t"] = "+tabs",
-      ["<leader>w"] = "+windows",
+      { "[", desc = "+prev" },
+      { "]", desc = "+next" },
+      { "g", desc = "+go" },
+      { "<leader>b", desc = "+buffers" },
+      { "<leader>c", desc = "+code" },
+      { "<leader>f", desc = "+files" },
+      { "<leader>s", desc = "+search" },
+      { "<leader>t", desc = "+tabs" },
+      { "<leader>w", desc = "+windows" },
     },
   },
   config = function(_, opts)
     local wk = require("which-key")
     wk.setup(opts)
-    wk.register(opts.defaults)
+    wk.add(opts.defaults)
   end,
 }
