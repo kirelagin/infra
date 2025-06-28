@@ -19,7 +19,7 @@
 
     defaultKeymap = "viins";
 
-    initExtra = ''
+    initContent = ''
       setopt HIST_REDUCE_BLANKS  # TODO: make into an option
 
       bindkey -M viins '^x' push-line

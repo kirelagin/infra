@@ -35,6 +35,7 @@
     };
 
     networking.networkmanager.enable = true;
+    networking.modemmanager.enable = false;
     networking.nameservers = [];  # do not use harcoded dns
     users.users.kirelagin.extraGroups = [ "dialout" "networkmanager" ];
 
@@ -109,7 +110,7 @@
       '';
     };
 
-    hardware.pulseaudio.enable = false;
+    services.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;

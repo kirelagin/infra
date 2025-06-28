@@ -8,7 +8,7 @@
       dejavu_fonts
       font-awesome
       lato
-(pkgs.nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
+      nerd-fonts.dejavu-sans-mono
       paratype-pt-sans
       paratype-pt-serif
     ];

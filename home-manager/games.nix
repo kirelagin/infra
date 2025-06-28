@@ -1,11 +1,9 @@
 { pkgs, ... }:
 
 let
-  retroarch = pkgs.retroarch.override {
-    cores = with pkgs.libretro; [
-      bsnes
-    ];
-  };
+  retroarch = pkgs.retroarch.withCores (cores: with cores; [
+    bsnes
+  ]);
 in
 
 {

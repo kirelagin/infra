@@ -25,7 +25,7 @@
   home.packages = with pkgs; [
                     age-plugin-yubikey
                     agenix
-                    androidenv.androidPkgs.platform-tools
+                    android-tools
                     ctags
                     dnsutils
                     fd
