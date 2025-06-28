@@ -87,20 +87,6 @@
           ]);
       };
 
-      kirXps = nixpkgs-u.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { flakes = inputs; };
-        modules =
-          [ (import ./hosts/kirXps.nix)
-            { flakes.nixpkgs = nixpkgs-u; }
-          ] ++ (with self.nixosModules.services; [
-            steam
-          ]) ++ (with self.nixosModules.config; [
-            defaults
-            laptop
-          ]);
-      };
-
       kirFw = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { flakes = inputs; };
