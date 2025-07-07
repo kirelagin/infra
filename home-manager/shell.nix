@@ -6,6 +6,7 @@
     dotDir = ".config/zsh";
 
     enableCompletion = true;
+    enableVteIntegration = true;
 
     autosuggestion.enable = true;
     syntaxHighlighting.enable = false;

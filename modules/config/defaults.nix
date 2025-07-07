@@ -98,7 +98,14 @@
     # Use zsh
     programs.zsh.enable = true;
     users.defaultUserShell = pkgs.zsh;
-    programs.zsh.promptInit = "source ${flakes.prompt_kir}/prompt_kir.zsh";
+    programs.zsh.promptInit = ''
+      source ${flakes.prompt_kir}/prompt_kir.zsh
+
+      __term_title() {
+        printf '\033]0;%s:%s\007' "$(hostname)" "$(basename -- $(pwd))"
+      }
+      precmd_functions+=(__term_title)
+    '';
     environment.pathsToLink = [ "/share/zsh" ];
 
     # Useful system packages
