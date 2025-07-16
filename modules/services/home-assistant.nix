@@ -40,21 +40,21 @@ in
             "--volume=/run/dbus:/run/dbus"  # bluetooth
             "--device=${zigbee_dev}:/dev/zigbee"
           ];
-          dependsOn = [ "zwave-js" ];
+          #dependsOn = [ "zwave-js" ];
         };
 
-        zwave-js = {
-          image = images.zwave-js-ui.imageName;
-          imageFile = pkgs.dockerTools.pullImage images.zwave-js-ui;
-          volumes = [ "zwave-js:/usr/src/app/store" ];
-          extraOptions = [
-            "--device=${zwave_dev}:/dev/zwave"
-          ];
-          ports = [
-            "3000:3000/tcp"
-            "8091:8091/tcp"
-          ];
-        };
+        #zwave-js = {
+        #  image = images.zwave-js-ui.imageName;
+        #  imageFile = pkgs.dockerTools.pullImage images.zwave-js-ui;
+        #  volumes = [ "zwave-js:/usr/src/app/store" ];
+        #  extraOptions = [
+        #    "--device=${zwave_dev}:/dev/zwave"
+        #  ];
+        #  ports = [
+        #    "3000:3000/tcp"
+        #    "8091:8091/tcp"
+        #  ];
+        #};
       };
     };
 
