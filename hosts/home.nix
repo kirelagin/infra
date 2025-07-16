@@ -13,15 +13,19 @@
     boot.loader.grub.devices = [ "nodev" ];
     boot.loader.grub.timeoutStyle = "hidden";
 
-    # It would be enough to copy just `amlogic/meson-gxl-s905x-libretech-cc.dtb`, but this way
-    # I don't have to think about it
-    boot.loader.grub.extraInstallCommands = ''
+    # This is a bit hacky, and hardcodes the name of this specific board.
+    # TODO: Is there a better way to do this?
+    boot.loader.grub.extraInstallCommands = let
+      board = "amlogic/meson-gxl-s905x-libretech-cc-v2.dtb";
+    in ''
       dtb_target="${config.boot.loader.efi.efiSysMountPoint}"/dtb
       dtb_target_tmp="$dtb_target".tmp.''$''$
-      "${pkgs.coreutils}"/bin/rm -rf "$dtb_target_tmp"
-      "${pkgs.coreutils}"/bin/cp -aT "${config.hardware.deviceTree.kernelPackage}"/dtbs "$dtb_target_tmp"
-      "${pkgs.coreutils}"/bin/rm -rf "$dtb_target"
-      "${pkgs.coreutils}"/bin/mv "$dtb_target_tmp" "$dtb_target"
+      dtb_target_tmp_dir=$("${pkgs.coreutils}"/bin/dirname -- "$dtb_target_tmp"/"${board}")
+      "${pkgs.coreutils}"/bin/rm -rf -- "$dtb_target_tmp"
+      "${pkgs.coreutils}"/bin/mkdir -p -- "$dtb_target_tmp_dir"
+      "${pkgs.coreutils}"/bin/cp -a -- "${config.hardware.deviceTree.kernelPackage}"/dtbs/${board} "$dtb_target_tmp_dir"/
+      "${pkgs.coreutils}"/bin/rm -rf -- "$dtb_target"
+      "${pkgs.coreutils}"/bin/mv -- "$dtb_target_tmp" "$dtb_target"
     '';
 
     boot.loader.timeout = 0;
@@ -67,7 +71,7 @@
 
     system.stateVersion = "23.05";
 
-    time.timeZone = "America/New_York";
+    time.timeZone = "Europe/Zurich";
 
     networking.useDHCP = true;
     networking.useNetworkd = true;
