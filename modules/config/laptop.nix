@@ -133,10 +133,16 @@
     services.udev.packages = [
       (pkgs.writeTextFile {
         name = "nuphy-rules";
-        text = ''
-          # NuPhy Kick75 IO
-          ACTION=="add", KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="19f5", ATTRS{idProduct}=="1026", MODE="0660", TAG+="uaccess"
-        '';
+        text =
+          let
+            devices = [
+              "2620" "1020"  # NuPhy IO Dongle + Upgrader
+              "1026" "0720"  # NuPhy Kick75 IO + Upgrader
+              "1028" "0722"  # NuPhy Air75 v3 + Upgrader
+            ];
+          in lib.flip lib.concatMapStrings devices (product: ''
+            ACTION=="add", KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="19f5", ATTRS{idProduct}=="${product}", MODE="0660", TAG+="uaccess"
+          '');
         destination = "/etc/udev/rules.d/70-nuphy.rules";
       })
 
