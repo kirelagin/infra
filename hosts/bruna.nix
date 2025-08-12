@@ -49,6 +49,10 @@
 
   networking.firewall.allowedTCPPorts = [ 11234 ];  # for testing
 
+  environment.systemPackages = with pkgs; [
+    git-annex
+  ];
+
   nix.settings.max-jobs = 1;
 
   system.stateVersion = "23.05";
