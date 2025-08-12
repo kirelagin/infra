@@ -1,0 +1,87 @@
+$-- Pandoc metadata variables:
+$--
+$-- ---
+$-- title: Letter subject
+$-- author: First Last Name
+$-- fromaddress: |
+$--   Multiline address  
+$--   each line ending with `  `  
+$--   to make it a Markfown line break
+$-- to: Name or address
+$-- opening: (optional) Dear Sir or Madam:
+$-- closing: (optional) Cheers,
+$-- date: (default=today in ISO format) Date in any format
+$-- language: (default=english) Document language
+$-- ---
+$--
+
+$passoptions.latex()$
+\documentclass[
+  $if(draft)$draft,$endif$%
+]{scrartcl}
+\usepackage[firstfoot=false]{scrletter}
+
+\usepackage[]{geometry}
+\geometry{verbose,a4paper,tmargin=20mm,bmargin=25mm,lmargin=40mm,rmargin=25mm}
+
+\usepackage{microtype}
+
+\usepackage[$if(language)$$language$$else$english$endif$]{babel}
+\frenchspacing
+\usepackage{scrdate}
+
+\usepackage[hyphens]{url}
+\usepackage{xcolor}
+\usepackage[hidelinks,unicode=true]{hyperref}
+% Make links footnotes instead of hotlinks:
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+\urlstyle{same}  % don't use monospace font for urls
+
+\hypersetup{
+$if(title-meta)$
+            pdftitle={$title-meta$},
+$endif$
+$if(author-meta)$
+            pdfauthor={$author-meta$},
+$endif$
+$if(keywords)$
+            pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},
+$endif$
+            colorlinks=false,
+            breaklinks=true}
+
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+
+% pandoc stuff
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Remove section numbers
+\renewcommand*{\sectionformat}{}
+% Reduce font size
+\addtokomafont{section}{\fontsize{11pt}{12.833pt}\selectfont}
+
+\begin{document}
+	
+$if(author)$\setkomavar{fromname}{$for(author)$$author$$sep$ \and $endfor$}$endif$
+$if(fromaddress)$\setkomavar{fromaddress}{$fromaddress$}$endif$
+$if(author)$\setkomavar{signature}{($for(author)$$author$$sep$ \and $endfor$)}$endif$
+\setkomavar{date}{$if(date)$$date$$else$\ISOToday$endif$}
+
+$if(title)$\setkomavar{subject}{$title$}$endif$
+
+\begin{letter}{$if(to)$$to$$else$To:$endif$}
+
+\opening{$opening$}
+
+$body$
+
+$if(closing)$\closing{$closing$}$endif$
+
+%enclosure listing
+%\encl{}
+
+\end{letter}
+\end{document}

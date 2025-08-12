@@ -17,8 +17,9 @@ in {
     };
 
     templates = {
-      "kirelagin.latex" = ./pandoc/templates/kirelagin.latex;
       "assignment.latex" = ./pandoc/templates/assignment.latex;
+      "kirelagin.latex" = ./pandoc/templates/kirelagin.latex;
+      "letter.latex" = ./pandoc/templates/letter.latex;
     };
 
     citationStyles = [
