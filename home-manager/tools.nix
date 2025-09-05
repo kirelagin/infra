@@ -32,6 +32,7 @@
                     fswatch
                     fzf
                     gopass
+                    magic-wormhole
                     mypy
                     ncdu
                     nix-diff

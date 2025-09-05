@@ -12,6 +12,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       chromium
+      darktable
       dconf-editor
       (firefox.override { nativeMessagingHosts = [ browserpass passff-host ]; })
       gimp
@@ -20,6 +21,7 @@ in {
       libreoffice-fresh
       pavucontrol
       quassel
+      rymdport
       tdesktop  # Telegram
       vlc
       wl-clipboard
