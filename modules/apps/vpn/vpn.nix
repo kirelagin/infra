@@ -53,7 +53,7 @@ in {
           { allowedIPs = [ "172.16.200.14" "2605:6400:30:fa9e:ff0e::0/80" ];  # kirXps
             publicKey = "XjR9nzUDhU1v+JsWxdjtcJV0FP/RpPmpXHBY7Nbn8Bs=";
           }
-          { allowedIPs = [ "172.16.200.15" "2605:6400:30:fa9e:ff0f::0/80" ];  # mom-phone
+          { allowedIPs = [ "172.16.200.15" "2605:6400:30:fa9e:ff0f::0/80" ];  # mom-Nokia8
             publicKey = "QquoLvO0mfuxUEVNM1CnZA9b/zbfYUeCahgXrO4ifWk=";
           }
           { allowedIPs = [ "172.16.200.16" "2605:6400:30:fa9e:ff10::0/80" ];  # nyc
@@ -67,6 +67,9 @@ in {
           }
           { allowedIPs = [ "172.16.200.19" "2605:6400:30:fa9e:ff13::0/80" ];  # Pixel 9 Pro
             publicKey = "NY5f4Kfnj9T3htUm2zpTys7MlKLPNEwIO06qXxQ9sGo=";
+          }
+          { allowedIPs = [ "172.16.200.20" "2605:6400:30:fa9e:ff14::0/80" ];  # mom-Pixel9a
+            publicKey = "czP+OFr4tQ/ZsQ1gCe5T3NmajDNOij1gDUQ/As46ER0=";
           }
         ];
         postSetup = [
