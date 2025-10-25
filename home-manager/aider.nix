@@ -14,6 +14,16 @@ let
 
     exit "$ret"
   '';
+
+  aider-wrapped = pkgs.writeShellScriptBin "aider" ''
+    export HOME="${config.xdg.dataHome}/aider"
+    mkdir -p -- "$HOME"
+    
+    exec ${pkgs.aider-chat-with-help}/bin/aider \
+      --config "${config.xdg.configHome}/aider/config.yml" \
+      --env-file "${config.xdg.configHome}/aider/env" \
+      "$@"
+  '';
 in
 
 {
@@ -22,11 +32,11 @@ in
   ];
 
   home.packages = [
-    pkgs.aider-chat-with-help
+    aider-wrapped
   ];
 
-  home.file.".aider.conf.yml".text = lib.generators.toYAML {} {
-    # Set OPENROUTER_API_KEY=... in a `.env` file
+  xdg.configFile."aider/config.yml".text = lib.generators.toYAML {} {
+    # Set OPENROUTER_API_KEY=... in a file at ${config.xdg.configHome}/aider/env
     model = "openrouter/anthropic/claude-sonnet-4";
     weak-model = "openrouter/google/gemini-2.5-flash";
     cache-prompts = true;
