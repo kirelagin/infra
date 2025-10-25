@@ -48,6 +48,7 @@ in
     git = true;
     gitignore = false;
 
+    chat-mode = "ask";
     watch-files = true;
 
     check-update = false;
