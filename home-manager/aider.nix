@@ -50,6 +50,8 @@ in
 
     watch-files = true;
 
+    check-update = false;
+
     lint-cmd = [
       "python: ${lint-python}"
     ];
