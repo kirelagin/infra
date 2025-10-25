@@ -18,7 +18,7 @@ let
   aider-wrapped = pkgs.writeShellScriptBin "aider" ''
     export HOME="${config.xdg.dataHome}/aider"
     mkdir -p -- "$HOME"
-    
+
     exec ${pkgs.aider-chat-with-help}/bin/aider \
       --config "${config.xdg.configHome}/aider/config.yml" \
       --env-file "${config.xdg.configHome}/aider/env" \
