@@ -71,6 +71,9 @@ in {
           { allowedIPs = [ "172.16.200.20" "2605:6400:30:fa9e:ff14::0/80" ];  # mom-Pixel9a
             publicKey = "czP+OFr4tQ/ZsQ1gCe5T3NmajDNOij1gDUQ/As46ER0=";
           }
+          { allowedIPs = [ "172.16.200.21" "2605:6400:30:fa9e:ff15::0/80" ];  # raya-phone
+            publicKey = "IcT5FzOImSbnO57sHfXNgYnQwTRkg4Y0yZ3Hqg1fImU=";
+          }
         ];
         postSetup = [
           helpers
