@@ -33,11 +33,9 @@
                     fzf
                     gopass
                     magic-wormhole
-                    mypy
                     ncdu
                     nix-diff
                     nmap
-                    (python3.withPackages (pp: [pp.requests]))
                     radare2
                     rage
                     rclone

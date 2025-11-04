@@ -16,9 +16,10 @@
     ./mail.nix
     ./nvim.nix
     ./pandoc.nix
+    ./python.nix
     ./sagemath.nix
     ./shell.nix
-    ./taskwarrior.nix
+    #./taskwarrior.nix
     ./tex.nix
     ./tmux.nix
     ./tools.nix

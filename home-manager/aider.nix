@@ -5,11 +5,11 @@ let
     ret=0
 
     printf '# Running flake8:\n'
-    ${pkgs.python3Packages.flake8}/bin/flake8 --count "$@"
+    ${config.kirelagin.pythonEnv}/bin/flake8 --count "$@"
     [ "$?" -ne 0 ] && ret=1
 
     printf '# Running mypy:\n'
-    ${pkgs.mypy}/bin/mypy --follow-imports=silent --strict "$@"
+    ${config.kirelagin.pythonEnv}/bin/mypy --follow-imports=silent --strict "$@"
     [ "$?" -ne 0 ] && ret=1
 
     exit "$ret"
