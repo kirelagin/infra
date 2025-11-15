@@ -37,7 +37,7 @@ in
 
   xdg.configFile."aider/config.yml".text = lib.generators.toYAML {} {
     # Set OPENROUTER_API_KEY=... in a file at ${config.xdg.configHome}/aider/env
-    model = "openrouter/anthropic/claude-sonnet-4";
+    model = "openrouter/anthropic/claude-sonnet-4.5";
     weak-model = "openrouter/google/gemini-2.5-flash";
     cache-prompts = true;
     cache-keepalive-pings = 10;
