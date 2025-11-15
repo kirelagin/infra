@@ -11,6 +11,7 @@
       flake8
       mypy
 
+      numpy
       requests
       types-requests
     ]);
