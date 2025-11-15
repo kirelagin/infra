@@ -35,13 +35,13 @@
       mergetool.keepBackup = false;
 
       "mergetool \"diffconflicts\"" = {
-	cmd = ''nvim -c DiffConflicts "$MERGED" "$BASE" "$LOCAL" "$REMOTE"'';
-	trustExitCode = true;
+        cmd = ''nvim -c DiffConflicts "$MERGED" "$BASE" "$LOCAL" "$REMOTE"'';
+        trustExitCode = true;
       };
 
       pretty = {
-	my = ''format:%C(auto)%h% d%Creset%nDate:   %ai%nAuthor: %aN <%aE>%n%n    %s%n'';
-	my-signature = ''format:%C(auto)%h% d%Creset%nDate:   %ai%nAuthor: %aN <%aE>%n%C(dim)Signed: [%G?]% GS%Creset%n%n    %s%n'';
+        my = ''format:%C(auto)%h% d%Creset%nDate:   %ai%nAuthor: %aN <%aE>%n%n    %s%n'';
+        my-signature = ''format:%C(auto)%h% d%Creset%nDate:   %ai%nAuthor: %aN <%aE>%n%C(dim)Signed: [%G?]% GS%Creset%n%n    %s%n'';
       };
     };
 
@@ -51,7 +51,6 @@
       "/.hg/"
       ".hg*"
 
-      "/Session.vim"
       "tags"
 
       "result"

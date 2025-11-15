@@ -38,4 +38,8 @@ in
       paths = nvim-treesitter.dependencies;
     }}/parser";
 
+  programs.git.ignores = [
+    "/Session.vim"
+  ];
+
 }
