@@ -64,7 +64,6 @@
   };
 
   home.packages = with pkgs; [
-    gitAndTools.git-crypt
   ] ++ lib.optionals config.desktop.enable [
     gitg
   ];

@@ -9,13 +9,17 @@
 
   config.home-manager = {
     verbose = true;
-    useGlobalPkgs = true;
+    useGlobalPkgs = false;
     useUserPackages = true;
     users.kirelagin = import ../../home-manager;
     sharedModules = [
-      ({ config, ... }: {
+      ({ config, osConfig, ... }: {
         systemd.user.sessionVariables = config.home.sessionVariables;
+        nixpkgs.overlays = osConfig.nixpkgs.overlays;
       })
     ];
+    extraSpecialArgs ={
+      inherit flakes;
+    };
   };
 }

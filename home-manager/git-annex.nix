@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    gitAndTools.git-annex
-    gitAndTools.git-annex-remote-rclone
+    git-annex
+    git-annex-remote-rclone
   ];
 }

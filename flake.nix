@@ -6,6 +6,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-u.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-legacy.url = "github:NixOS/nixpkgs/nixos-25.05";
     dns = {
       url = "github:kirelagin/nix-dns";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,7 +20,7 @@
       flake = false;
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
@@ -34,7 +35,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, ... }: {
+  outputs = inputs@{ self, nixpkgs, nixpkgs-u, ... }: {
 
     packages = {
       x86_64-linux = {
@@ -81,18 +82,19 @@
             nginx
           ]) ++ (with self.nixosModules.apps; [
             nginx-stub
+            xray
           ]) ++ (with self.nixosModules.config; [
             defaults
             headless
           ]);
       };
 
-      kirFw = nixpkgs.lib.nixosSystem {
+      kirFw = nixpkgs-u.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { flakes = inputs; };
         modules =
           [ (import ./hosts/kirFw.nix)
-            { flakes.nixpkgs = nixpkgs; }
+            { flakes.nixpkgs = nixpkgs-u; }
           ] ++ (with self.nixosModules.services; [
             steam
           ]) ++ (with self.nixosModules.config; [

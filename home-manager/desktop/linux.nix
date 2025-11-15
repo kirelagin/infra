@@ -1,7 +1,15 @@
-{ config, lib, pkgs, ... }:
+{ config, flakes, lib, pkgs, ... }:
 
 let
   cfg = config.desktop;
+
+  # Unbreak by pulling legacy webkitgtk_4_0 from pinned Nixpkgs 25.05
+  citrix_workspace_hack = pkgs.citrix_workspace.overrideAttrs (origAttrs: rec {
+    buildInputs = origAttrs.buildInputs ++ [
+      flakes.nixpkgs-legacy.legacyPackages.x86_64-linux.webkitgtk_4_0
+    ];
+    meta.broken = false;
+  });
 
 in {
   options.desktop = {
@@ -12,6 +20,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       chromium
+      citrix_workspace_hack
       darktable
       dconf-editor
       (firefox.override { nativeMessagingHosts = [ browserpass passff-host ]; })
@@ -22,7 +31,7 @@ in {
       pavucontrol
       quassel
       rymdport
-      tdesktop  # Telegram
+      telegram-desktop
       vlc
       wl-clipboard
       xclip

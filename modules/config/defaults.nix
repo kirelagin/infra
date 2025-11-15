@@ -112,7 +112,7 @@
     environment.systemPackages = with pkgs; [
       dnsutils
       file
-      gitAndTools.gitMinimal
+      gitMinimal
       htop
       neovim
     ] ++ lib.optionals pkgs.stdenv.isLinux [
