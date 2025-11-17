@@ -4,12 +4,20 @@ let
   cfg = config.desktop;
 
   # Unbreak by pulling legacy webkitgtk_4_0 from pinned Nixpkgs 25.05
-  citrix_workspace_hack = pkgs.citrix_workspace.overrideAttrs (origAttrs: rec {
+  citrix_workspace_hack = (pkgs.citrix_workspace.overrideAttrs (origAttrs: rec {
     buildInputs = origAttrs.buildInputs ++ [
       flakes.nixpkgs-legacy.legacyPackages.x86_64-linux.webkitgtk_4_0
     ];
+    # This new binary wants libfuse3.so.3, but we only have .4
+    # (this is completely braindead, but I have no better ideas)
+    postInstall = (origAttrs.postInstall or "") + ''
+      rm -- "$out"/opt/citrix-icaclient/ctxfuse
+    '';
     meta.broken = false;
-  });
+  })).override {
+    version = "25.08.0.88";
+    hash = "sha256-eauQf8KIZlibGvDvgmouwL9cHGZRzRYpN5Ugho483aY=";
+  };
 
 in {
   options.desktop = {
