@@ -3,7 +3,7 @@
 {
   programs.zsh = {
     enable = true;
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
 
     enableCompletion = true;
     enableVteIntegration = true;
@@ -110,7 +110,7 @@
         shell_integration: true
       }
 
-      const local_rc = ~/.config/nushell/local.nu
+      const local_rc = ${config.xdg.configHome}/nushell/local.nu
       if ($local_rc | path exists) { source $local_rc }
     '';
   };

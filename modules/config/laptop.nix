@@ -28,10 +28,10 @@
     services.power-profiles-daemon.enable = lib.mkDefault true;
     services.tlp.enable = lib.mkDefault false;
 
-    services.logind = {
-      lidSwitch = "suspend";
-      lidSwitchDocked = "suspend";
-      lidSwitchExternalPower = "suspend";
+    services.logind.settings.Login = {
+      HandleLidSwitch = "suspend";
+      HandleLidSwitchDocked = "suspend";
+      HandleLidSwitchExternalPower = "suspend";
     };
 
     networking.networkmanager.enable = true;
@@ -61,8 +61,8 @@
 
     services.libinput.enable = true;
 
-    services.xserver.desktopManager.gnome.enable = true;
-    services.xserver.displayManager.gdm.enable = true;
+    services.desktopManager.gnome.enable = true;
+    services.displayManager.gdm.enable = true;
     programs.ssh.enableAskPassword = true;
     programs.ssh.askPassword = "${pkgs.callPackage ../../pkgs/ssh-askpass-gnome4 {}}/bin/gnome-ssh-askpass4";
 
@@ -88,7 +88,7 @@
     ] ++ lib.optionals pkgs.stdenv.isLinux [
       powertop
       tpm2-tools
-    ] ++ lib.optionals config.services.xserver.desktopManager.gnome.enable [
+    ] ++ lib.optionals config.services.desktopManager.gnome.enable [
       pkgs.gnome-firmware
     ];
 

@@ -5,21 +5,21 @@
     enable = true;
     package = pkgs.gitFull;
 
-    userName = "Kirill Elagin";
-    userEmail = "kirelagin@gmail.com";
+    settings = {
+      user.name = "Kirill Elagin";
+      user.email = "kirelagin@gmail.com";
 
-    aliases = {
-      st = "status";
-      unstage = "reset HEAD --";
-      log = "log --format=my-signature";
-      glog = "log --graph --date-order --format=my-signature";
-      sign = "commit --amend --no-edit -S";
-      scrub = "reset --hard @{upstream}";
-      hash = "rev-parse HEAD";
-      amend = "commit --amend --no-edit";
-    };
+      alias = {
+        st = "status";
+        unstage = "reset HEAD --";
+        log = "log --format=my-signature";
+        glog = "log --graph --date-order --format=my-signature";
+        sign = "commit --amend --no-edit -S";
+        scrub = "reset --hard @{upstream}";
+        hash = "rev-parse HEAD";
+        amend = "commit --amend --no-edit";
+      };
 
-    extraConfig = {
       help.autoCorrect = 1;
       color.ui = "auto";
       core.pager = "less -+F -X";
