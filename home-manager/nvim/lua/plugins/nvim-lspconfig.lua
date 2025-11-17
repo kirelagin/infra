@@ -19,7 +19,8 @@ return {
     config = function(_, opts)
       local lspc = require("lspconfig")
       for server, settings in pairs(opts.setup) do
-        lspc[server].setup({ settings = settings })
+        vim.lsp.config(server, { settings = settings })
+        vim.lsp.enable(server)
       end
     end,
     init = function()
