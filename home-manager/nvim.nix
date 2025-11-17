@@ -28,10 +28,14 @@ in
       Event.mappings["User LazyFile"] = Event.mappings.LazyFile
 
       require("lazy").setup({
-        { "catppuccin/nvim", name = "catppuccin", dir = "${pkgs.vimPlugins.catppuccin-nvim}" },
-        { "nvim-treesitter/nvim-treesitter", name = "nvim-treesitter",  dir = "${nvim-treesitter}", lazy = true },
-        { "nvim-telescope/telescope-fzf-native.nvim", name = "telescope-fzf-native.nvim", dir = "${pkgs.vimPlugins.telescope-fzf-native-nvim}", lazy = true },
-        { import = "plugins" --[[ searches on rtp in ./lua subdirs --]] },
+        checker = { enable = true },  -- check for plugin updates automatically
+
+        spec = {
+          { "catppuccin/nvim", name = "catppuccin", dir = "${pkgs.vimPlugins.catppuccin-nvim}" },
+          { "nvim-treesitter/nvim-treesitter", name = "nvim-treesitter",  dir = "${nvim-treesitter}", lazy = true },
+          { "nvim-telescope/telescope-fzf-native.nvim", name = "telescope-fzf-native.nvim", dir = "${pkgs.vimPlugins.telescope-fzf-native-nvim}", lazy = true },
+          { import = "plugins" --[[ searches on rtp in ./lua subdirs --]] },
+        },
       })
 
       vim.cmd.colorscheme "catppuccin"
