@@ -2,8 +2,7 @@ return {
   {
     "neovim/nvim-lspconfig",
 
-    -- event = { "LazyFile", },
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "LazyFile", },
     opts = {
       setup = {
         ccls = {},

@@ -1,8 +1,7 @@
 return {
   "tpope/vim-fugitive",
 
-  -- event = "LazyFile"
-  event = { "BufReadPost", "BufNewFile" },
+  event = "LazyFile",
   config = function()
     local function map(mode, l, r, desc)
       vim.keymap.set(mode, l, r, { desc = desc })

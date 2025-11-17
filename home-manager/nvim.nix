@@ -21,6 +21,12 @@ in
 
       vim.opt.rtp:prepend("${pkgs.vimPlugins.lazy-nvim}")
       vim.opt.rtp:prepend("${./nvim}")  -- so that the import below finds the lua/plugins dir
+
+      -- Add support for the LazyFile event
+      local Event = require("lazy.core.handler.event")
+      Event.mappings.LazyFile = { id = "LazyFile", event = { "BufReadPost", "BufNewFile", "BufWritePre" } }
+      Event.mappings["User LazyFile"] = Event.mappings.LazyFile
+
       require("lazy").setup({
         { "catppuccin/nvim", name = "catppuccin", dir = "${pkgs.vimPlugins.catppuccin-nvim}" },
         { "nvim-treesitter/nvim-treesitter", name = "nvim-treesitter",  dir = "${nvim-treesitter}", lazy = true },

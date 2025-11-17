@@ -1,8 +1,7 @@
 return {
   "stevearc/conform.nvim",
 
-  -- event = { "LazyFile" },
-  event = { "BufReadPost", "BufNewFile" },
+  event = { "LazyFile" },
   opts = {
     formatters_by_ft = {
       cpp = { "clang-format" },

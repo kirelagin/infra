@@ -1,8 +1,7 @@
 return {
   "RRethy/vim-illuminate",
 
-  -- event = { "LazyFile" },
-  event = { "BufReadPost", "BufNewFile" },
+  event = { "LazyFile" },
   opts = {
     providers = { "lsp", "treesitter" },
     delay = 200,

@@ -3,8 +3,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     name = "nvim-treesitter",
 
-    -- event = { "LazyFile" },
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "LazyFile" },
     init = function(plugin)
       -- Make custom queries available early for other plugins
       -- that need them but do not `require("nvim-treesitter")`
