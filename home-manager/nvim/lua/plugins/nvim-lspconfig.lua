@@ -47,6 +47,8 @@ return {
           --map("n", "<space>D", vim.lsp.buf.type_definition, opts)
           --map("n", "<space>f", function() vim.lsp.buf.format({ async = true }) end, opts)
 
+          Snacks.toggle.inlay_hints():map("<leader>ch")
+
           vim.keymap.set("n", "<leader>cr", function()
             require("inc_rename")
             return ":IncRename " .. vim.fn.expand("<cword>")
