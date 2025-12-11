@@ -9,6 +9,7 @@
     ./colour.nix
     ./secrets.nix
     ./snapshots.nix
+    ./unfree.nix
   ];
 
   options = {

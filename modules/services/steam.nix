@@ -2,7 +2,7 @@
 
 {
   programs.steam.enable = true;
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+  unfree.pkgnames = [
     "steam"
     "steamcmd"
     "steam-original"

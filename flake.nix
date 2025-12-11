@@ -163,6 +163,7 @@
         laptop = import ./modules/config/laptop.nix;
         secrets = import ./modules/config/secrets.nix;
         secure-boot = import ./modules/config/secure-boot.nix;
+        unfree = import ./modules/config/unfree.nix;
       };
     };
 
