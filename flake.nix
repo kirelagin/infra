@@ -4,7 +4,7 @@
 
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-u.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-legacy.url = "github:NixOS/nixpkgs/nixos-25.05";
     dns = {
@@ -12,7 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.05";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
       flake = false;
     };
     prompt_kir = {
@@ -20,12 +20,12 @@
       flake = false;
     };
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.2";
+      url = "github:nix-community/lanzaboote/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix = {
@@ -89,12 +89,12 @@
           ]);
       };
 
-      kirFw = nixpkgs-u.lib.nixosSystem {
+      kirFw = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { flakes = inputs; };
         modules =
           [ (import ./hosts/kirFw.nix)
-            { flakes.nixpkgs = nixpkgs-u; }
+            { flakes.nixpkgs = nixpkgs; }
           ] ++ (with self.nixosModules.services; [
             steam
           ]) ++ (with self.nixosModules.config; [

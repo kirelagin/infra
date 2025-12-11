@@ -42,8 +42,9 @@
         enable = true;
         domain = config.networking.domain;
         organizationName = config.networking.domain;
-        fromName = "Mailserver DMARC report";
       };
+
+      stateVersion = 3;
     };
 
     secrets.secrets.mailserver = {
