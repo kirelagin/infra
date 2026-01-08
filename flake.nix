@@ -89,6 +89,21 @@
           ]);
       };
 
+      nigra = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { flakes = inputs; };
+        modules =
+          [ (import ./hosts/nigra.nix)
+          ] ++ (with self.nixosModules.services; [
+            nginx
+          ]) ++ (with self.nixosModules.apps; [
+            nginx-stub
+          ]) ++ (with self.nixosModules.config; [
+            defaults
+            headless
+          ]);
+      };
+
       kirFw = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { flakes = inputs; };
