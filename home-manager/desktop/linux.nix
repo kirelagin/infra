@@ -15,8 +15,8 @@ let
     '';
     meta.broken = false;
   })).override {
-    version = "25.08.0.88";
-    hash = "sha256-eauQf8KIZlibGvDvgmouwL9cHGZRzRYpN5Ugho483aY=";
+    version = "25.08.10.111";
+    hash = "sha256-bd3ClxBRJgvjJW+waKBE31k9ePam+n2pHeSjlkvkDRo=";
   };
 
 in {
@@ -71,5 +71,9 @@ in {
         idle-brightness = 100;  # disable screen dimming hack
       };
     };
+  } // {
+    nixpkgs.config.permittedInsecurePackages = [
+      "libsoup-2.74.3"  # citrix_workspace bullshit
+    ];
   };
 }
