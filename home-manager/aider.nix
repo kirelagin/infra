@@ -21,6 +21,7 @@ let
 
     exec ${pkgs.aider-chat-with-help}/bin/aider \
       --config "${config.xdg.configHome}/aider/config.yml" \
+      --model-settings-file "${config.xdg.configHome}/aider/model.settings.yml" \
       --env-file "${config.xdg.configHome}/aider/env" \
       "$@"
   '';
@@ -37,8 +38,8 @@ in
 
   xdg.configFile."aider/config.yml".text = lib.generators.toYAML {} {
     # Set OPENROUTER_API_KEY=... in a file at ${config.xdg.configHome}/aider/env
-    model = "openrouter/anthropic/claude-sonnet-4.5";
-    weak-model = "openrouter/google/gemini-2.5-flash";
+    model = "openrouter/anthropic/claude-sonnet-4.6";
+    weak-model = "openrouter/google/gemini-3-flash-preview";
     cache-prompts = true;
     cache-keepalive-pings = 10;
 
@@ -57,4 +58,31 @@ in
       "python: ${lint-python}"
     ];
   };
+
+  xdg.configFile."aider/model.settings.yml".text = ''
+    - name: openrouter/anthropic/claude-sonnet-4.6
+      edit_format: diff
+      weak_model_name: openrouter/google/gemini-3-flash-preview
+      use_repo_map: true
+      examples_as_sys_msg: false
+      extra_params:
+        max_tokens: 64000
+      cache_control: true
+      editor_model_name: openrouter/anthropic/claude-sonnet-4.6
+      editor_edit_format: editor-diff
+      accepts_settings: ["thinking_tokens"]
+
+    - name: openrouter/google/gemini-3.1-pro-preview
+      overeager: true
+      edit_format: diff-fenced
+      use_repo_map: true
+      weak_model_name: openrouter/google/gemini-3-flash-preview
+      accepts_settings: ["thinking_tokens"]
+
+    - name: openrouter/google/gemini-3-flash-preview
+      overeager: true
+      edit_format: diff-fenced
+      use_repo_map: true
+      accepts_settings: ["thinking_tokens"]
+  '';
 }
