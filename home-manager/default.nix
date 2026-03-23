@@ -15,6 +15,7 @@
     ./lldb.nix
     ./mail.nix
     ./nvim.nix
+    ./opencode.nix
     ./pandoc.nix
     ./python.nix
     ./sagemath.nix
