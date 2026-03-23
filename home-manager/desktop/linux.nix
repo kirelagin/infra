@@ -28,7 +28,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       chromium
-      citrix_workspace_hack
+      citrix_workspace
       darktable
       dconf-editor
       (firefox.override { nativeMessagingHosts = [ browserpass passff-host ]; })

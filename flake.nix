@@ -20,7 +20,7 @@
       flake = false;
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
@@ -104,12 +104,12 @@
           ]);
       };
 
-      kirFw = nixpkgs.lib.nixosSystem {
+      kirFw = nixpkgs-u.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { flakes = inputs; };
         modules =
           [ (import ./hosts/kirFw.nix)
-            { flakes.nixpkgs = nixpkgs; }
+            { flakes.nixpkgs = nixpkgs-u; }
           ] ++ (with self.nixosModules.services; [
             steam
           ]) ++ (with self.nixosModules.config; [

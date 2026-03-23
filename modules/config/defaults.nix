@@ -93,9 +93,6 @@
 
     services.resolved.dnssec = lib.mkDefault "true";
 
-    # Experimental nixos-rebuild
-    system.rebuild.enableNg = true;
-
     # Use zsh
     programs.zsh.enable = true;
     users.defaultUserShell = pkgs.zsh;

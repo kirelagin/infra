@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./aider.nix
+    # ./aider.nix  # FIXME
     ./fonts.nix
     ./games.nix
     ./gdb.nix

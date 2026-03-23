@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 
 let
-  ts = pkgs.vimPlugins.nvim-treesitter;
+  ts = pkgs.vimPlugins.nvim-treesitter-legacy;
   nvim-treesitter = ts.withPlugins (ps: ts.allGrammars ++ (with ps; [
     tree-sitter-nu
   ]));
