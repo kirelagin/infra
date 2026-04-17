@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ flakes, lib, pkgs, ... }:
 
 let
 in
@@ -8,12 +8,17 @@ in
     "/.opencode*"
   ];
 
+  nixpkgs.overlays = [
+    flakes.opencode.overlays.default
+  ];
+
   programs.opencode = {
     enable = true;
     enableMcpIntegration = true;
 
+    tui.theme = "catppuccin";
+
     settings = {
-      theme = "catppuccin";
       model = "openrouter/anthropic/claude-opus-4.6";
       small_model = "openrouter/google/gemini-3-flash-preview";
 

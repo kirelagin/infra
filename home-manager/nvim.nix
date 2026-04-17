@@ -12,8 +12,9 @@ in
     enable = true;
 
     withPython3 = true;
+    withRuby = false;
 
-    extraLuaConfig = ''
+    initLua = ''
       local path_orig = package.path
       package.path = "${./nvim}/?/init.lua;${./nvim}/?.lua;" .. package.path
       require("config").setup()

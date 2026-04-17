@@ -33,6 +33,12 @@
       inputs.home-manager.follows = "home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # packages
+    opencode = {
+      url = "github:anomalyco/opencode/v1.4.10";
+      inputs.nixpkgs.follows = "nixpkgs-u";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-u, ... }:
