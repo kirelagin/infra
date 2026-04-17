@@ -21,7 +21,7 @@
     };
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-u";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     lanzaboote = {
@@ -35,7 +35,25 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-u, ... }: {
+  outputs = inputs@{ self, nixpkgs, nixpkgs-u, ... }:
+
+  let
+    mkHome =
+      { host
+      , username ? "kirelagin"
+      }:
+      inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = self.nixosConfigurations.${host}.pkgs;
+        extraSpecialArgs = { flakes = inputs; };
+        modules = [
+          {
+            home.username = username;
+            home.homeDirectory = self.nixosConfigurations.${host}.config.users.users.${username}.home;
+          }
+          ./home-manager
+        ];
+      };
+  in {
 
     packages = {
       x86_64-linux = {
@@ -146,6 +164,10 @@
           home-device
         ]);
       };
+    };
+
+    homeConfigurations = {
+      "kirelagin@kirFw" = mkHome { host = "kirFw"; };
     };
 
     nixosModules = {

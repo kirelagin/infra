@@ -25,55 +25,60 @@ in {
     xorg = lib.mkEnableOption "Xorg support" // { default = pkgs.stdenv.isLinux; };
   };
 
-  config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      chromium
-      citrix_workspace
-      darktable
-      dconf-editor
-      (firefox.override { nativeMessagingHosts = [ browserpass passff-host ]; })
-      gimp
-      gnvim
-      inkscape
-      libreoffice-fresh
-      pavucontrol
-      quassel
-      rymdport
-      telegram-desktop
-      vlc
-      wl-clipboard
-      xclip
-    ];
+  config = lib.mkMerge [
+    (lib.mkIf cfg.enable {
+      home.packages = with pkgs; [
+        chromium
+        citrix_workspace
+        darktable
+        dconf-editor
+        (firefox.override { nativeMessagingHosts = [ browserpass passff-host ]; })
+        gimp
+        gnvim
+        inkscape
+        libreoffice-fresh
+        pavucontrol
+        quassel
+        rymdport
+        telegram-desktop
+        vlc
+        wl-clipboard
+        xclip
+      ];
 
-    home.shellAliases = {
-      open = "${lib.getBin pkgs.xdg-utils}/bin/xdg-open";
-    } // lib.optionalAttrs cfg.xorg {
-      pbcopy  = "${lib.getBin pkgs.xclip}/bin/xclip -selection clipboard -i";
-      pbpaste = "${lib.getBin pkgs.xclip}/bin/xclip -selection clipboard -o";
-    };
-
-    dconf.settings = {
-      "org/gnome/desktop/input-sources" = {
-        xkb-options = [
-          "misc:typo" "lv3:ralt_switch"  # typo layout
-        ];
+      home.shellAliases = {
+        open = "${lib.getBin pkgs.xdg-utils}/bin/xdg-open";
+      } // lib.optionalAttrs cfg.xorg {
+        pbcopy  = "${lib.getBin pkgs.xclip}/bin/xclip -selection clipboard -i";
+        pbpaste = "${lib.getBin pkgs.xclip}/bin/xclip -selection clipboard -o";
       };
 
-      "org/gnome/desktop/wm/preferences" = {
-        button-layout = "close,minimize:appmeny";
+      dconf.settings = {
+        "org/gnome/desktop/input-sources" = {
+          xkb-options = [
+            "misc:typo" "lv3:ralt_switch"  # typo layout
+          ];
+        };
 
-        audible-bell = false;
-        visual-bell = true;
-        visual-bell-type = "frame-flash";  # flash window
-      };
+        "org/gnome/desktop/wm/preferences" = {
+          button-layout = "close,minimize:appmeny";
 
-      "org/gnome/settings-daemon/plugins/power" = {
-        idle-brightness = 100;  # disable screen dimming hack
+          audible-bell = false;
+          visual-bell = true;
+          visual-bell-type = "frame-flash";  # flash window
+        };
+
+        "org/gnome/settings-daemon/plugins/power" = {
+          idle-brightness = 100;  # disable screen dimming hack
+        };
       };
-    };
-  } // {
-    nixpkgs.config.permittedInsecurePackages = [
-      "libsoup-2.74.3"  # citrix_workspace bullshit
-    ];
-  };
+    })
+    {
+      nixpkgs.config.allowUnfreePredicate = pkg:
+        builtins.elem (lib.getName pkg) [ "citrix-workspace" ];
+      nixpkgs.config.permittedInsecurePackages = [
+        "libsoup-2.74.3"  # citrix_workspace bullshit
+      ];
+    }
+  ];
 }

@@ -7,7 +7,6 @@
 {
   imports = [
     ./home-device.nix
-    ./home-manager.nix
   ];
 
   config = {
@@ -79,8 +78,6 @@
     };
 
     services.pcscd.enable = true;
-
-    nixpkgs.overlays = [ flakes.agenix.overlays.default ];
 
     environment.systemPackages = with pkgs; [
       gptfdisk

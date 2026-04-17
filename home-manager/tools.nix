@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ flakes, lib, pkgs, ... }:
 
 {
   programs = {
@@ -21,6 +21,10 @@
       ]);
     };
   };
+
+  nixpkgs.overlays = [
+    flakes.agenix.overlays.default
+  ];
 
   home.packages = with pkgs; [
                     age-plugin-yubikey
