@@ -66,6 +66,8 @@
     programs.ssh.enableAskPassword = true;
     programs.ssh.askPassword = "${pkgs.callPackage ../../pkgs/ssh-askpass-gnome4 {}}/bin/gnome-ssh-askpass4";
 
+    programs.geary.enable = true;
+
     services.fstrim.enable = true;
     boot.kernel.sysctl = {
       "vm.swappiness" = 1;
