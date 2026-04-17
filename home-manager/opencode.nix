@@ -19,7 +19,7 @@ in
     tui.theme = "catppuccin";
 
     settings = {
-      model = "openrouter/anthropic/claude-opus-4.6";
+      model = "openrouter/anthropic/claude-opus-4.7";
       small_model = "openrouter/google/gemini-3-flash-preview";
 
       default_agent = "plan";
