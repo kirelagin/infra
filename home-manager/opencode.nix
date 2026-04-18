@@ -1,6 +1,11 @@
 { flakes, lib, pkgs, ... }:
 
 let
+  models = {
+    cheap = "openrouter/minimax/minimax-m2.5:free";
+    coding = "anthropic/claude-sonnet-4-6";
+    coding_advanced = "anthropic/claude-opus-4-7";
+  };
 in
 
 {
@@ -19,10 +24,19 @@ in
     tui.theme = "catppuccin";
 
     settings = {
-      model = "openrouter/anthropic/claude-opus-4.7";
-      small_model = "openrouter/google/gemini-3-flash-preview";
+      model = models.coding;
+      small_model = models.cheap;
 
       default_agent = "plan";
+
+      agent = {
+        "plan" =  {
+          model = models.coding_advanced;
+        };
+        "build" = {
+          model = models.coding;
+        };
+      };
 
       permission = {
         codesearch = "ask";
@@ -37,6 +51,10 @@ in
         };
         "ruff".disabled = true;
       };
+
+      plugin = [
+        "@ex-machina/opencode-anthropic-auth@1.7.4"
+      ];
     };
 
     commands = {
