@@ -67,46 +67,52 @@ in
         Commit the changes staged at the moment in the project’s Git repository.
         **Do not** stage any new files.
 
-        1. Check the status of the files:
+        1. Check the status of the files (`git status --short`)
 
-           !`git status --short`
+        2. Review the staged changes: (`git diff --staged`)
 
-        2. Review the staged changes:
-
-           !`git diff --staged`
-
-        3. If necessary, take into account the recent history:
-
-           !`git log --oneline -n 5`
+        3. If necessary, take into account the recent history: (`git log --oneline -n 5`)
 
         4. Make sure the staged changes are self-contained and meaningful. If it looks like they are incomplete,
            or something is missing, stop and ask the user for confirmation.
 
-        5. Based on the collected information, prepare a descriptive commit message.
+        5. Based on the collected information, prepare a descriptive commit message following <rules>.
 
-           The commit message **must** contain three sections:
-
-           1. Commit title (a brief summary, following the format established in the repository)
-           2. Reason for the changes in the commit: what problem we are solving and why we are making the change.
-           3. What the change in the commit does: how exactly it addresses the problem.
-
-           Keep the commit message concise, but descriptive. It should contain exactly the right amount of detail.
-           There **must** be a title and there **must** be _at least_ two paragraphs following the structure
-           outlined above.
-           Each section should be as brief as possible, but, still, it has to contain all the details necessary
-           for understanding the change.
-           Do not overdo it: if the diff is self-descriptive, the change is easy to understand, and trivial,
-           then it is perfectly fine to just have a section consisting of a single sentence.
-
-        6. At the end of the commit message, add the following text verbatim:
-
-           ```
-           Co-authored-by: OpenCode <noreply@opencode.ai>
-           ```
-
-        7. Create the commit by running `git commit` with the appropriate arguments.
+        6. Create the commit by running `git commit` with the appropriate arguments.
            Be careful with the shell syntax when invoking the command, correctly escape the contents
            of the message and make sure there are no extra symbols added.
+
+        <rules>
+           The commit message **must** contain three sections:
+
+           1. (title) A one-line summary, following the format established in the repository.
+           2. (why) Reason for the changes in the commit, what problem we are solving and why we are making the change.
+           3. (how) What the change in the commit does, how exactly it addresses the problem.
+
+           There **must** be a title and there **must** be _at least_ two paragraphs following the structure
+           outlined above.
+
+           Here are the best practices for writing the body of the message:
+
+           * Each section should be as brief as possible, but, still, it has to contain all the details necessary
+             for understanding the change.
+           * Prefer plain-text, however it is perfectly ok to use standard Markdown if this improves readability.
+           * Break long lines, preferably at sentence boundaries, or logical boundaries so that the flow of the
+             text remains. There is no hard limit, but try to keep each line under 120 characters.
+           * Do not describe the code changes itself – the users sees the diff. Focus solely on the semantics.
+           * For the “How” part, if there are multiple logical changes, prefer a bullet list with each point
+             describing one meaningful part of the diff.
+           * Do not overdo it: if the diff is self-descriptive, the change is easy to understand, and trivial,
+             then it is perfectly fine to just have a section consisting of a single sentence.
+           * Once again, keep it concise, but descriptive. It should contain exactly the right amount of detail.
+           * At the end of the commit message, add the following text verbatim:
+
+             ```
+             Co-authored-by: OpenCode <noreply@opencode.ai>
+             ```
+        </rules>
+
+        $ARGUMENTS
       '';
     };
   };
