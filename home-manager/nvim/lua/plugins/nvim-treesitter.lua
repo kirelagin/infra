@@ -4,12 +4,31 @@ return {
     name = "nvim-treesitter",
     event = { "LazyFile" },
     config = function()
+      local function start_ts()
+        pcall(vim.treesitter.start)
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end
+
       vim.api.nvim_create_autocmd("FileType", {
-        callback = function()
-          pcall(vim.treesitter.start)
-          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-        end,
+        callback = start_ts,
       })
+
+      -- When nvim starts without a file and then :e <file> is used, lazy.nvim's
+      -- event handler re-fires BufReadPost for newly-registered augroups (e.g.
+      -- gitsigns, treesitter-context). This sets Neovim's internal did_filetype
+      -- flag, so when the original BufReadPost chain resumes, filetypedetect
+      -- sees did_filetype()==1 and skips filetype detection entirely. We use
+      -- vim.filetype.match() to bypass the did_filetype() check, and also
+      -- handle the case where filetype was already detected but our FileType
+      -- autocmd was registered too late to catch it.
+      if vim.bo.filetype == "" and vim.api.nvim_buf_get_name(0) ~= "" then
+        local ft = vim.filetype.match({ buf = 0 })
+        if ft then
+          vim.bo.filetype = ft
+        end
+      elseif vim.bo.filetype ~= "" then
+        start_ts()
+      end
     end,
   },
 
