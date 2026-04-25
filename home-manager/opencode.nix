@@ -61,7 +61,7 @@ in
       };
 
       plugin = [
-        "@ex-machina/opencode-anthropic-auth@1.7.4"
+        "@ex-machina/opencode-anthropic-auth@1.7.5"
       ];
     };
 
