@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 
 let
-  ts = pkgs.vimPlugins.nvim-treesitter-legacy;
+  ts = pkgs.vimPlugins.nvim-treesitter;
   nvim-treesitter = ts.withPlugins (ps: ts.allGrammars ++ (with ps; [
     tree-sitter-nu
   ]));
@@ -31,6 +31,14 @@ in
       require("lazy").setup({
         checker = { enable = true },  -- check for plugin updates automatically
 
+        performance = {
+          rtp = {
+            paths = {
+              "${pkgs.symlinkJoin { name = "treesitter-parsers"; paths = nvim-treesitter.dependencies; }}",
+            },
+          },
+        },
+
         spec = {
           { "catppuccin/nvim", name = "catppuccin", dir = "${pkgs.vimPlugins.catppuccin-nvim}" },
           { "nvim-treesitter/nvim-treesitter", name = "nvim-treesitter",  dir = "${nvim-treesitter}", lazy = true },
@@ -42,12 +50,6 @@ in
       vim.cmd.colorscheme "catppuccin"
     '';
   };
-
-  # HACK !?
-  xdg.configFile."nvim/parser".source = "${pkgs.symlinkJoin {
-      name = "treesitter-parsers";
-      paths = nvim-treesitter.dependencies;
-    }}/parser";
 
   programs.git.ignores = [
     "/Session.vim"

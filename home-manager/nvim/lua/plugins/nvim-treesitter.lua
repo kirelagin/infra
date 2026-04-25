@@ -2,39 +2,20 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     name = "nvim-treesitter",
-
     event = { "LazyFile" },
-    init = function(plugin)
-      -- Make custom queries available early for other plugins
-      -- that need them but do not `require("nvim-treesitter")`
-      require("lazy.core.loader").add_to_rtp(plugin)
-      require("nvim-treesitter.query_predicates")
+    config = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          pcall(vim.treesitter.start)
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
     end,
-    keys = {
-      { "<c-space>", desc = "Increment Selection" },
-      { "<bs>", desc = "Decrement Selection", mode = "x" },
-    },
-    opts = {
-      highlight = { enable = true },
-      indent = { enable = true },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
-      },
-    },
-    config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
   },
 
   {
     "nvim-treesitter/nvim-treesitter-context",
     dependencies = { "nvim-treesitter" },
-
-    -- event = "LazyFile",
     event = { "BufReadPost", "BufNewFile" },
     opts = { mode = "topline", max_lines = 5 },
     keys = {
@@ -49,34 +30,35 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     dependencies = { "nvim-treesitter" },
-
-    -- event = "LazyFile",
     event = { "BufReadPost", "BufNewFile" },
     config = function()
-      require("nvim-treesitter.configs").setup({
-        textobjects = {
-          move = {
-            enable = true,
-            set_jumps = true,
-            goto_next_start = {
-              ["]m"] = { query = "@function.outer", desc = "Next function" },
-            },
-            goto_previous_start = {
-              ["[m"] = { query = "@function.outer", desc = "Previous function" },
-            },
-          },
-          select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-              ["af"] = { query = "@function.outer", desc = "a function" },
-              ["if"] = { query = "@function.inner", desc = "inner function" },
-              ["ac"] = { query = "@class.outer", desc = "a class" },
-              ["ic"] = { query = "@class.inner", desc = "inner class" },
-            },
-          },
-        },
+      require("nvim-treesitter-textobjects").setup({
+        select = { lookahead = true },
+        move  = { set_jumps = true },
       })
+
+      local move   = require("nvim-treesitter-textobjects.move")
+      local select = require("nvim-treesitter-textobjects.select")
+
+      vim.keymap.set({ "n", "x", "o" }, "]m", function()
+        move.goto_next_start("@function.outer", "textobjects")
+      end, { desc = "Next function" })
+      vim.keymap.set({ "n", "x", "o" }, "[m", function()
+        move.goto_previous_start("@function.outer", "textobjects")
+      end, { desc = "Previous function" })
+
+      vim.keymap.set({ "x", "o" }, "af", function()
+        select.select_textobject("@function.outer", "textobjects")
+      end, { desc = "a function" })
+      vim.keymap.set({ "x", "o" }, "if", function()
+        select.select_textobject("@function.inner", "textobjects")
+      end, { desc = "inner function" })
+      vim.keymap.set({ "x", "o" }, "ac", function()
+        select.select_textobject("@class.outer", "textobjects")
+      end, { desc = "a class" })
+      vim.keymap.set({ "x", "o" }, "ic", function()
+        select.select_textobject("@class.inner", "textobjects")
+      end, { desc = "inner class" })
     end,
   },
 }
