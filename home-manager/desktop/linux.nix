@@ -72,6 +72,40 @@ in {
           idle-brightness = 100;  # disable screen dimming hack
         };
       };
+
+      programs.ghostty = {
+        enable = true;
+        enableZshIntegration = true;
+        settings = {
+          theme = "Catppuccin Mocha";
+          font-family = "DejaVu Sans Mono";
+          font-size = 11;
+
+          keybind = [
+            ## vim-like navigation
+            "ctrl+backslash=activate_key_table:vim"
+            "vim/"
+
+            "vim/key_j=scroll_page_lines:1"
+            "vim/key_k=scroll_page_lines:-1"
+            "vim/ctrl+key_d=scroll_page_down"
+            "vim/ctrl+key_u=scroll_page_up"
+            "vim/key_g>key_g=scroll_to_top"
+            "vim/shift+key_g=scroll_to_bottom"
+            "vim/slash=start_search"
+            "vim/key_n=navigate_search:next"
+            "vim/key_y=copy_to_clipboard"
+            "vim/shift+semicolon=toggle_command_palette"
+            "vim/escape=deactivate_key_table"
+            "chain=scroll_to_bottom"
+            "vim/key_q=deactivate_key_table"
+            "chain=scroll_to_bottom"
+            "vim/key_i=deactivate_key_table"
+            "chain=scroll_to_bottom"
+            "vim/catch_all=ignore"
+          ];
+        };
+      };
     })
     {
       nixpkgs.config.allowUnfreePredicate = pkg:
