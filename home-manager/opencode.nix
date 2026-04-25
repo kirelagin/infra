@@ -3,8 +3,8 @@
 let
   models = {
     cheap = "openrouter/minimax/minimax-m2.5:free";
-    coding = "anthropic/claude-sonnet-4-6";
-    coding_advanced = "anthropic/claude-opus-4-7";
+    coding = "anthropic/claude-haiku-4-5";
+    coding_advanced = "anthropic/claude-sonnet-4-6";
   };
 in
 
@@ -70,6 +70,7 @@ in
         ---
         description: Create a Git commit recording the staged changes
         agent: build
+        model: ${models.coding_advanced}
         ---
 
         Commit the changes staged at the moment in the project’s Git repository.
@@ -86,7 +87,10 @@ in
 
         5. Based on the collected information, prepare a descriptive commit message following <rules>.
 
-        6. Create the commit by running `git commit` with the appropriate arguments.
+        6. Present the crafted message to the user and ask them to approve it (or provide feedback).
+           If there is feedback, incorporate it and try again.
+
+        7. Create the commit by running `git commit` with the appropriate arguments.
            Be careful with the shell syntax when invoking the command, correctly escape the contents
            of the message and make sure there are no extra symbols added.
 
@@ -108,8 +112,9 @@ in
            * Break long lines, preferably at sentence boundaries, or logical boundaries so that the flow of the
              text remains. There is no hard limit, but try to keep each line under 120 characters.
            * Do not describe the code changes itself – the users sees the diff. Focus solely on the semantics.
-           * For the “How” part, if there are multiple logical changes, prefer a bullet list with each point
+           * For the (“how”) part, if there are multiple logical changes, prefer a bullet list with each point
              describing one meaningful part of the diff.
+           * Never list a bullet list for the “(why)” section.
            * Do not overdo it: if the diff is self-descriptive, the change is easy to understand, and trivial,
              then it is perfectly fine to just have a section consisting of a single sentence.
            * Once again, keep it concise, but descriptive. It should contain exactly the right amount of detail.
