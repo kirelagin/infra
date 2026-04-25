@@ -5,7 +5,7 @@ return {
     event = { "LazyFile", },
     opts = {
       setup = {
-        ccls = {},
+        clangd = {},
         lua_ls = {
           Lua = {
             diagnostics = {
@@ -13,11 +13,11 @@ return {
             },
           },
         },
+        nixd = {},
         pyright = {},
       },
     },
     config = function(_, opts)
-      local lspc = require("lspconfig")
       for server, settings in pairs(opts.setup) do
         vim.lsp.config(server, { settings = settings })
         vim.lsp.enable(server)
@@ -28,7 +28,6 @@ return {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
           local buffer = ev.buf
-          local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
           -- Enable completion triggered by <c-x><c-o>
           vim.bo[buffer].omnifunc = "v:lua.vim.lsp.omnifunc"
