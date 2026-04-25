@@ -36,7 +36,8 @@
 
     # packages
     opencode = {
-      url = "github:anomalyco/opencode/v1.4.10";
+      #url = "github:anomalyco/opencode/v1.14.24";
+      url = "github:anomalyco/opencode/e29058c346e50976c6b5a2277f22d1902917e65c";
       inputs.nixpkgs.follows = "nixpkgs-u";
     };
   };

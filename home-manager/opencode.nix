@@ -19,6 +19,14 @@ in
 
   programs.opencode = {
     enable = true;
+
+    package = pkgs.opencode.overrideAttrs (origAttrs: {
+      postPatch = (origAttrs.postpatch or "") + ''
+        substituteInPlace package.json \
+              --replace-fail '"packageManager": "bun@1.3.13"' '"packageManager": "bun@${pkgs.bun.version}"'
+      '';
+    });
+
     enableMcpIntegration = true;
 
     tui.theme = "catppuccin";
