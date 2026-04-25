@@ -45,6 +45,10 @@ in
           { "nvim-telescope/telescope-fzf-native.nvim", name = "telescope-fzf-native.nvim", dir = "${pkgs.vimPlugins.telescope-fzf-native-nvim}", lazy = true },
           { import = "plugins" --[[ searches on rtp in ./lua subdirs --]] },
         },
+
+        rocks = {
+          enabled = false,
+        },
       })
 
       vim.cmd.colorscheme "catppuccin"
