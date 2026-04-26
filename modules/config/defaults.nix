@@ -65,6 +65,8 @@
       };
     };
 
+    services.dbus.implementation = "broker";
+
     # Set user account
     users.mutableUsers = false;
     secrets.secrets.user = {};
