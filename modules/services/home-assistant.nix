@@ -8,12 +8,12 @@ let
   images = {
     ha = {
       imageName = "homeassistant/home-assistant";
-      imageDigest = "sha256:816b80788e81b517c477a200a47f3d7e882cc2b9b0504f616957a19f59518d2f";
-      sha256 = "sha256-oZVAU7evGoojbX0s6yHw4ul/yKlQ4nUrn7sVBX/DOUI=";
+      imageDigest = "sha256:c71e7a3780d917b8217c17515263d1461ec2bff192660d7dd30cd8889519ebfe";
+      sha256 = "sha256-OkkHRGMlT47kw8L+/CFxeeZa6qYl0X1EvZgcON5RMuI=";
     };
     zwave-js-ui = {
       imageName = "zwavejs/zwave-js-ui";
-      imageDigest = "sha256:7fc0a78a6c843654eb93166decd13192b5a1f53637cf117ea13569f2a33a0e94";
+      imageDigest = "sha256:c43f88e2e395bb4b37c9e87e64998b751b1e1908318177623cebe08867e1eb42";
       sha256 = "";
     };
   };

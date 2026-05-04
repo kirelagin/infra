@@ -155,7 +155,7 @@
         ]);
       };
 
-      home = nixpkgs.lib.nixosSystem {
+      home = nixpkgs-u.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = { flakes = inputs; };
         modules = [
@@ -163,6 +163,7 @@
           {
             #nixpkgs.config.allowUnsupportedSystem = true;
           }
+          { flakes.nixpkgs = nixpkgs-u; }
         ] ++ (with self.nixosModules.services; [
           home-assistant
         ]) ++ (with self.nixosModules.config; [
