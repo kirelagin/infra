@@ -33,10 +33,16 @@ in
           image = images.ha.imageName;
           imageFile = pkgs.dockerTools.pullImage images.ha;
           volumes = [ "home-assistant:/config" ];
+          devices = [
+            "${zigbee_dev}:/dev/zigbee"
+          ];
+          capabilities = {
+            NET_ADMIN = true;
+            NET_RAW = true;
+          };
           extraOptions = [
             "--network=host"
-            "--volume=/run/dbus:/run/dbus"  # bluetooth
-            "--device=${zigbee_dev}:/dev/zigbee"
+            "--volume=/run/dbus:/run/dbus:ro"  # bluetooth
           ];
           #dependsOn = [ "zwave-js" ];
         };
