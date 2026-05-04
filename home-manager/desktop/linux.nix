@@ -81,6 +81,8 @@ in {
           font-family = "DejaVu Sans Mono";
           font-size = 11;
 
+          maximize = "true";
+
           keybind = [
             ## vim-like navigation
             "ctrl+backslash=activate_key_table:vim"
@@ -104,6 +106,8 @@ in {
             "chain=scroll_to_bottom"
             "vim/catch_all=ignore"
           ];
+
+          shell-integration-features = "ssh-env";
         };
       };
     })
