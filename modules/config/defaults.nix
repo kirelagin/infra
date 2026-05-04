@@ -93,7 +93,12 @@
     nix.registry.nixpkgs.flake = config.flakes.nixpkgs;
     nix.settings.trusted-users = [ "kirelagin" ];
 
-    services.resolved.dnssec = lib.mkDefault "true";
+    services.resolved = {
+      settings.Resolve = {
+        "DNSSEC" = lib.mkDefault "true";
+        "LLMNR" = false;
+      };
+    };
 
     # Use zsh
     programs.zsh.enable = true;

@@ -49,7 +49,11 @@
     };
 
     services.resolved.enable = true;
-    services.resolved.dnssec = "allow-downgrade";
+    services.resolved.settings.Resolve = {
+      "DNSSEC" = "allow-downgrade";
+      "MulticastDNS" = true;
+    };
+    networking.firewall.allowedUDPPorts = [ 5353 ];
 
     time.timeZone = null;
     services.automatic-timezoned.enable = true;
