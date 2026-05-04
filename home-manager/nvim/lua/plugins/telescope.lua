@@ -33,16 +33,16 @@ return {
 		end,
 		cmd = "Telescope",
 		keys = {
-			{ "<C-p>", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-			{ "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-			{ "<C-_>", "<cmd>Telescope live_grep<cr>", desc = "Grep files" }, -- this is actually <C-/>
-			{ "<leader>sg", "<cmd>Telescope live_grep<cr>", desc = "Grep files" },
-			{ "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Find help tags" },
-			{ "<leader>ss", "<cmd>Telescope treesitter<cr>", desc = "Find Treesitter nodes" },
+			{ "<C-p>",      "<cmd>Telescope find_files<cr>",                               desc = "Find files" },
+			{ "<leader>sf", "<cmd>Telescope find_files<cr>",                               desc = "Find files" },
+			{ "<C-_>",      "<cmd>Telescope live_grep<cr>",                                desc = "Grep files" }, -- this is actually <C-/>
+			{ "<leader>sg", "<cmd>Telescope live_grep<cr>",                                desc = "Grep files" },
+			{ "<leader>sh", "<cmd>Telescope help_tags<cr>",                                desc = "Find help tags" },
+			{ "<leader>ss", "<cmd>Telescope treesitter<cr>",                               desc = "Find Treesitter nodes" },
 
-			{ "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "List git branches" },
-			{ "<leader>gC", "<cmd>Telescope git_commits<cr>", desc = "List git commits for the buffer" },
-			{ "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "List git commits" },
+			{ "<leader>gb", "<cmd>Telescope git_branches<cr>",                             desc = "List git branches" },
+			{ "<leader>gC", "<cmd>Telescope git_commits<cr>",                              desc = "List git commits for the buffer" },
+			{ "<leader>gc", "<cmd>Telescope git_commits<cr>",                              desc = "List git commits" },
 
 			{ "<leader>b/", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Find buffers" },
 		},

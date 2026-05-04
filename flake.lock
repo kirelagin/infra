@@ -228,22 +228,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-legacy": {
-      "locked": {
-        "lastModified": 1764939437,
-        "narHash": "sha256-4TLFHUwXraw9Df5mXC/vCrJgb50CRr3CzUzF0Mn3CII=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "00d2457e2f608b4be6fe8b470b0a36816324b0ae",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-25.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-u": {
       "locked": {
         "lastModified": 1776877367,
@@ -329,7 +313,6 @@
         "mailserver": "mailserver",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-legacy": "nixpkgs-legacy",
         "nixpkgs-u": "nixpkgs-u",
         "opencode": "opencode",
         "prompt_kir": "prompt_kir"
