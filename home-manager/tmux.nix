@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
   programs.tmux = {
     enable = true;
@@ -15,25 +17,19 @@
 
     escapeTime = 0;
 
+    plugins = with pkgs.tmuxPlugins; [
+      { plugin = catppuccin;
+        extraConfig = ''
+          set -g @catppuccin_flavor "mocha"
+          set -g status-left ""
+          set -g status-right "#{E:@catppuccin_status_application}"
+          set -ag status-right "| #[fg=#{@thm_blue}]%H:%M:%S#[default] "
+        '';
+      }
+    ];
+
     extraConfig = ''
       set -g destroy-unattached off
-
-      set -g status-style "bg=colour12,fg=black"
-      set -g status-left ""
-      set -g status-right "| #[fg=green,bright]%H:%M:%S#[default] "
-      set -g status-right-style "bg=black,fg=white"
-      setw -g window-status-format " #I #W "
-      setw -g window-status-bell-style "bg=red,fg=colour12"
-      setw -g window-status-current-style "bg=black,bright"
-      setw -g window-status-current-format " #I #W "
-
-      set -g status-interval 1
-
-      set -g pane-border-style "fg=colour103"
-      set -g pane-active-border-style "fg=colour12"
-
-      set -g set-titles on
-      set -g set-titles-string "#W -- #H"
 
       set -g activity-action any
       set -g bell-action any
