@@ -164,6 +164,7 @@
           { flakes.nixpkgs = nixpkgs-u; }
         ] ++ (with self.nixosModules.services; [
           home-assistant
+          homedns
         ]) ++ (with self.nixosModules.config; [
           defaults
           headless
@@ -180,6 +181,7 @@
       services = {
         backups = import ./modules/services/backups.nix;
         home-assistant = import ./modules/services/home-assistant.nix;
+        homedns = import ./modules/services/homedns.nix;
         mail = import ./modules/services/mailserver.nix;
         nextcloud = import ./modules/services/nextcloud.nix;
         nginx = import ./modules/services/nginx.nix;

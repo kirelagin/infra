@@ -95,5 +95,10 @@
       git-annex
     ];
 
+    homedns = {
+      routerDomain = "fritz.box";
+      routerIp = "192.168.178.1";
+    };
+
   };
 }

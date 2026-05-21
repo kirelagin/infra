@@ -34,9 +34,6 @@
     networking.firewall = {
       enable = true;
       logRefusedConnections = false;
-      extraCommands = ''
-        ip46tables -w -P FORWARD DROP
-      '';
     };
 
     networking.useDHCP = lib.mkDefault true;
