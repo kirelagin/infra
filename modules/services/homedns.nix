@@ -41,9 +41,11 @@ in
             "::0/0 allow"
           ];
 
-          domain-insecure = [ "${cfg.routerDomain}." "local." ];
+          prefetch = true;
 
-          local-zone = ''"s.kir.elagin.me." transparent'';
+          domain-insecure = [ "${cfg.routerDomain}." ];
+          private-domain = [ "${cfg.routerDomain}." ];
+
           local-data = [
             ''"home.s.kir.elagin.me. IN CNAME home.${cfg.routerDomain}."''
           ];
