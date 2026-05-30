@@ -1,8 +1,6 @@
 return {
   "tpope/vim-fugitive",
 
-  enabled = false,
-
   event = "LazyFile",
   config = function()
     local function map(mode, l, r, desc)
