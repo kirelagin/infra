@@ -24,6 +24,9 @@
           set -g status-left ""
           set -g status-right "#{E:@catppuccin_status_application}"
           set -ag status-right "| #[fg=#{@thm_blue}]%H:%M:%S#[default] "
+          set -g @kirelagin_window_text "#{?#{==:#{pane_current_command},sudo},#[push-default]#[fg=#{@thm_red}]#T#[fg=default]#[pop-default],#T}"
+          set -g @catppuccin_window_text " #{E:@kirelagin_window_text}"
+          set -g @catppuccin_window_current_text " #{E:@kirelagin_window_text}"
         '';
       }
     ];
