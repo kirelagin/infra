@@ -17,13 +17,13 @@
       fqdn = "${config.networking.hostName}.${config.networking.domain}";
       domains = [ "elagin.me" "kir.elagin.me" ];
 
-      loginAccounts = {
+      accounts = {
         "kir@elagin.me" = {
           hashedPasswordFile = config.secrets.secrets.mailserver.path;
           aliases = [ "kirill@elagin.me" "📧@kir.elagin.me" ];
         };
       };
-      extraVirtualAliases = {
+      aliases = {
         "abuse@elagin.me" = "kir@elagin.me";
         "postmaster@elagin.me" = "kir@elagin.me";
         "ruf@elagin.me" = "kir@elagin.me";
@@ -31,7 +31,7 @@
 
       hierarchySeparator = "/";
 
-      certificateScheme = "acme-nginx";
+      x509.useACMEHost = config.mailserver.fqdn;
 
       enableImap = true;
       enableImapSsl = true;
@@ -40,8 +40,6 @@
 
       dmarcReporting = {
         enable = true;
-        domain = config.networking.domain;
-        organizationName = config.networking.domain;
       };
 
       stateVersion = 3;
@@ -52,7 +50,7 @@
       group = "dovecot2";
     };
 
-    backups.paths = [ config.mailserver.mailDirectory ];
+    backups.paths = [ config.mailserver.storage.path ];
 
   };
 }
