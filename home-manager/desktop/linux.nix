@@ -3,22 +3,6 @@
 let
   cfg = config.desktop;
 
-  # Unbreak by pulling legacy webkitgtk_4_0 from pinned Nixpkgs 25.05
-  citrix_workspace_hack = (pkgs.citrix_workspace.overrideAttrs (origAttrs: rec {
-    buildInputs = origAttrs.buildInputs ++ [
-      flakes.nixpkgs-legacy.legacyPackages.x86_64-linux.webkitgtk_4_0
-    ];
-    # This new binary wants libfuse3.so.3, but we only have .4
-    # (this is completely braindead, but I have no better ideas)
-    postInstall = (origAttrs.postInstall or "") + ''
-      rm -- "$out"/opt/citrix-icaclient/ctxfuse
-    '';
-    meta.broken = false;
-  })).override {
-    version = "25.08.10.111";
-    hash = "sha256-bd3ClxBRJgvjJW+waKBE31k9ePam+n2pHeSjlkvkDRo=";
-  };
-
 in {
   options.desktop = {
     enable = lib.mkEnableOption "desktop" // { default = pkgs.stdenv.isLinux; };
@@ -29,7 +13,7 @@ in {
     (lib.mkIf cfg.enable {
       home.packages = with pkgs; [
         chromium
-        citrix_workspace
+        citrix-workspace
         darktable
         dconf-editor
         (firefox.override { nativeMessagingHosts = [ browserpass passff-host ]; })
@@ -37,6 +21,7 @@ in {
         gnvim
         inkscape
         libreoffice-fresh
+       (logseq.override { electron_39 = electron; })
         pavucontrol
         quassel
         rymdport
@@ -113,9 +98,10 @@ in {
     })
     {
       nixpkgs.config.allowUnfreePredicate = pkg:
-        builtins.elem (lib.getName pkg) [ "citrix-workspace" ];
+        builtins.elem (lib.getName pkg) [
+          "citrix-workspace" "linuxx64"
+        ];
       nixpkgs.config.permittedInsecurePackages = [
-        "libsoup-2.74.3"  # citrix_workspace bullshit
       ];
     }
   ];

@@ -23,7 +23,7 @@ in
     package = pkgs.opencode.overrideAttrs (origAttrs: {
       postPatch = (origAttrs.postpatch or "") + ''
         substituteInPlace package.json \
-              --replace-fail '"packageManager": "bun@1.3.13"' '"packageManager": "bun@${pkgs.bun.version}"'
+              --replace-fail '"packageManager": "bun@1.3.14"' '"packageManager": "bun@${pkgs.bun.version}"'
       '';
     });
 

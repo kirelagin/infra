@@ -24,7 +24,7 @@
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.0.0";
+      url = "github:nix-community/lanzaboote/v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix = {
@@ -32,15 +32,19 @@
       inputs.home-manager.follows = "home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    pi = {
+      url = "github:lukasl-dev/pi.nix";
+      inputs.nixpkgs.follows = "nixpkgs-u";
+    };
 
     # packages
     opencode = {
-      url = "github:anomalyco/opencode/v1.15.1";
+      url = "github:anomalyco/opencode/v1.16.2";
       inputs.nixpkgs.follows = "nixpkgs-u";
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-u, ... }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-u, pi, ... }:
 
   let
     mkHome =
