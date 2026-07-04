@@ -50,7 +50,7 @@
 
     services.resolved.enable = true;
     services.resolved.settings.Resolve = {
-      "DNSSEC" = "allow-downgrade";
+      "DNSSEC" = "true";
       "MulticastDNS" = true;
     };
     networking.firewall.allowedUDPPorts = [ 5353 ];
