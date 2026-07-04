@@ -9,7 +9,8 @@ let
 
   kirelagin = [
     "age1yubikey1qdjwvsyg7fcje5uxe2lhhrtsmp394jjak9p3pyn9pf9h7cl925mck39a05j"  # disaster
-    "age1yubikey1qt9t95u5thtq56sz3vh3arqmawk659df24h666c57ehafyz54fkszfz98x5"  # kirelagin
+    "age1yubikey1qt9t95u5thtq56sz3vh3arqmawk659df24h666c57ehafyz54fkszfz98x5"  # kirelagin (old)
+    "age1yubikey1qdqu5gzzf5jjxxm9jy0m98zlq69z35udatexzp9jlfp4wqnefhkmk9g23f0"  # kirelagin
   ];
 in
 
