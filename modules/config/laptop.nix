@@ -93,6 +93,9 @@
       tpm2-tools
     ] ++ lib.optionals config.services.desktopManager.gnome.enable [
       pkgs.gnome-firmware
+      pkgs.gnome-themes-extra
+
+      pkgs.gnomeExtensions.gsconnect
     ];
 
     # Allow containers to access the internet through NAT.
@@ -101,6 +104,13 @@
       internalInterfaces = ["ve-+"];
     };
     networking.firewall = {
+      allowedTCPPortRanges = lib.mkIf config.services.desktopManager.gnome.enable [
+        { from = 1716; to = 1764; }  # GSConnect
+      ];
+      allowedUDPPortRanges = lib.mkIf config.services.desktopManager.gnome.enable [
+        { from = 1716; to = 1764; }  # GSConnect
+      ];
+
       extraCommands = ''
         ip46tables -A FORWARD -i 've-+' -j ACCEPT
         ip46tables -A FORWARD -o 've-+' -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
