@@ -72,10 +72,6 @@
     grep = "grep --color=auto";
     egrep = "egrep --color=auto";
     man = "LANG=C man";
-  } // lib.optionalAttrs pkgs.stdenv.isLinux {
-    ls = "ls -v --color=auto";
-  } // lib.optionalAttrs pkgs.stdenv.isDarwin {
-    ls = "ls -G";
   } // lib.optionalAttrs config.programs.zoxide.enable {
     cd = "z";
   };
@@ -116,6 +112,16 @@
   };
 
   programs.carapace.enable = true;
+
+  programs.lsd = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      sorting = {
+        dir-grouping = "first";
+      };
+    };
+  };
 
   programs.zoxide.enable = true;
 
