@@ -59,6 +59,8 @@
 
       "__pycache__/"
       ".ipynb_checkpoints/"
+      ".jupyter_ystore.db"
+      ".jupyter/"
     ];
 
     signing.format = null;
