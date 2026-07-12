@@ -2,9 +2,9 @@
 
 let
   models = {
-    cheap = "openrouter/minimax/minimax-m2.5:free";
-    coding = "anthropic/claude-haiku-4-5";
-    coding_advanced = "anthropic/claude-sonnet-4-6";
+    cheap = "openrouter/openrouter/free";
+    coding = "openrouter/~anthropic/claude-haiku-latest";
+    coding_advanced = "openrouter/~anthropic/claude-sonnet-latest";
   };
 in
 
@@ -61,7 +61,6 @@ in
       };
 
       plugin = [
-        "@ex-machina/opencode-anthropic-auth@1.7.5"
       ];
     };
 

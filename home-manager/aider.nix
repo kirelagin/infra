@@ -21,7 +21,6 @@ let
 
     exec ${pkgs.aider-chat-with-help}/bin/aider \
       --config "${config.xdg.configHome}/aider/config.yml" \
-      --model-settings-file "${config.xdg.configHome}/aider/model.settings.yml" \
       --env-file "${config.xdg.configHome}/aider/env" \
       "$@"
   '';
