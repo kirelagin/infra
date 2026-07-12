@@ -95,6 +95,11 @@ in {
           shell-integration-features = "ssh-env";
         };
       };
+
+      services.nextcloud-client = {
+        enable = true;
+        startInBackground = true;
+      };
     })
     {
       nixpkgs.config.allowUnfreePredicate = pkg:
