@@ -20,7 +20,6 @@ in {
       wg0 = {
         ips = [ "172.16.200.1/24" "2605:6400:30:fa9e:ff01::ff90:4000/72" ];
         listenPort = 16200;
-        # TODO: This stores the secret key in the store :(
         privateKeyFile = config.secrets.secrets.wireguard.path;
         peers = [
           { allowedIPs = [ "172.16.200.2"  "2605:6400:30:fa9e:ff02::0/80" ];  # minano
@@ -48,7 +47,7 @@ in {
             publicKey = "onSq3fG+b//QmzO699CzeF4YBG9s+wehL7eE81++AWk=";
           }
           { allowedIPs = [ "172.16.200.13" "2605:6400:30:fa9e:ff0d::0/80" ];  # kirOne7t
-            publicKey = "HRZEyv2L24UPRefRF1bJ/sFRD+ZLO5xb6y96Z7UnCF0=";
+            publicKey = "+N17RAll+SeAh7MPVjx3QOT6KUNtIx91lwZngZL38kg=";
           }
           { allowedIPs = [ "172.16.200.14" "2605:6400:30:fa9e:ff0e::0/80" ];  # kirXps
             publicKey = "XjR9nzUDhU1v+JsWxdjtcJV0FP/RpPmpXHBY7Nbn8Bs=";
