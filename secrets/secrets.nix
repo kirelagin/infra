@@ -23,4 +23,6 @@ in
   "mailserver.age".publicKeys = kirelagin ++ machines.bruna;
   "nextcloud-admin.age".publicKeys = kirelagin ++ machines.bruna;
   "wireguard.age".publicKeys = kirelagin ++ machines.bruna;
+
+  "zigbee2mqtt-network.age".publicKeys = kirelagin ++ machines.home;
 }

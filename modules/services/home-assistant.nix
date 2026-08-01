@@ -27,15 +27,83 @@ in
 
     hardware.bluetooth.enable = true;
 
+    secrets.secrets.zigbee2mqtt-network = {
+      owner = "zigbee2mqtt";
+    };
+
+    services.zigbee2mqtt = {
+      enable = true;
+      settings = {
+        serial = {
+          port = zigbee_dev;
+          adapter = "ember";
+        };
+        mqtt = {
+          server = "mqtt://127.0.0.1:1883";
+          user = "zigbee2mqtt";
+          password = "zigbee2mqtt";
+          base_topic = "zigbee2mqtt";
+        };
+        homeassistant.enabled = true;
+        permit_join = false;
+        frontend = {
+          enabled = true;
+          host = "127.0.0.1";
+          port = 8080;
+        };
+      };
+    };
+
+    systemd.services.zigbee2mqtt = {
+      wants = [ "mosquitto.service" ];
+      after = [ "mosquitto.service" ];
+      serviceConfig.EnvironmentFile = [ config.secrets.secrets.zigbee2mqtt-network.path ];
+    };
+
+    systemd.services."podman-homeassistant" = {
+      wants = [
+        "mosquitto.service"
+        "zigbee2mqtt.service"
+      ];
+      after = [
+        "mosquitto.service"
+        "zigbee2mqtt.service"
+      ];
+    };
+
+    services.mosquitto = {
+      enable = true;
+      listeners = [
+        {
+          address = "127.0.0.1";
+          port = 1883;
+          users = {
+            homeassistant = {
+              password = "homeassistant";
+              acl = [
+                "readwrite homeassistant/#"
+                "readwrite zigbee2mqtt/#"
+              ];
+            };
+            zigbee2mqtt = {
+              password = "zigbee2mqtt";
+              acl = [
+                "read homeassistant/status"
+                "write homeassistant/#"
+                "readwrite zigbee2mqtt/#"
+              ];
+            };
+          };
+        }
+      ];
+    };
+
     virtualisation.oci-containers = {
       containers = {
         homeassistant = {
           image = images.ha.imageName;
           imageFile = pkgs.dockerTools.pullImage images.ha;
           volumes = [ "home-assistant:/config" ];
-          devices = [
-            "${zigbee_dev}:/dev/zigbee"
-          ];
           capabilities = {
             NET_ADMIN = true;
             NET_RAW = true;
