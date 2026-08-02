@@ -15,6 +15,7 @@ return {
         },
         nixd = {},
         pyright = {},
+        vtsls = {},
       },
     },
     config = function(_, opts)
