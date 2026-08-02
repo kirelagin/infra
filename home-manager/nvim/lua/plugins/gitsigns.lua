@@ -16,18 +16,18 @@ return {
 
       map("n", "]h", gs.next_hunk, "Next hunk")
       map("n", "[h", gs.prev_hunk, "Prev hunk")
-      map({ "n", "v" }, "<leader>chs", gs.stage_hunk, "Stage hunk")
-      map({ "n", "v" }, "<leader>chr", gs.reset_hunk, "Reset hunk")
-      map("n", "<leader>chS", gs.stage_buffer, "Stage buffer")
-      map("n", "<leader>chu", gs.undo_stage_hunk, "Undo stage hunk")
-      map("n", "<leader>chR", gs.reset_buffer, "Reset buffer")
-      map("n", "<leader>chp", gs.preview_hunk_inline, "Preview hunk inline")
-      map("n", "<leader>chb", function() gs.blame_line({ full = true }) end, "Blame line")
-      map("n", "<leader>chd", gs.diffthis, "Diff this")
-      map("n", "<leader>chD", function() gs.diffthis("~") end, "Diff this ~")
+      map({ "n", "v" }, "<leader>cgs", gs.stage_hunk, "Stage hunk")
+      map({ "n", "v" }, "<leader>cgr", gs.reset_hunk, "Reset hunk")
+      map("n", "<leader>cgS", gs.stage_buffer, "Stage buffer")
+      map("n", "<leader>cgu", gs.undo_stage_hunk, "Undo stage hunk")
+      map("n", "<leader>cgR", gs.reset_buffer, "Reset buffer")
+      map("n", "<leader>cgp", gs.preview_hunk_inline, "Preview hunk inline")
+      map("n", "<leader>cgb", function() gs.blame_line({ full = true }) end, "Blame line")
+      map("n", "<leader>cgd", gs.diffthis, "Diff this")
+      map("n", "<leader>cgD", function() gs.diffthis("~") end, "Diff this ~")
       map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "gitsigns hunk")
 
-      map("n", "<leader>cb", gs.blame, "Blame file")
+      map("n", "<leader>cgb", gs.blame, "Blame file")
 
       local gsc = require("gitsigns.config")
       Snacks.toggle({
