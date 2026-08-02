@@ -37,6 +37,8 @@
       set -g activity-action any
       set -g bell-action any
 
+      set -g extended-keys on
+      set -g extended-keys-format "csi-u"
 
       bind Space next-window
       bind BSpace previous-window
