@@ -120,5 +120,10 @@ in {
     system.stateVersion = "23.05";
 
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+    hardware.bluetooth.settings.General = {
+      "Experimental" = true;
+      "KernelExperimental" = "6fbaf188-05e0-496a-9885-d6ddfdb4e03e";
+    };
   };
 }
