@@ -5,8 +5,8 @@
 { config, flakes, lib, pkgs, ... }:
 
 let
-  # 7.1 has regressions, so stick to 7.0 for now
-  linuxPackages = pkgs.linuxPackages_7_0;
+  # 7.1 has regressions, 7.0 is EoL, so...
+  linuxPackages = pkgs.linuxPackages_6_18;
 
 
 in {
