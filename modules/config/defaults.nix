@@ -119,7 +119,9 @@
       gitMinimal
       htop
       neovim
+      ripgrep
     ] ++ lib.optionals pkgs.stdenv.isLinux [
+      ethtool
       nftables
       pciutils
       psmisc  # pskill and co
