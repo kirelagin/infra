@@ -118,5 +118,7 @@ in {
     environment.systemPackages = [ pkgs.fw-ectool ];
 
     system.stateVersion = "23.05";
+
+    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 }
