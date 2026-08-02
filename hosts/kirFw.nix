@@ -5,7 +5,8 @@
 { config, flakes, lib, pkgs, ... }:
 
 let
-  linuxPackages = pkgs.linuxPackages_latest;
+  # 7.1 has regressions, so stick to 7.0 for now
+  linuxPackages = pkgs.linuxPackages_7_0;
 
 
 in {
@@ -14,7 +15,6 @@ in {
   ];
 
   config = {
-    # Bleeding-edge
     boot.kernelPackages = linuxPackages;
 
     boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
