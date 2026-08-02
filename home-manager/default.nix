@@ -17,6 +17,7 @@
     ./nvim.nix
     ./opencode.nix
     ./pandoc.nix
+    ./pi.nix
     ./python.nix
     ./sagemath.nix
     ./shell.nix

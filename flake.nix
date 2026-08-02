@@ -32,9 +32,15 @@
       inputs.home-manager.follows = "home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     pi = {
       url = "github:lukasl-dev/pi.nix";
       inputs.nixpkgs.follows = "nixpkgs-u";
+    };
+
+    pi-ext = {
+      url = "github:tomsej/pi-ext";
+      flake = false;
     };
 
     # packages
@@ -44,7 +50,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-u, pi, ... }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-u, ... }:
 
   let
     mkHome =

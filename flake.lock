@@ -302,6 +302,22 @@
         "type": "github"
       }
     },
+    "pi-ext": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1785442910,
+        "narHash": "sha256-xJjgrR4z8RBIIhTgxL+fobqMRL0Ey5fVAFv8S74LLtA=",
+        "owner": "tomsej",
+        "repo": "pi-ext",
+        "rev": "0355d4e7f121786a008c9315377df261ad9c6d6f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tomsej",
+        "repo": "pi-ext",
+        "type": "github"
+      }
+    },
     "pre-commit": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -353,6 +369,7 @@
         "nixpkgs-u": "nixpkgs-u",
         "opencode": "opencode",
         "pi": "pi",
+        "pi-ext": "pi-ext",
         "prompt_kir": "prompt_kir"
       }
     },
