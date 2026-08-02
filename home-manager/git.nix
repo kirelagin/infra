@@ -56,6 +56,7 @@
       "result"
       "result-*"
       "/.tmp"
+      "/.wip/"
 
       "__pycache__/"
       ".ipynb_checkpoints/"
