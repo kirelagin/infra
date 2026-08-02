@@ -8,8 +8,8 @@ let
   images = {
     ha = {
       imageName = "homeassistant/home-assistant";
-      imageDigest = "sha256:f73512ba4fe06bb4d57636fe3578d0820cdec46f81e8f837ab59e451662ff3cb";
-      sha256 = "sha256-39RzMAimG2Wt6a+jTBcJOkWmZvyXi3GBrt/uKm4gu/Q=";
+      imageDigest = "sha256:5a531753cea96444200158fc2b0ac7ccd739291ec50414877b396de6e0bb29b3";
+      sha256 = "sha256-LEkOUy1jASuXnehwazfSMcd8Y4I4u338fBE0w6MO3FQ=";
     };
     #zwave-js-ui = {
     #  imageName = "zwavejs/zwave-js-ui";
