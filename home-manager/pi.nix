@@ -13,10 +13,6 @@
 
       themes = [ "${flakes.pi-ext}/themes/catppuccin-mocha.json" ];
 
-      extensions = [
-        "${flakes.pi-ext}/extensions/leader-key"
-      ];
-
       settings = {
         theme = "catppuccin-mocha";
       };
