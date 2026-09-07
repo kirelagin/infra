@@ -124,6 +124,7 @@
       ripgrep
     ] ++ lib.optionals pkgs.stdenv.isLinux [
       ethtool
+      lm_sensors
       nftables
       pciutils
       psmisc  # pskill and co
