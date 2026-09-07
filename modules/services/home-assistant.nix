@@ -2,7 +2,12 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   images = {
@@ -19,6 +24,7 @@ let
   };
   #zwave_dev = "/dev/serial/by-id/usb-Zooz_800_Z-Wave_stick_533D004242-if00";
   zigbee_dev = "/dev/serial/by-id/usb-Itead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_V2_d017f77b9438ef119d823e7af3d9b1e5-if00-port0";
+  thread_dev = "/dev/serial/by-id/usb-SONOFF_SONOFF_Dongle_Plus_MG24_26d5361072f5ef11ae059ea29ed47d52-if00-port0";
 
 in
 
@@ -26,6 +32,81 @@ in
   config = {
 
     hardware.bluetooth.enable = true;
+
+    users.groups.otbr = { };
+
+    services.openthread-border-router = {
+      enable = true;
+      extraArgs = [ "--syslog-disable" ];
+      openFirewall = false;
+      backboneInterfaces = [ "end0" ];
+      interfaceName = "wpan0";
+      radio = {
+        device = thread_dev;
+        baudRate = 460800;
+        flowControl = false;
+      };
+      rest = {
+        listenAddress = "127.0.0.1";
+        listenPort = 8081;
+      };
+      web = {
+        enable = true;
+        listenAddress = "127.0.0.1";
+        listenPort = 8082;
+      };
+    };
+
+    services.matterjs-server = {
+      enable = true;
+      listenAddress = "127.0.0.1";
+      port = 5580;
+      openFirewall = false;
+      bluetoothSupport = false;
+    };
+
+    # Matter subscriptions from sleepy devices can be idle longer than the
+    # kernel's default two-minute UDP stream conntrack timeout.
+    boot.kernel.sysctl."net.netfilter.nf_conntrack_udp_timeout_stream" = 3600;
+
+    networking.firewall = {
+      filterForward = true;
+      trustedInterfaces = [ "wpan0" ];
+      extraForwardRules = ''
+        # Established/related return traffic is accepted before this chain.
+        # These FORWARD rules leave Thread-to-local-host INPUT traffic unchanged.
+        # OTBR's ingress chain still validates advertised Thread destinations.
+        ct state new iifname "end0" oifname "wpan0" accept comment "allow LAN to Thread"
+        ct state new iifname "wpan0" oifname != "wpan0" reject comment "reject Thread egress"
+      '';
+    };
+
+    # Staged manually until the radio and network are validated.
+    systemd.services.otbr-agent = {
+      wantedBy = lib.mkForce [ ];
+      serviceConfig = {
+        Group = "otbr";
+        StateDirectoryMode = "0700";
+        UMask = lib.mkForce "0007";
+      };
+    };
+
+    systemd.services.otbr-web = {
+      partOf = [ "otbr-agent.service" ];
+      wantedBy = lib.mkForce [ ];
+      serviceConfig = {
+        Group = "otbr";
+        # otbr-web also sends this copy to syslog, which remains in journald.
+        StandardError = "null";
+      };
+    };
+
+    # Staged manually until commissioning and restart tests pass.
+    systemd.services.matterjs-server = {
+      wantedBy = lib.mkForce [ ];
+      wants = [ "otbr-agent.service" ];
+      after = [ "otbr-agent.service" ];
+    };
 
     secrets.secrets.zigbee2mqtt-network = {
       owner = "zigbee2mqtt";
@@ -110,7 +191,7 @@ in
           };
           extraOptions = [
             "--network=host"
-            "--volume=/run/dbus:/run/dbus:ro"  # bluetooth
+            "--volume=/run/dbus:/run/dbus:ro" # bluetooth
           ];
           #dependsOn = [ "zwave-js" ];
         };
