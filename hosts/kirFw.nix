@@ -5,8 +5,7 @@
 { config, flakes, lib, pkgs, ... }:
 
 let
-  # 7.1 has regressions, 7.0 is EoL, so...
-  linuxPackages = pkgs.linuxPackages_6_18;
+  linuxPackages = pkgs.linuxPackages_7_1;
 
 
 in {
@@ -26,10 +25,7 @@ in {
       #"pm_debug_messages" "amd_pmc.dyndbg"
     ];
 
-    boot.kernelPatches = lib.optionals (lib.versionOlder linuxPackages.kernel.version "6.10") [
-      { name = "fw-amd-ec"; patch = ../patches/kernel/fw-amd-ec.patch; }
-    ] ++ lib.optionals (lib.versionOlder linuxPackages.kernel.version "6.7.8") [
-      { name = "amdgpu-drm-buddy-alloc_range"; patch = ../patches/kernel/amdgpu-drm-buddy-alloc_range.patch; }
+    boot.kernelPatches = [
     ];
 
     services.udev.extraRules = ''
