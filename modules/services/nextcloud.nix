@@ -61,7 +61,6 @@
 
           # Images
           "OC\\Preview\\Krita"
-          "OC\\Preview\\Imaginary"
         ];
 
         # Fix paths used by apps
@@ -70,13 +69,9 @@
         "memories.exiftool" = "${lib.getExe pkgs.exiftool}";
         "memories.vod.ffmpeg" = "${lib.getExe pkgs.ffmpeg-headless}";
         "memories.vod.ffprobe" = "${pkgs.ffmpeg-headless}/bin/ffprobe";
-
-        "preview_imaginary_url" = "http://${config.services.imaginary.address}:${toString config.services.imaginary.port}";
       };
-      enableImagemagick = false;  # Use imaginary instead
+      enableImagemagick = true;
     };
-    services.imaginary.enable = true;
-    services.imaginary.settings.return-size = true;  # had to set to true, the NixOS module is broken :/
 
     # HACK: for memories
     systemd.services.nextcloud-cron = {
