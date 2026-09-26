@@ -5,8 +5,8 @@ let
 
 in {
   options.desktop = {
-    enable = lib.mkEnableOption "desktop" // { default = pkgs.stdenv.isLinux; };
-    xorg = lib.mkEnableOption "Xorg support" // { default = pkgs.stdenv.isLinux; };
+    enable = lib.mkEnableOption "desktop" // { default = pkgs.stdenv.hostPlatform.isLinux; };
+    xorg = lib.mkEnableOption "Xorg support" // { default = pkgs.stdenv.hostPlatform.isLinux; };
   };
 
   config = lib.mkMerge [

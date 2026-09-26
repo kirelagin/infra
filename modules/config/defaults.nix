@@ -122,7 +122,7 @@
       htop
       neovim
       ripgrep
-    ] ++ lib.optionals pkgs.stdenv.isLinux [
+    ] ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
       ethtool
       lm_sensors
       nftables

@@ -89,7 +89,7 @@
       iotop
       iw
       wireguard-tools
-    ] ++ lib.optionals pkgs.stdenv.isLinux [
+    ] ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
       powertop
       tpm2-tools
     ] ++ lib.optionals config.services.desktopManager.gnome.enable [

@@ -5,7 +5,7 @@ let
 
 in {
   options.programs.homebrew = {
-    enable = lib.mkEnableOption "homebrew" // { default = pkgs.stdenv.isDarwin; };
+    enable = lib.mkEnableOption "homebrew" // { default = pkgs.stdenv.hostPlatform.isDarwin; };
   };
 
   config = lib.mkIf cfg.enable {

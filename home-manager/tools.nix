@@ -54,9 +54,9 @@
                     yubikey-manager
   ] ++ [
     (import ./tools/yubi-oath-backup.nix lib pkgs)
-  ] ++ lib.optionals pkgs.stdenv.isDarwin [
+  ] ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
     gnugrep
-  ] ++ lib.optionals pkgs.stdenv.isLinux [
+  ] ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
     (import ./tools/envof.nix lib pkgs)
     (import ./tools/whicher.nix lib pkgs)
   ];
