@@ -66,6 +66,8 @@ in {
           font-family = "DejaVu Sans Mono";
           font-size = 11;
 
+          scrollback-limit = 100000000;
+
           maximize = "true";
 
           keybind = [
