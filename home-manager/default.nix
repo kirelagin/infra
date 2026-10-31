@@ -27,6 +27,7 @@
     ./tools.nix
 
     ./desktop/linux.nix
+    ./windows-vm.nix
   ];
 
   config = {

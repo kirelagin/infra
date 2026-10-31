@@ -113,6 +113,19 @@ in {
 
     environment.systemPackages = [ pkgs.fw-ectool ];
 
+    # System libvirt owns the domain, NVRAM, and swtpm state outside the Nix store.
+    virtualisation.libvirtd = {
+      enable = true;
+      onBoot = "ignore";
+      onShutdown = "shutdown";
+      qemu.swtpm.enable = true;
+    };
+    # swtpm_localca runs as tss and needs this CA state directory.
+    systemd.tmpfiles.rules = [
+      "d /var/lib/swtpm-localca 0700 tss tss -"
+    ];
+    users.users.kirelagin.extraGroups = [ "libvirtd" ];
+
     system.stateVersion = "23.05";
 
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];

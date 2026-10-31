@@ -56,6 +56,7 @@
     mkHome =
       { host
       , username ? "kirelagin"
+      , extraModules ? [ ]
       }:
       inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = self.nixosConfigurations.${host}.pkgs;
@@ -66,7 +67,7 @@
             home.homeDirectory = self.nixosConfigurations.${host}.config.users.users.${username}.home;
           }
           ./home-manager
-        ];
+        ] ++ extraModules;
       };
   in {
 
@@ -184,7 +185,15 @@
     };
 
     homeConfigurations = {
-      "kirelagin@kirFw" = mkHome { host = "kirFw"; };
+      "kirelagin@kirFw" = mkHome {
+        host = "kirFw";
+        extraModules = [{
+          kir.windowsVm = {
+            enable = true;
+            usbControllerPassthrough = "0000:c3:00.3";
+          };
+        }];
+      };
     };
 
     nixosModules = {
