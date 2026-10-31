@@ -93,6 +93,8 @@
       powertop
       tpm2-tools
     ] ++ lib.optionals config.services.desktopManager.gnome.enable [
+      pkgs.file-roller
+
       pkgs.gnome-firmware
       pkgs.gnome-themes-extra
 
