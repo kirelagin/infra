@@ -5,7 +5,7 @@
 { config, flakes, lib, pkgs, ... }:
 
 let
-  linuxPackages = pkgs.linuxPackages_7_1;
+  linuxPackages = pkgs.linuxPackages_7_3;
 
 
 in {

@@ -14,8 +14,6 @@
     boot.loader.systemd-boot.configurationLimit = 5;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    boot.initrd.systemd.enable = true;
-
     hardware.enableRedistributableFirmware = lib.mkDefault true;
 
     powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

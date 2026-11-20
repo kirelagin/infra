@@ -20,8 +20,8 @@ in {
         gimp
         gnvim
         inkscape
-        libreoffice-fresh
-       (logseq.override { electron_39 = electron; })
+        libreoffice
+        #(logseq.override { electron_39 = electron; })
         pavucontrol
         quassel
         rymdport
