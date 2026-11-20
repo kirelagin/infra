@@ -116,7 +116,6 @@
             nginx
           ]) ++ (with self.nixosModules.apps; [
             nginx-stub
-            xray
           ]) ++ (with self.nixosModules.config; [
             defaults
             headless
