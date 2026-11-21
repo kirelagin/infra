@@ -43,6 +43,16 @@
       flake = false;
     };
 
+    hermes-agent = {
+      url = "github:NousResearch/hermes-agent/v0.23.3";
+      inputs.nixpkgs.follows = "nixpkgs-u";
+      inputs.home-manager.follows = "home-manager";
+    };
+    hermes-official-plugins = {
+      url = "github:NousResearch/hermes-official-plugins/13b2c1c9c8204bf333df240b2aacf98c3e6250b7";
+      flake = false;
+    };
+
     # packages
     opencode = {
       url = "github:anomalyco/opencode/v1.18.5";
@@ -89,6 +99,7 @@
           ] ++ (with self.nixosModules.services; [
             authelia
             backups
+            hermes-agent
             mail
             nextcloud
             nginx
@@ -200,6 +211,7 @@
       services = {
         authelia = import ./modules/services/authelia.nix;
         backups = import ./modules/services/backups.nix;
+        hermes-agent = import ./modules/services/hermes-agent.nix;
         home-assistant = import ./modules/services/home-assistant.nix;
         homedns = import ./modules/services/homedns.nix;
         mail = import ./modules/services/mailserver.nix;
