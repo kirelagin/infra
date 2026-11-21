@@ -15,6 +15,7 @@ let
   backendPort = 9091;
   domain = config.networking.domain;
   hostname = "auth.s.${domain}";
+  ownerSubject = "user:kirelagin";
   oidcKeyDirectory = "oidc-keys";
   oidcKeyPath = "/var/lib/authelia-main/${oidcKeyDirectory}";
 in
@@ -53,11 +54,10 @@ in
       access_control = {
         default_policy = "deny";
         # Authelia requires a rule for a deny-by-default access policy.
-        # Future OIDC clients will need their own independent owner policy.
         rules = [
           {
             domain = hostname;
-            subject = "user:kirelagin";
+            subject = ownerSubject;
             policy = "two_factor";
           }
         ];
@@ -71,6 +71,15 @@ in
       storage.local.path = "/var/lib/authelia-main/db.sqlite3";
       notifier.filesystem.filename = "/var/lib/authelia-main/notifications.txt";
       identity_providers.oidc = {
+        authorization_policies.owner_only = {
+          default_policy = "deny";
+          rules = [
+            {
+              subject = ownerSubject;
+              policy = "two_factor";
+            }
+          ];
+        };
         authorization_policies.issuer_fallback_deny = {
           default_policy = "deny";
           # Authelia requires at least one rule with a subject or network.
