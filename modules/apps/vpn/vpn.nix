@@ -15,6 +15,11 @@ let
 
 in {
   config = {
+    boot.kernel.sysctl = {
+      "net.ipv4.conf.all.forwarding" = true;
+      "net.ipv6.conf.all.forwarding" = true;
+    };
+
     secrets.secrets.wireguard = {};
     networking.wireguard.interfaces = {
       wg0 = {
@@ -79,8 +84,6 @@ in {
         ];
         postSetup = [
           helpers
-          ''${pkgs.bash}/bin/bash -c "echo 1 > /proc/sys/net/ipv4/conf/all/forwarding"''
-          ''${pkgs.bash}/bin/bash -c "echo 1 > /proc/sys/net/ipv6/conf/all/forwarding"''
           ''ip46tables -w -A FORWARD -i wg0 -j ACCEPT''
           ''ip46tables -w -A FORWARD -o wg0 -j ACCEPT''
           ''ip46tables -w -t nat -A POSTROUTING -o ${lib.escapeShellArg config.networking.defaultGateway.interface} -j MASQUERADE''
@@ -90,8 +93,6 @@ in {
           ''ip46tables -w -t nat -D POSTROUTING -o ${lib.escapeShellArg config.networking.defaultGateway.interface} -j MASQUERADE''
           ''ip46tables -w -D FORWARD -o wg0 -j ACCEPT''
           ''ip46tables -w -D FORWARD -i wg0 -j ACCEPT''
-          ''${pkgs.bash}/bin/bash -c "echo 0 > /proc/sys/net/ipv6/conf/all/forwarding"''
-          ''${pkgs.bash}/bin/bash -c "echo 0 > /proc/sys/net/ipv4/conf/all/forwarding"''
         ];
       };
     };
