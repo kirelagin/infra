@@ -51,7 +51,7 @@ let
     SOA = {
       nameServer = "ns1";
       adminEmail = "kirelagin@gmail.com";
-      serial = 2026112100;
+      serial = 2026112101;
     };
 
     NS = lib.flatten [
@@ -116,6 +116,7 @@ let
           nigra = host "85.198.64.6" null;
 
           s.subdomains = {
+            agents.CNAME = [ "bruna.kir.elagin.me." ];
             auth.CNAME = [ "bruna.kir.elagin.me." ];
             cloud.CNAME = [ "bruna.kir.elagin.me." ];
             tesla.CNAME = [ "bruna.kir.elagin.me." ];
