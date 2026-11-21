@@ -40,7 +40,10 @@
       ];
     };
 
-    defaultGateway = "104.244.79.1";
+    defaultGateway = {
+      address = "104.244.79.1";
+      interface = "ens3";
+    };
     defaultGateway6 = {
       address = "2605:6400:30::1";
       metric = 256;
