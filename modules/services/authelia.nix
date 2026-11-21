@@ -3,6 +3,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -68,6 +69,25 @@ in
       # TODO: add OIDC when we have clients
 
     };
+  };
+
+  backups.streams.authelia-db = {
+    command = "${pkgs.writeShellScript "authelia-sqlite-snapshot" ''
+      set -euo pipefail
+      umask 077
+      database=${lib.escapeShellArg config.services.authelia.instances.main.settings.storage.local.path}
+      test -s "$database" || { echo 'Authelia database is missing or empty' >&2; exit 1; }
+      scratch=$(${pkgs.coreutils}/bin/mktemp -d "''${RUNTIME_DIRECTORY:?}/snapshot.XXXXXXXX")
+      trap '${pkgs.coreutils}/bin/rm -rf -- "$scratch"' EXIT
+      snapshot="$scratch/db.sqlite3"
+      ${pkgs.sqlite}/bin/sqlite3 -batch -readonly -cmd '.timeout 30000' "$database" \
+        ".backup '$snapshot'" >/dev/null
+      test -s "$snapshot" || { echo 'Authelia SQLite snapshot is empty' >&2; exit 1; }
+      result=$(${pkgs.sqlite}/bin/sqlite3 -batch -readonly "$snapshot" 'PRAGMA quick_check;')
+      test "$result" = ok || { echo 'Authelia SQLite snapshot failed quick_check' >&2; exit 1; }
+      ${pkgs.coreutils}/bin/cat -- "$snapshot"
+    ''}";
+    filename = "authelia-main.sqlite3";
   };
 
   services.nginx = {
