@@ -28,8 +28,10 @@
     time.timeZone = lib.mkDefault "UTC";
 
     # Set logfile size limit
-    services.journald.settings = {
-      Journal.SystemMaxUse = "300M";
+    services.journald = if lib.versionAtLeast lib.trivial.release "26.11" then {
+      settings.Journal.SystemMaxUse = "300M";
+    } else {
+      extraConfig = "SystemMaxUse=300M";
     };
 
     # Enable firewall
