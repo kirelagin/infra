@@ -25,4 +25,7 @@ in
   "wireguard.age".publicKeys = kirelagin ++ machines.bruna;
 
   "zigbee2mqtt-network.age".publicKeys = kirelagin ++ machines.home;
+
+  "authelia-storage.age".publicKeys = kirelagin ++ machines.bruna;
+  "authelia-users.age".publicKeys = kirelagin ++ machines.bruna;
 }

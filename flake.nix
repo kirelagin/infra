@@ -87,6 +87,7 @@
         modules =
           [ (import ./hosts/bruna.nix)
           ] ++ (with self.nixosModules.services; [
+            authelia
             backups
             mail
             nextcloud
@@ -197,6 +198,7 @@
 
     nixosModules = {
       services = {
+        authelia = import ./modules/services/authelia.nix;
         backups = import ./modules/services/backups.nix;
         home-assistant = import ./modules/services/home-assistant.nix;
         homedns = import ./modules/services/homedns.nix;
