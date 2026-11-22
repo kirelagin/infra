@@ -145,9 +145,13 @@ in
       };
     };
 
-    config = { pkgs, ... }:
+    config = { config, pkgs, ... }:
     let
       upstreamPackage = flakes.hermes-agent.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      gateway = config.systemd.services.hermes-agent;
+      homeSetupScript = "${gateway.environment.HERMES_HOME}/home-setup.sh";
+      # Keep this marker in the transient home, independent of XDG overrides.
+      homeSetupMarker = "${gateway.environment.HOME}/.cache/hermes/home-setup-done";
     in
     {
       imports = [ flakes.hermes-agent.nixosModules.default ];
@@ -251,7 +255,33 @@ in
         HERMES_DASHBOARD_OIDC_CLIENT_SECRET=
       '';
 
+      systemd.services.hermes-home-setup = {
+        description = "Set up the Hermes guest home";
+        unitConfig.ConditionPathExists = [ homeSetupScript "!${homeSetupMarker}" ];
+        environment = {
+          inherit (gateway.environment) HOME HERMES_HOME NIX_REMOTE;
+          # Use the final PATH instead of adding the default service tools again.
+          PATH = lib.mkForce gateway.environment.PATH;
+        };
+        serviceConfig = {
+          Type = "oneshot";
+          TimeoutStartSec = "20s";
+          TimeoutStopSec = "2s";
+          WorkingDirectory = gateway.environment.HOME;
+          inherit (gateway.serviceConfig)
+            User Group UMask NoNewPrivileges PrivateTmp ProtectHome ProtectSystem ReadWritePaths;
+        };
+        script = ''
+          set -e
+          ${lib.getExe pkgs.bash} "$HERMES_HOME/home-setup.sh"
+          mkdir -p -- "$HOME/.cache/hermes"
+          touch -- "$HOME/.cache/hermes/home-setup-done"
+        '';
+      };
+
       systemd.services.hermes-agent = {
+        wants = [ "hermes-home-setup.service" ];
+        after = [ "hermes-home-setup.service" ];
         serviceConfig.ReadWritePaths = [ dataDir ];
         environment = {
           # Opt out of the upstream all-or-nothing settings write guard.
