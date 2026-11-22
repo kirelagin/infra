@@ -160,6 +160,22 @@ in
       environment.etc."nix/nix.conf".text = ''
         experimental-features = nix-command flakes
       '';
+      # nix.registry is inactive with nix.enable = false. Keep the input's
+      # store-path context so the guest closure includes the pinned checkout.
+      environment.etc."nix/registry.json".text = builtins.toJSON {
+        version = 2;
+        flakes = [
+          {
+            exact = true;
+            from = { type = "indirect"; id = "nixpkgs"; };
+            to = {
+              type = "path";
+              path = flakes.nixpkgs.outPath;
+              inherit (flakes.nixpkgs) rev narHash lastModified;
+            };
+          }
+        ];
+      };
 
       users.users.hermes.uid = hermesId;
       users.groups.hermes.gid = hermesId;
