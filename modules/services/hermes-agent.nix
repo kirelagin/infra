@@ -282,7 +282,10 @@ in
       systemd.services.hermes-agent = {
         wants = [ "hermes-home-setup.service" ];
         after = [ "hermes-home-setup.service" ];
-        serviceConfig.ReadWritePaths = [ dataDir ];
+        serviceConfig = {
+          ReadWritePaths = [ dataDir ];
+          SupplementaryGroups = [ "systemd-journal" ];
+        };
         environment = {
           # Opt out of the upstream all-or-nothing settings write guard.
           HERMES_MANAGED = lib.mkForce "false";
