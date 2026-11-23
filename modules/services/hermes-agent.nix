@@ -22,6 +22,7 @@ let
   # Reserve this 64 Ki-ID range for Hermes on Bruna, above nspawn's pick range.
   privateUsersBase = 1879048192;
   hermesId = 976;
+  hermesUserManager = "user@${toString hermesId}.service";
   shiftedId = toString (privateUsersBase + hermesId);
   veth = "ve-hermes";
   domain = config.networking.domain;
@@ -257,6 +258,9 @@ in
 
       systemd.services.hermes-home-setup = {
         description = "Set up the Hermes guest home";
+        # Let a fresh user manager see any units installed by the optional setup.
+        before = [ hermesUserManager ];
+        wantedBy = [ hermesUserManager ];
         unitConfig.ConditionPathExists = [ homeSetupScript "!${homeSetupMarker}" ];
         environment = {
           inherit (gateway.environment) HOME HERMES_HOME NIX_REMOTE;
