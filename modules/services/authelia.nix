@@ -71,6 +71,11 @@ in
       storage.local.path = "/var/lib/authelia-main/db.sqlite3";
       notifier.filesystem.filename = "/var/lib/authelia-main/notifications.txt";
       identity_providers.oidc = {
+        lifespans = {
+          access_token = "1d";
+          id_token = "1d";
+          refresh_token = "14d";
+        };
         authorization_policies.owner_only = {
           default_policy = "deny";
           rules = [
