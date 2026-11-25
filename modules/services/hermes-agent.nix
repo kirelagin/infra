@@ -295,6 +295,8 @@ in
         wants = [ "hermes-home-setup.service" ];
         after = [ "hermes-home-setup.service" ];
         serviceConfig = {
+          # A tool subprocess being OOM-killed must not stop the gateway.
+          OOMPolicy = "continue";
           ReadWritePaths = [ dataDir ];
           SupplementaryGroups = [ "systemd-journal" ];
         };
