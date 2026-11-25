@@ -41,6 +41,14 @@ let
   } ''
     cp -r "$src" "$out"
   '';
+  heraldPush = pkgs.fetchFromGitHub {
+    name = "herald-push";
+    owner = "Giton22";
+    repo = "hermes-herald-push";
+    # v0.7.2, matching Kyllene's PushApi.
+    rev = "47297c5e2e2779e6895736e46f6e79ad91050e1d";
+    hash = "sha256-YCqQcdtcX3WuxZviu9/xDBKxASpPYuomalTw7xaYSjw=";
+  };
   writableOfficialPlugins = {
     memory-wiki = [
       "plugin.yaml"
@@ -208,7 +216,7 @@ in
         };
         workingDirectory = workspaceDir;
         extraPackages = [ pkgs.nix ];
-        extraPlugins = [ advancedDelegation ];
+        extraPlugins = [ advancedDelegation heraldPush ];
         # Install ordinary files with fresh mtimes for ZIP backup. Hermes can
         # then publish the writable Desktop copy and stamp its pairing marker.
         hermesHomeFiles = lib.concatMapAttrs (name: files:
@@ -220,7 +228,7 @@ in
         ) writableOfficialPlugins;
         settings = {
           plugins = {
-            enabled = [ "advanced-delegation" ] ++ builtins.attrNames writableOfficialPlugins;
+            enabled = [ "advanced-delegation" "herald-push" ] ++ builtins.attrNames writableOfficialPlugins;
             disabled = [
               "hermes-achievements"
               # Bundled auth backends auto-load unless explicitly disabled.
